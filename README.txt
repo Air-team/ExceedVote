@@ -1,2 +1,2 @@
 exceed vote
->>>>>> Hello
+Hello world
