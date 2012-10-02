@@ -17,11 +17,11 @@ public class Ballot {
 		return this.value;
 	}
 	
-	public void setValue(int value)
+	public void setBallot(int value)
 	{
 		this.value = value;
 	}
-	public void reduceValue(int value)
+	public void reduceBallot(int value)
 	{
 		
 		this.value -= value; 

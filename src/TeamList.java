@@ -6,16 +6,16 @@ import java.util.List;
  */
 
 /**
- * @author PrisaDumrongsiri
+ * @author Prisa Dumrongsiri
  *
  */
 public class TeamList {
 	
-	private List<Team> listTeam;
+	private List<Team> list;
 	private Team team;
 	
 	public TeamList(){
-		listTeam = new ArrayList<Team>();
+		list = new ArrayList<Team>();
 	
 	}
 	
@@ -24,11 +24,11 @@ public class TeamList {
 	 * @return listTeam which contain all team that exist
 	 */
 	public List getTeam(){
-		return listTeam;
+		return list;
 	}
 	
 	public void addTeam(Team team){
-		 listTeam.add(team);
+		 list.add(team);
 	}
 	
 	
@@ -38,9 +38,9 @@ public class TeamList {
 	 */
 	public void setBallot(String teamName){
 		try{
-		for(int i=0;i<listTeam.size();i++) {
-			if( ( (Team)(listTeam.get(i)) ).getName().equals(teamName)) { 
-				listTeam.get(i).setScore(1);
+		for(int i=0;i<list.size();i++) {
+			if( ( (Team)(list.get(i)) ).getName().equals(teamName)) { 
+				list.get(i).setScore(1);
 			}
 		}
 		} catch(NullPointerException ne)
