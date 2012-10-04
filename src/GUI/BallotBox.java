@@ -16,7 +16,7 @@ public class BallotBox {
 		private TeamList teamList;
 		private List list;
 		private int value = 1;
-		
+		private Tracking tk = new  Tracking();
 		public BallotBox(TeamList teamList){
 			this.teamList = teamList;	
 			list = teamList.getTeam();
@@ -33,6 +33,7 @@ public class BallotBox {
 			for(int i=0;i<list.size();i++){
 				if(  ( (Team)list.get(i) ).getName().equals(teamName) )  {
 							teamList.setBallot(teamName);
+							tk.addLog(teamName);
 							return true;
 				}
 			}
