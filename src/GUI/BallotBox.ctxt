@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.params=teamList
-comment0.target=BallotBox(TeamList)
-comment1.params=teamName
-comment1.target=boolean\ putBallot(java.lang.String)
-comment1.text=\ \r\n\ Put\ the\ ballot\ in\ the\ team\ that\ you\ want\ to\ vote\ via\ ballot\ box\r\n\ @param\ teamName\ is\ the\ team\ name\ that\ you\ want\ to\ vote\r\n
-numComments=2
