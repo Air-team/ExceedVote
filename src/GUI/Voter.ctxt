@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=name\ type\ ballot\ bb
+comment0.target=Voter(java.lang.String,\ java.lang.String,\ Ballot,\ BallotBox)
+comment1.params=
+comment1.target=java.lang.String\ getName()
+comment2.params=
+comment2.target=java.lang.String\ getType()
+comment3.params=
+comment3.target=java.util.List\ showTeam()
+comment4.params=
+comment4.target=Ballot\ getBallot()
+comment5.params=nameT
+comment5.target=boolean\ pullBollot(java.lang.String)
+numComments=6

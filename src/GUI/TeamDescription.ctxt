@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.params=info
+comment0.target=TeamDescription(java.lang.String)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ TeamDescription\r\n
+comment1.params=info
+comment1.target=void\ setInfo(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getInfo()
+numComments=3
