@@ -73,6 +73,7 @@ public class VoteUI extends JFrame
 
         // test
         teamInfo.add(new JLabel("Name:  Durian"));
+       
     }
 
     private class UpAction extends AbstractAction{ 

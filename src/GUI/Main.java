@@ -8,10 +8,13 @@ public class Main {
      */
     public static void main(String[] args) {
        
-        TeamDescription des = new TeamDescription("name: Durian");
-        Team a = new Team("Durian",des);
+        TeamDescription durianDes = new TeamDescription("name: Durian");
+        TeamDescription amazeDes = new TeamDescription("name: Amaze");
+        Team  durian = new Team("Durian",durianDes);
+        Team  amaze = new Team("Amaze",amazeDes);
         TeamList list = new TeamList();
-        list.addTeam(a);
+        list.addTeam(durian);
+        list.addTeam(amaze);
         
         Ballot ballot = new Ballot();
         BallotBox ballotbox = new BallotBox(list);
