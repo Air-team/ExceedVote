@@ -8,43 +8,27 @@ public class Main {
      */
     public static void main(String[] args) {
        
-        TeamDescription durianDes = new TeamDescription("name: Durian");
+       TeamDescription durianDes = new TeamDescription("name: Durian");
         TeamDescription amazeDes = new TeamDescription("name: Amaze");
+        TeamDescription desTest1 = new TeamDescription("name: Test1");
+        TeamDescription desTest2 = new TeamDescription("name: Test2");
+        
         Team  durian = new Team("Durian",durianDes);
         Team  amaze = new Team("Amaze",amazeDes);
+        Team  test1 = new Team("Test1",amazeDes);
+        Team  test2 = new Team("Test2",amazeDes);
         TeamList list = new TeamList();
         list.addTeam(durian);
         list.addTeam(amaze);
+        list.addTeam(test1);
+        list.addTeam(test2);
         
         Ballot ballot = new Ballot();
         BallotBox ballotbox = new BallotBox(list);
-        Voter voter = new Voter("Air at Bangkok","STUDENT",ballot,ballotbox);
+        Voter voter = new Voter("Air SKE09","STUDENT",ballot,ballotbox,list);
         
         VoteUI voteUI = new VoteUI(voter);
         voteUI.run();
-        
-        /*
-         * 
-        String name = "air";
-        Voter voter = new Voter(name);
-        TeamDescription des = new TeamDescription("www");
-        Team a = new Team("a",des);
-        TeamList list = new TeamList();
-        list.addTeam(a);
-        BallotBox ballotbox = new BallotBox(list);
-        Ballot ballot = new Ballot(10);
-
-    
-        System.out.println( voter.getName() );
-        System.out.println(  ((Team)list.getTeam().get(0)).getName() );
-        System.out.println( ballotbox.putBallot("a") );
-        if(ballotbox.putBallot("a"))
-        {
-        ballot.reduceValue(1);
-        }
-        System.out.println(ballot.getballot());
-         */
-
     }
 
 }
