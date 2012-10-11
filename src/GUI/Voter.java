@@ -1,5 +1,3 @@
-package GUI;
-
 import java.util.List;
 
 /**
@@ -17,13 +15,13 @@ public class Voter {
     private List<Team> list;
     private BallotBox bb;
 
-    public Voter(String name,String type,Ballot ballot,BallotBox bb)
+    public Voter(String name,String type,Ballot ballot,BallotBox bb,TeamList teamList)
     {   
         this.name = name;
         this.type = type;
         this.ballot = ballot;
         this.bb = bb;
-        this.teamList = new TeamList();
+        this.teamList = teamList;
         this.list = teamList.getTeam();
     }
 
@@ -50,5 +48,15 @@ public class Voter {
     public boolean pullBollot(String nameT)
     {
         return bb.putBallot(nameT);
+    }
+    
+    public String[] getTeamNames()
+    {    
+        String[] names = new String[list.size()];
+        for(int i = 0 ; i < list.size(); i++)
+        {
+            names[i] = list.get(i).getName();
+        }
+        return names;
     }
 }
