@@ -1,13 +1,7 @@
-package GUI;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import java.net.URL;
-import java.lang.Class;
 /**
  * eXceed Vote GUI 
  * 
@@ -23,11 +17,9 @@ public class VoteUI extends JFrame
     private JButton  vote;
     private JLabel status;
     private JLabel showBallot;
-    private JLabel teamName;
+    private JButton teamName;
     private JPanel team;
     private JPanel votePanel;
-    private JLabel image = new JLabel();
-    private Icon teamList = new ImageIcon();
 
     // test teamInfo 
     private JPanel teamInfo = new JPanel();
@@ -36,23 +28,24 @@ public class VoteUI extends JFrame
      * ballot test
      */
     int ballot;
-    String tName = "";
     String type = "";
     String nameVoter = "";
     /*
      * name team test
      */
-    String nameT = "Durian"; 
+    String[] names;
+    // name select
+    String select ="";
     // Voter
     private Voter voter;
-
+    
     public VoteUI(Voter voter)
     {
         this.voter = voter;
         this.ballot = ((Ballot)this.voter.getBallot()).getValue();
+        names = voter.getTeamNames();
         type = voter.getType();
         nameVoter = voter.getName();
-        this.pack();
     }
 
     /*
@@ -67,13 +60,12 @@ public class VoteUI extends JFrame
         vote = new JButton(new UpAction());
         status= new JLabel(type+" : "+nameVoter);
         showBallot = new JLabel("YOU HAVE BALLOT!!");
-        teamName = new JLabel(nameT);
+        teamName = new JButton();
         team = new JPanel();
         votePanel = new JPanel();
 
         // test
         teamInfo.add(new JLabel("Name:  Durian"));
-       
     }
 
     private class UpAction extends AbstractAction{ 
@@ -92,12 +84,12 @@ public class VoteUI extends JFrame
             }
             else
             {    
-                String alert = "Do you want to vote " + nameT ;
+                String alert = "Do you want to vote " + select ;
                 int result = JOptionPane.showConfirmDialog((Component)
                         null, alert , "Submit Vote!!!", JOptionPane.YES_NO_OPTION);
                 if(result == 0)
                 {
-                    boolean canVote = voter.pullBollot(nameT);
+                    boolean canVote = voter.pullBollot(select);
                     if(canVote)
                     {
                         ballot--;
@@ -110,6 +102,20 @@ public class VoteUI extends JFrame
         }
     }
 
+    private class ActionSelect extends AbstractAction{ 
+
+        public ActionSelect()
+        { 
+            super(); 
+        } 
+
+        public void actionPerformed(ActionEvent e)
+        {   
+            JButton o = (JButton)e.getSource();
+            select = o.getText();
+            vote.setText("Vote "+select);
+        }
+    }
     /*
      * set component color(test)
      */
@@ -131,6 +137,7 @@ public class VoteUI extends JFrame
         buttom.add(team);
         buttom.add(votePanel);
         vote.setText("Vote");
+        teamName.setText(select);
     }
 
     /*
@@ -138,12 +145,13 @@ public class VoteUI extends JFrame
      */
     public void setTaem()
     {
-        /*URL position = VoteUI.class.getResource("test.jpg");
-        teamList = new ImageIcon(position);*/ 
-        image.setIcon(teamList);
-        team.setLayout(new BorderLayout());
-        team.add(teamName,BorderLayout.NORTH);
-        team.add(image,BorderLayout.CENTER);
+        team.setLayout(new GridLayout(20,1));
+        for(int i = 0 ; i < names.length ; i++)
+        {    
+            JButton eachTeam = new JButton(new ActionSelect());
+            eachTeam.setText(names[i]);
+            team.add(eachTeam);
+        }
 
         votePanel.setLayout(new BorderLayout());
         votePanel.add(vote,BorderLayout.NORTH);
