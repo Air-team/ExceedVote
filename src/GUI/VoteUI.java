@@ -1,7 +1,22 @@
+package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import javax.swing.JTextPane;
+import java.awt.Color;
+import java.awt.Font;
 /**
  * eXceed Vote GUI 
  * 
@@ -10,20 +25,22 @@ import javax.swing.*;
  */
 public class VoteUI extends JFrame
 {
-    private JPanel top ;
-    private JPanel statPanel;
-    private JPanel ballotPanel;
-    private JPanel buttom;
-    private JButton  vote;
-    private JLabel status;
-    private JLabel showBallot;
-    private JButton teamName;
-    private JPanel team;
-    private JPanel votePanel;
+    private JPanel contentPane;
 
-    // test teamInfo 
-    private JPanel teamInfo = new JPanel();
-
+    private final JLabel label = new JLabel("New label");
+    /**
+     * @wbp.nonvisual location=81,-31
+     */
+    private final JTextField textField_1 = new JTextField();
+    
+    private JButton voteBtn;
+    private JPanel listTeam = new JPanel();
+    private JPanel infoPanel = new JPanel();
+    private JTextPane teamInfomation = new JTextPane();
+    private JPanel statusPanel = new JPanel();
+    private JTextPane status = new JTextPane();
+    private JPanel ballotPanel = new JPanel();
+    JTextPane ballotRemain = new JTextPane();
     /*
      * ballot test
      */
@@ -38,7 +55,7 @@ public class VoteUI extends JFrame
     String select ="";
     // Voter
     private Voter voter;
-    
+
     public VoteUI(Voter voter)
     {
         this.voter = voter;
@@ -53,19 +70,56 @@ public class VoteUI extends JFrame
      */
     public void initComponent()
     {
-        top = new JPanel();
-        statPanel = new JPanel();
-        ballotPanel = new JPanel();
-        buttom = new JPanel();
-        vote = new JButton(new UpAction());
-        status= new JLabel(type+" : "+nameVoter);
-        showBallot = new JLabel("YOU HAVE BALLOT!!");
-        teamName = new JButton();
-        team = new JPanel();
-        votePanel = new JPanel();
-
-        // test
-        teamInfo.add(new JLabel("Name:  Durian"));
+        textField_1.setColumns(10);
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 513, 414);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.BLACK);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		// button
+		voteBtn = new JButton(new UpAction());
+		voteBtn.setText("Vote");
+		voteBtn.setBounds(329, 342, 89, 23);
+		contentPane.add(voteBtn);
+		// listTeam
+		listTeam.setBounds(10, 54, 218, 311);
+		contentPane.add(listTeam);
+		listTeam.setLayout(new GridLayout(20, 1, 0, 0));
+		// infomationPanel
+		infoPanel.setBounds(241, 52, 246, 279);
+		contentPane.add(infoPanel);
+		infoPanel.setLayout(null);
+		//teamInfomation
+		teamInfomation.setText("Name : \r\nInfomation : ");
+		teamInfomation.setEditable(false);
+		teamInfomation.setBounds(0, 0, 246, 279);
+		infoPanel.add(teamInfomation);
+		// statusPanel
+		statusPanel.setBounds(10, 11, 218, 30);
+		contentPane.add(statusPanel);
+		statusPanel.setLayout(null);
+		// status
+		status.setBackground(Color.BLACK);
+		status.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		status.setText(type+" name : "+nameVoter);
+		status.setForeground(Color.ORANGE);
+		status.setEditable(false);
+		status.setBounds(0, 0, 218, 30);
+		statusPanel.add(status);
+		// ballotPanel
+		ballotPanel.setBounds(241, 11, 246, 30);
+		contentPane.add(ballotPanel);
+		ballotPanel.setLayout(null);
+		// ballotRemain
+		ballotRemain.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		ballotRemain.setText("Ballot : "+String.valueOf(ballot));
+		ballotRemain.setForeground(Color.ORANGE);
+		ballotRemain.setBackground(Color.BLACK);
+		ballotRemain.setBounds(0, 0, 246, 30);
+		ballotPanel.add(ballotRemain);
+		ballotRemain.setEditable(false);
     }
 
     private class UpAction extends AbstractAction{ 
@@ -94,7 +148,7 @@ public class VoteUI extends JFrame
                     {
                         ballot--;
                         String shows = "YOU HAVE  "+ String.valueOf(ballot) +"  BALLOT!!";
-                        showBallot.setText(shows);
+                        ballotRemain.setText(shows);
                     }
                 }
             }
@@ -113,114 +167,32 @@ public class VoteUI extends JFrame
         {   
             JButton o = (JButton)e.getSource();
             select = o.getText();
-            vote.setText("Vote "+select);
+            teamInfomation.setText("Name : "+select+"\r\nInfomation : ");
         }
     }
-    /*
-     * set component color(test)
-     */
-    public void setColor()
-    {
-        statPanel.setBackground(Color.ORANGE);
-        buttom.setBackground(Color.BLACK);
-        ballotPanel.setBackground(Color.ORANGE);
-        teamName.setForeground(Color.BLACK);
-    }
-
-    /*
-     * set vote button
-     */
-    public void setButton()
-    {  
-        GridLayout grid = new GridLayout(1,2);
-        buttom.setLayout(grid);
-        buttom.add(team);
-        buttom.add(votePanel);
-        vote.setText("Vote");
-        teamName.setText(select);
-    }
-
+    
     /*
      * set team in UI,
      */
-    public void setTaem()
+    public void setTeam()
     {
-        team.setLayout(new GridLayout(20,1));
         for(int i = 0 ; i < names.length ; i++)
         {    
             JButton eachTeam = new JButton(new ActionSelect());
             eachTeam.setText(names[i]);
-            team.add(eachTeam);
+            listTeam.add(eachTeam);
         }
-
-        votePanel.setLayout(new BorderLayout());
-        votePanel.add(vote,BorderLayout.NORTH);
-        votePanel.add(teamInfo,BorderLayout.CENTER);
     }
-
-    /*
-     * set Label in UI
-     */
-    public void setLabel()
-    {
-        statPanel.add(status);
-        ballotPanel.add( showBallot);
-        teamName.setHorizontalAlignment(JLabel.CENTER);  
-        teamName.setFont(new Font("Arial",Font.BOLD,23));
-        String initText = "YOU HAVE "+String.valueOf(ballot)+" BALLOT!!!";
-        showBallot.setText(initText);
-        //turnBase.setHorizontalAlignment(JLabel.CENTER);    
-    }
-
-    /*
-     * put components on JFrame
-     */
-    public void setFrame()
-    {
-        this.setLayout(new BorderLayout());
-        top.setLayout(new GridLayout(1,2));
-        top.add(statPanel);
-        top.add(ballotPanel);
-        //buttom.add()
-        this.add(top,BorderLayout.NORTH);
-        this.add(buttom, BorderLayout.CENTER);
-
-    }
-
+    
     /*
      * run Frame
      */
     public void run()
     {    
         this.initComponent();
-        this.setFrame();
-        this.setColor();
-        this.setTaem();
-        this.setLabel();
-        this.setButton();
-
-        this.setTitle("Vote UI");
-        this.setSize(900,500);
-        //this.pack();
+        this.setTeam();
         this.setVisible(true);
-        // set Lock frame :|
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    public void setBallot()
-    {
-    }
-
-    public void setListTeam()
-    {
-    }
-
-    public void setStatus()
-    {
-    }
-
-    public void update()
-    {
     }
 }
