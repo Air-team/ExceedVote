@@ -14,14 +14,14 @@ public class Voter {
 	private String type;
 	private Ballot ballot;
 	private List<Team> list;
-	private BallotBox ballotBox;
+	private BallotBox bb;
 
 	public Voter(String name, String type, Ballot ballot, BallotBox bb,
 			TeamList teamList) {
 		this.name = name;
 		this.type = type;
 		this.ballot = ballot;
-		this.ballotBox= bb;
+		this.bb = bb;
 		this.list = teamList.getTeam();
 	}
 
