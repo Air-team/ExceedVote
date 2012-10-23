@@ -3,6 +3,10 @@ package exceedvote.air.model;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * Class Team represent the  
+ * @author Air Team
+ */
 public class Team {
 	// instance variables - replace the example below with your own
 	private String name;
@@ -25,7 +29,6 @@ public class Team {
 
 	public void setScore(int score) {
 		this.score = this.getScore() + score;
-		int result = JOptionPane.showConfirmDialog((Component) null, name, name
-				+ " has been vote", JOptionPane.DEFAULT_OPTION);
+		int result = JOptionPane.showConfirmDialog((Component) null, name, name + " has been vote", JOptionPane.DEFAULT_OPTION);
 	}
 }

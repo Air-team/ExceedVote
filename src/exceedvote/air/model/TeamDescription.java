@@ -1,13 +1,9 @@
 package exceedvote.air.model;
 
 /**
- * Write a description of class TeamDescription here.
- * 
- * @author (your name)
- * @version (a version number or a date)
+ * @author Air Team
  */
 public class TeamDescription {
-	// instance variables - replace the example below with your own
 	private String info;
 
 	/**
@@ -17,10 +13,18 @@ public class TeamDescription {
 		this.info = info;
 	}
 
+	/**
+	 * Set the information of each team.
+	 * @param info String represents the information of team.
+	 */
 	public void setInfo(String info) {
 		this.info = info;
 	}
 
+	/**
+	 * Get the information of each team.
+	 * @return info String represents the information of team.
+	 */
 	public String getInfo() {
 		return this.info;
 	}

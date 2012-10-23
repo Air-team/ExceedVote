@@ -44,7 +44,6 @@ public class BallotBoxTest {
 	/**
 	 * Create team and try to add to available team and not available team
 	 */
-
 	@Test
 	public void testBallotBox() {
 		TeamList teamList1 = new TeamList();

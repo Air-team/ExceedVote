@@ -5,39 +5,41 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
- * Box that you keep the ballot of each team that you want to vote
- * @author PrisaDumrongsiri
- * 
+ * BallotBox collects the ballot, that contains the vote of each user, from the users.
+ * @author Prisa Dumrongsiri
  */
 public class BallotBox {
 
+	/** TeamList */
 	private TeamList teamList;
+	/** The List of teams to vote */
 	private List<Team> list;
+	/** Log4j */
 	private Tracking track = new Tracking();
+	/** Log for tracking the action of this class */
 	private Logger log;
 
+	/**
+	 * BallotBox constructor knows the TeamLisT. Initialize the list of all team.
+	 * @param teamList
+	 */
 	public BallotBox(TeamList teamList) {
 		this.teamList = teamList;
 		list = teamList.getTeam();
 	}
 
 	/**
-	 * Put the ballot in the team that you want to vote via ballot box
-	 * 
-	 * @param teamName
-	 *            is the team name that you want to vote
+	 * Put the Ballot into the BallotBox. And set the vote, that the user vote, to the team.
+	 * @param teamName is name of the team that the user wants to vote.
 	 */
 	public boolean putBallot(String teamName) {
-
-		
-			for (int i = 0; i < list.size(); i++) {
-				if ( list.get(i).getName().equals(teamName) ) {
-					teamList.setBallot(teamName);
-					track.addLog(teamName);
-					return true;
-				}
+		for (int i = 0; i < list.size(); i++) {
+			if ( list.get(i).getName().equals(teamName) ) {
+				teamList.setBallot(teamName);
+				track.addLog(teamName);
+				return true;
 			}
-		
+		}		
 		return false;
 	}
 

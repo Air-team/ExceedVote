@@ -5,23 +5,25 @@ import java.util.List;
 
 
 /**
- * List of all teams
- * 
+ * TeamList represents the teams. TeamList contains the teams that can be voted in List. 
  * @author Prisa Dumrongsiri
- *
  */
 public class TeamList {
 
-	/** List of type Team, which keeps all the participate teams. */
+	/** List of type Team, which keeps all the participated teams. */
 	private List<Team> list;
 
+	/**
+	 * TeamList constructor initializes the list of type Team.
+	 */
 	public TeamList()
 	{
 		list = new ArrayList<Team>();
 	}
 
 	/** 
-	 * @return listTeam which contain all team that exist
+	 * Get all the Teams.
+	 * @return list The List which contains all teams that exist.
 	 */
 	public List<Team> getTeam()
 	{

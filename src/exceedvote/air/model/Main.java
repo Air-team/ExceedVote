@@ -4,13 +4,13 @@ import exceedvote.air.ui.VoteUI;
 
 /**
  * Start Vote system
- * 
- * @author AIr Team
+ * @author Air Team
  * @version 2012.10.1
  */
 public class Main {
 
 	/**
+	 * Initialize the Objects and runs the program.
 	 * @param args
 	 */
 	public static void main(String[] args) {

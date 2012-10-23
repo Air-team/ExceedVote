@@ -53,6 +53,7 @@ public class TeamListTest {
 		assertEquals(true, tlist.addTeam(team9));
 		assertEquals(true, tlist.addTeam(team10));
 	}
+	
 	/**
 	 * Check if we avoid adding the same team or not
 	 */
@@ -66,6 +67,7 @@ public class TeamListTest {
 		assertEquals(true, tlist.addTeam(team2));
 		assertEquals(false, tlist.addTeam(team2));
 	}
+	
 	/**
 	 * test the size of TeamList
 	 */
@@ -85,7 +87,6 @@ public class TeamListTest {
 	/**
 	 * try to add ballot and test if it's added
 	 */
-	
 	@Test
 	public void testSetBallot() {
 		Team team1 = new Team("iSelf", new TeamDescription("diary"));

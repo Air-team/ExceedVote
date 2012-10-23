@@ -7,8 +7,8 @@ import org.junit.Test;
 import exceedvote.air.model.Ballot;
 
 
-/**
-* @author Team AIR
+ /**
+ * @author Team AIR
  * @version 2555-10-23
  */
 public class BallotTest {
