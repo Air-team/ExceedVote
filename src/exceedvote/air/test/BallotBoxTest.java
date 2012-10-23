@@ -13,9 +13,8 @@ import exceedvote.air.model.TeamList;
 
 /**
  * The test class testBallotBox.
- * 
- * @author (your name)
- * @version (a version number or a date)
+ * @author Team AIR
+ * @version 2555-10-23
  */
 public class BallotBoxTest {
 	/**
@@ -41,6 +40,10 @@ public class BallotBoxTest {
 	@After
 	public void tearDown() {
 	}
+	
+	/**
+	 * Create team and try to add to available team and not available team
+	 */
 
 	@Test
 	public void testBallotBox() {

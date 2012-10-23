@@ -8,8 +8,8 @@ import exceedvote.air.model.Ballot;
 
 
 /**
- * 
- * @author Prisa Dumrongsiri 2012.10.02
+* @author Team AIR
+ * @version 2555-10-23
  */
 public class BallotTest {
 	String typeStudent = "STUDENT";
@@ -51,7 +51,6 @@ public class BallotTest {
 		assertEquals(3, ballotT.getValue());
 
 		assertEquals(0, ballotJ.getValue());
-
 		if (typeStudent.equals("STUDENT")) {
 			ballotT.setValue(typeStudent);
 		}
@@ -60,7 +59,7 @@ public class BallotTest {
 	}
 
 	/**
-	 * Check reduceBallot method if it's acted the value is decresd or not
+	 * Check reduceBallot method if it's acted the value is decreased or not
 	 */
 	@Test
 	public void testReduceValue() {

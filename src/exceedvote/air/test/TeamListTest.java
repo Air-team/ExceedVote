@@ -9,17 +9,26 @@ import org.junit.Test;
 import exceedvote.air.model.Team;
 import exceedvote.air.model.TeamDescription;
 import exceedvote.air.model.TeamList;
-
+/**
+ * The test class TeamListTest.
+ *
+ * @author Team AIR
+ * @version 2555-10-23
+ */
 
 public class TeamListTest {
-	
+	/**
+	 * Check the if one team is add correctly to list
+	 */
 	@Test
 	public void testAddOneTeam() {
 		Team team1 = new Team("iSelf", new TeamDescription("diary"));
 		TeamList tlist = new TeamList();
 		assertEquals(true, tlist.addTeam(team1));
 	}
-	
+	/**
+	 * Check the if ten team is add correctly to list
+	 */
 	@Test
 	public void testAddTenTeam() {
 		Team team1 = new Team("iSelf", new TeamDescription("diary"));
@@ -44,7 +53,9 @@ public class TeamListTest {
 		assertEquals(true, tlist.addTeam(team9));
 		assertEquals(true, tlist.addTeam(team10));
 	}
-	
+	/**
+	 * Check if we avoid adding the same team or not
+	 */
 	@Test
 	public void testAddSameTeam() {
 		Team team1 = new Team("iSelf", new TeamDescription("diary"));
@@ -55,7 +66,9 @@ public class TeamListTest {
 		assertEquals(true, tlist.addTeam(team2));
 		assertEquals(false, tlist.addTeam(team2));
 	}
-
+	/**
+	 * test the size of TeamList
+	 */
 	@Test
 	public void testGetTeam() {
 		Team team1 = new Team("iSelf", new TeamDescription("diary"));
@@ -68,6 +81,10 @@ public class TeamListTest {
 		list = tlist.getTeam();
 		assertEquals(1, list.size());
 	}
+	
+	/**
+	 * try to add ballot and test if it's added
+	 */
 	
 	@Test
 	public void testSetBallot() {
