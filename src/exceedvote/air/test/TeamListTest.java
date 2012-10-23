@@ -1,10 +1,15 @@
-package GUI;
+package exceedvote.air.test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import exceedvote.air.model.Team;
+import exceedvote.air.model.TeamDescription;
+import exceedvote.air.model.TeamList;
+
 
 public class TeamListTest {
 	

@@ -14,3 +14,40 @@
 2012-10-04 09:52:41 INFO GUI.BallotBox:addLog - vote For Durian
 2012-10-04 09:53:41 TRACE GUI.BallotBox:<init> - Initialize
 2012-10-04 09:53:41 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:35:20 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:35:20 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:35:24 INFO GUI.BallotBox:addLog - vote For Durian
+2012-10-04 11:35:24 INFO GUI.BallotBox:addLog - vote For Durian
+2012-10-04 11:44:26 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:44:26 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:44:34 INFO GUI.BallotBox:addLog - vote For Durian
+2012-10-04 11:44:34 INFO GUI.BallotBox:addLog - vote For Durian
+2012-10-04 11:53:01 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:53:01 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:53:41 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:53:41 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:54:29 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:54:29 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-04 11:54:33 INFO GUI.BallotBox:addLog - vote For Durian
+2012-10-04 11:54:33 INFO GUI.BallotBox:addLog - vote For Durian
+2012-10-23 08:16:17 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 08:16:17 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 08:16:23 INFO GUI.BallotBox:addLog - vote For Durian
+2012-10-23 08:16:23 INFO GUI.BallotBox:addLog - vote For Durian
+2012-10-23 09:31:44 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 09:31:44 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 09:31:58 INFO GUI.BallotBox:addLog - vote For PANDA
+2012-10-23 09:31:58 INFO GUI.BallotBox:addLog - vote For PANDA
+2012-10-23 09:41:54 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 09:41:54 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 09:42:01 INFO GUI.BallotBox:addLog - vote For OOP
+2012-10-23 09:42:01 INFO GUI.BallotBox:addLog - vote For OOP
+2012-10-23 09:42:32 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 09:42:32 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 09:42:37 INFO GUI.BallotBox:addLog - vote For OOP
+2012-10-23 09:42:37 INFO GUI.BallotBox:addLog - vote For OOP
+2012-10-23 09:43:44 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 09:43:44 TRACE GUI.BallotBox:<init> - Initialize
+2012-10-23 09:43:48 INFO GUI.BallotBox:addLog - vote For Amaze
+2012-10-23 09:43:48 INFO GUI.BallotBox:addLog - vote For Amaze
+2012-10-23 10:08:02 INFO exceedvote.air.model.BallotBox:addLog - vote For PANDA

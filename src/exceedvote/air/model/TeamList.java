@@ -1,4 +1,4 @@
-package GUI;
+package exceedvote.air.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,23 +11,23 @@ import java.util.List;
  *
  */
 public class TeamList {
-	
+
 	/** List of type Team, which keeps all the participate teams. */
 	private List<Team> list;
-	
+
 	public TeamList()
 	{
 		list = new ArrayList<Team>();
 	}
-	
+
 	/** 
 	 * @return listTeam which contain all team that exist
 	 */
-	public List getTeam()
+	public List<Team> getTeam()
 	{
 		return list;
 	}
-	
+
 	/**
 	 * Add Team.
 	 * @param team is object of class Team.
@@ -42,7 +42,7 @@ public class TeamList {
 		}
 		return false;
 	}
-	
+
 	/** 
 	 * To vote for a team.
 	 * @param teamName is the team name that the voter want to vote 
