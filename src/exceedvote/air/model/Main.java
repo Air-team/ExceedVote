@@ -15,11 +15,12 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
-		// a test team
-		TeamDescription durianDes = new TeamDescription("name: Durian");
+		 // a test team
+        TeamDescription durianDes = new TeamDescription("name: Durian");
 		TeamDescription amazeDes = new TeamDescription("name: Amaze");
 		TeamDescription desTest1 = new TeamDescription("name: OOP");
 		TeamDescription desTest2 = new TeamDescription("name: PANDA");
+		
 
 		Team durian = new Team("Durian", durianDes);
 		Team amaze = new Team("Amaze", amazeDes);
@@ -33,9 +34,15 @@ public class Main {
 
 		Ballot ballot = new Ballot();
 		BallotBox ballotbox = new BallotBox(list);
+		
 		Voter voter = new Voter("Air", "STUDENT", ballot, ballotbox, list);
-
+   
+        
 		VoteUI voteUI = new VoteUI(voter);
-		voteUI.run();
+		
+		VoteTypeUI voteTypeUI = new VoteTypeUI(voteUI);
+		voteTypeUI.run();
+		/*LoginUI loginUI = new LoginUI();
+		loginUI.run();*/
 	}
 }
