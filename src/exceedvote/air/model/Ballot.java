@@ -9,6 +9,7 @@ public class Ballot {
 
 	/** The vote of a ballot */
 	public int value;
+	private Team team;
 
 	/**
 	 * Ballot constructor. Initialize value.

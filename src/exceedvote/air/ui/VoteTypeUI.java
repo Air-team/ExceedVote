@@ -1,21 +1,20 @@
 package exceedvote.air.ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextPane;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
-import javax.swing.JLabel;
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
+
+
 /**
  * VoteType user interface
  * 
@@ -80,12 +79,16 @@ public class VoteTypeUI extends JFrame
 
         btnBeautifulUI = new JButton(new ActionSelect());
         btnBeautifulUI.setText("Beautiful UI");
+ 
         btnGoodFunction = new JButton(new ActionSelect());
         btnGoodFunction.setText("Good Function");
+     
         btnNoBug = new JButton(new ActionSelect());
         btnNoBug.setText("No Bug");
+      
         btnPresentation = new JButton(new ActionSelect());
         btnPresentation.setText("Presentation");
+      
 
         btnBeautifulUI.setBounds(30, 97, 379, 30);
         contentPane.add(btnBeautifulUI);
@@ -157,8 +160,10 @@ public class VoteTypeUI extends JFrame
             }
             else
             {
-                if(voteUI != null)
+                if(voteUI != null){
+//                	VoteTopic voteTopic = new VoteTopic(labelSelect);
                     voteUI.run(labelSelect);
+                }
             }
         }
     }

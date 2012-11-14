@@ -11,14 +11,14 @@ import java.util.List;
 public class TeamList {
 
 	/** List of type Team, which keeps all the participated teams. */
-	private List<Team> list;
-
+	private List<Team> listTeam;
+	 private Team team;
 	/**
 	 * TeamList constructor initializes the list of type Team.
 	 */
 	public TeamList()
 	{
-		list = new ArrayList<Team>();
+		listTeam = new ArrayList<Team>();
 	}
 
 	/** 
@@ -27,7 +27,7 @@ public class TeamList {
 	 */
 	public List<Team> getTeam()
 	{
-		return list;
+		return listTeam;
 	}
 
 	/**
@@ -37,9 +37,9 @@ public class TeamList {
 	 */
 	public boolean addTeam(Team team)
 	{
-		if(!list.contains(team))
+		if(!listTeam.contains(team))
 		{
-			list.add(team);
+			listTeam.add(team);
 			return true;
 		}
 		return false;
@@ -49,14 +49,24 @@ public class TeamList {
 	 * To vote for a team.
 	 * @param teamName is the team name that the voter want to vote 
 	 */
-	public void setBallot(String teamName)
+	public void setBallot(String teamName,String typeTeam)
 	{
-		for(int i=0;i<list.size();i++) 
+		for(int i=0;i<listTeam.size();i++) 
 		{
-			if(((Team)(list.get(i))).getName().equals(teamName)) 
+			if((listTeam.get(i)).getName().equals(teamName)) 
 			{ 
-				list.get(i).setScore(1);
+				listTeam.get(i).setScore(1,typeTeam);
 			}
 		}
 	}
+	
+	public String[] getTeamNames()
+    {    
+        String[] names = new String[listTeam.size()];
+        for(int i = 0 ; i < listTeam.size(); i++)
+        {
+            names[i] = listTeam.get(i).getName();
+        }
+        return names;
+    }
 }
