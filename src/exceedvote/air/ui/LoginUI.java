@@ -137,7 +137,7 @@ public class LoginUI extends JFrame {
 	}
 	
 	/*
-	 * main to start this frame
+	 * main to start this fram
 	 * (test)
 	 */
 	public static void main(String[] args)

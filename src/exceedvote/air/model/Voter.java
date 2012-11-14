@@ -11,7 +11,8 @@ public class Voter {
 	private String name;
 	private String type;
 	private Ballot ballot;
-	private String ballotLeft;
+	private List<Team> list;
+	private BallotBox bb;
 
 	/**
 	 * Constructor for objects of class Voter.
@@ -21,11 +22,12 @@ public class Voter {
 	 * @param bb is ballot box.
 	 * @param teamList is the team list.
 	 */
-	public Voter(String name, String type,String ballotLeft, Ballot ballot) {
+	public Voter(String name, String type, Ballot ballot, BallotBox bb, TeamList teamList) {
 		this.name = name;
 		this.type = type;
 		this.ballot = ballot;
-		this.ballotLeft = ballotLeft;
+		this.bb = bb;
+		this.list = teamList.getTeam();
 	}
 
 	/**
@@ -44,9 +46,13 @@ public class Voter {
 		return this.type;
 	}
 
-	public String getballotLeft(){
-        return ballotLeft;
-    }
+	/**
+	 * Return the list of all team.
+	 * @return list of the teams.
+	 */
+	public List<Team> showTeam() {
+		return list;
+	}
 
 	/**
 	 * Get the Ballot by specify the type of the voter.
@@ -57,6 +63,24 @@ public class Voter {
 		return this.ballot;
 	}
 
-	
-	
+	/**
+	 * Put the ballot into the BallotBox.
+	 * @param nameT is the name of thee team that voter wants to vote.
+	 * @return false if cannot vote.
+	 */
+	public boolean pullBollot(String nameT) {
+		return bb.putBallot(nameT);
+	}
+
+	/**
+	 * Return all the team names in an array of String;
+	 * @return array String contains the name of teams.
+	 */
+	public String[] getTeamNames() {
+		String[] names = new String[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			names[i] = list.get(i).getName();
+		}
+		return names;
+	}
 }
