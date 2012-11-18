@@ -1,4 +1,4 @@
-package exceedvote.air.persistence.jpa;
+package exceed.air.persistence.jpa;
 
 import java.util.List;
 import java.util.Scanner;

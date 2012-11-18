@@ -1,4 +1,4 @@
-package exceedvote.air.persistence.jpa;
+package exceed.air.persistence.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
