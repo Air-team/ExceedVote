@@ -225,7 +225,7 @@ public class VoteUI extends JFrame implements RunUI
 	   
 	         else
 	         {    
-	             String alert = "Do you want to vote " + selectTeam ;
+	             String alert = "Do you want to disvote " + selectTeam ;
 	             int result = JOptionPane.showConfirmDialog((Component)
 	                     null, alert , "Submit Vote!!!", JOptionPane.YES_NO_OPTION);
 	             if(result == 0)
@@ -236,6 +236,10 @@ public class VoteUI extends JFrame implements RunUI
 	                  {
 	                  	ballot++;
 	                      status.setText("Status : "+type+" : "+String.valueOf(voter.getballotLeft())+" Ballot");
+	                  }
+	                  else {
+	                	  JOptionPane.showConfirmDialog((Component)
+	         	                 null, "You didn't vote this team", "Select the team", JOptionPane.DEFAULT_OPTION);
 	                  }
 	             }
 	         }

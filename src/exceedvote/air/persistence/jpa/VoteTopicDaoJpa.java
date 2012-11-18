@@ -33,7 +33,7 @@ public class VoteTopicDaoJpa implements VoteTopicDao {
 	@Override
 	public void save(VoteTopic topic) {
 		EntityTransaction tx = em.getTransaction();
-		System.out.println(em.contains(topic));
+	
 		try {
 			tx.begin();
 			em.persist(topic);

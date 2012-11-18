@@ -86,7 +86,7 @@ public class Ballot implements Serializable {
 	}
 	
 	public Voter getVoter() {
-		return Voter;
+		return voter;
 	}
 	
 	/**
@@ -122,26 +122,25 @@ public class Ballot implements Serializable {
 
 
 	public boolean returnBallot(String teamName, String typeTeam, Voter voter) {
-			
-		for (int i = 0; i < list.size(); i++) {
-			
-			if ( list.get(i).getName().equals(teamName) ) {
-				
+		BallotDao dao = DaoFactory.getInstance().getBallotDao();
+		List<Ballot> allBallot = dao.findAll();
+		Ballot bb = dao.findSingle(teamName, typeTeam, voter, allBallot);
+//		System.out.println(allBallot.toString());
+//		if(bb==null) System.out.println("aaa");
+		if(bb!=null){
 				this.voter = voter;
 				int value  = voter.getballotLeft();
-				this.team = list.get(i);
 				int score = team.getScore(typeTeam);
 				score--;
 				team.setScore(score, typeTeam);
-				BallotDao dao = DaoFactory.getInstance().getBallotDao();
 				voter.setballotLeft(value+1);
-				dao.remove(this);
+				dao.remove(bb);
+				
 				track.addLogRevote(teamName,typeTeam);
 				return true;
-			}
-		}
+		}else
 		return false;
-	
+		
 	}
    
 }

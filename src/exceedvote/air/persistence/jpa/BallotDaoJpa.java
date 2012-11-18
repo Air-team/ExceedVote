@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.apache.log4j.Logger;
 import exceedvote.air.model.Ballot;
+import exceedvote.air.model.Voter;
 import exceedvote.air.persistence.BallotDao;
 
 
@@ -43,11 +44,12 @@ public class BallotDaoJpa implements BallotDao {
 	/**
 	 * Find Single Ballot.
 	 */
-
+	@Override
 	public Ballot findSingle(String teamName, String topic, Voter voter, List<Ballot> allBallot){
 		for (Ballot bl : allBallot) {
-			if (bl.getTopic() == topic) && (bl.getTeamName() == teamName)&& (bl.getVoter()==voter){return bl;}
+			if ( (bl.getTopic() == topic) && (bl.getTeamName() == teamName)&& (bl.getVoter()==voter )){return bl;}
 		}
+		return null;
 	}
 
 	/**
@@ -60,12 +62,15 @@ public class BallotDaoJpa implements BallotDao {
 			tx.begin();
 			em.remove(ballot);
 			tx.commit();
+			return true;
 			//System.out.printf("Delete Success");
 		} catch (Exception ex) {
 			getLogger().error("Error Delete Ballot "+ ex);
-			if (tx.isActive()) tx.rollback();
+			if (tx.isActive()) { tx.rollback(); }
+			return false;
 		}
-	
+		
+	}
 	@Override
 	public void remove(Ballot ballot){
 		em.remove(ballot);
