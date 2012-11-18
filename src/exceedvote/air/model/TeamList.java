@@ -1,18 +1,26 @@
 package exceedvote.air.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 /**
  * TeamList represents the teams. TeamList contains the teams that can be voted in List. 
  * @author Prisa Dumrongsiri
  */
-public class TeamList {
-
+@Entity
+public class TeamList implements Serializable {
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	/** List of type Team, which keeps all the participated teams. */
 	private List<Team> listTeam;
-	 private Team team;
 	/**
 	 * TeamList constructor initializes the list of type Team.
 	 */
@@ -45,20 +53,7 @@ public class TeamList {
 		return false;
 	}
 
-	/** 
-	 * To vote for a team.
-	 * @param teamName is the team name that the voter want to vote 
-	 */
-	public void setBallot(String teamName,String typeTeam)
-	{
-		for(int i=0;i<listTeam.size();i++) 
-		{
-			if((listTeam.get(i)).getName().equals(teamName)) 
-			{ 
-				listTeam.get(i).setScore(1,typeTeam);
-			}
-		}
-	}
+
 	
 	public String[] getTeamNames()
     {    

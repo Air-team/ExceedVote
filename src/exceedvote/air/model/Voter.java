@@ -1,17 +1,30 @@
 package exceedvote.air.model;
 
-import java.util.List;
+import java.io.Serializable;
+import javax.persistence.*;
+
+import exceed.air.persistence.DaoFactory;
+import exceed.air.persistence.VoterDao;
 
 /**
- * Class Voter represents the user that can vote to the projects. 
- * @author Busarat Jumrusvimonrat.
+ * Entity implementation class for Entity: Voter
+ *
  */
-public class Voter {
+@Entity
 
+public class Voter implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
+
+
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+   private Integer id;
 	private String name;
 	private String type;
-	private Ballot ballot;
-	private String ballotLeft;
+	private int amountOfBallot;
 
 	/**
 	 * Constructor for objects of class Voter.
@@ -21,11 +34,24 @@ public class Voter {
 	 * @param bb is ballot box.
 	 * @param teamList is the team list.
 	 */
-	public Voter(String name, String type,String ballotLeft, Ballot ballot) {
+	public Voter(String name, String type) {
+		this();
 		this.name = name;
 		this.type = type;
-		this.ballot = ballot;
-		this.ballotLeft = ballotLeft;
+		setFistQuata(type);
+	}
+
+	public Voter() {
+		super();
+	}
+   
+	private void setFistQuata(String type) {
+		if(type.equals("STUDENT")){
+			this.amountOfBallot = 5;
+		}
+		else if(type.equals("TEACHER")){
+			this.amountOfBallot = 10;
+		}
 	}
 
 	/**
@@ -44,19 +70,19 @@ public class Voter {
 		return this.type;
 	}
 
-	public String getballotLeft(){
-        return ballotLeft;
-    }
-
-	/**
-	 * Get the Ballot by specify the type of the voter.
-	 * @return ballot that has value.
-	 */
-	public Ballot getBallot() {
-		ballot.setValue(type);
-		return this.ballot;
-	}
-
 	
+	public Integer getId(){
+		return this.id;
+	}
+	
+	public void setballotLeft(int value){
+		this.amountOfBallot = value;
+		VoterDao dao = DaoFactory.getInstance().getVoterDao();
+		dao.save(this);
+	}
+	
+	public int getballotLeft(){
+		return amountOfBallot;
+	}
 	
 }

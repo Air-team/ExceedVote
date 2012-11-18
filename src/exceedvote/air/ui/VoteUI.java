@@ -1,5 +1,4 @@
 package exceedvote.air.ui;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +16,7 @@ import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import javax.swing.JTextPane;
 
-import exceedvote.air.model.BallotBox;
+import exceedvote.air.model.Ballot;
 import exceedvote.air.model.Voter;
 
 import java.awt.Color;
@@ -29,7 +28,7 @@ import java.util.List;
  * @author AIr Team
  * @version 2012.10.1
  */
-public class VoteUI extends JFrame
+public class VoteUI extends JFrame implements RunUI
 {
     private JPanel contentPane;
 
@@ -51,6 +50,7 @@ public class VoteUI extends JFrame
     private JLabel lblNewLabel = new JLabel("View your history");
     private JLabel lblVote = new JLabel("vote");
     private JLabel lblRevote = new JLabel("revote");
+    private JButton btnBack;
     /*
      * ballot test
      */
@@ -65,20 +65,24 @@ public class VoteUI extends JFrame
     
     String[] names;
     // name select
-    String select ="";
+    String selectTeam ="";
     // Voter
+   
     private Voter voter;
-    private BallotBox ballotBox;
-
-    public VoteUI(Voter voter,BallotBox ballotBox)
+    private Ballot ballott;
+    public VoteUI(Voter voter,Ballot ballott)
     {
         this.voter = voter;
-        this.ballotBox = ballotBox;
-        ballot = voter.getBallot().getValue();
-        names = ballotBox.getTeamNames();
+        this.ballott = ballott;
+        ballot = voter.getballotLeft();
+        names = ballott.getTeamNames();
         type = voter.getType();
         nameVoter = voter.getName();
+        
     }
+     //service for call other ui
+    SeviceUI serviceUI;
+
 
     /*
      * init all component
@@ -153,7 +157,11 @@ public class VoteUI extends JFrame
         lblNewLabel.setForeground(Color.ORANGE);
         lblNewLabel.setBounds(250, 200, 188, 14);
         contentPane.add(lblNewLabel);
-
+        
+        btnBack = new JButton(new backAction());
+        btnBack.setText("Back");
+		btnBack.setBounds(349, 342, 89, 23);
+		contentPane.add(btnBack);
     }
 
     private class UpAction extends AbstractAction{ 
@@ -165,7 +173,7 @@ public class VoteUI extends JFrame
 
         public void actionPerformed(ActionEvent e)
         {   
-            if(select.equals(""))
+            if(selectTeam.equals(""))
             {
                 JOptionPane.showConfirmDialog((Component)
                     null, "Please Click to select the team", "Select the team", JOptionPane.DEFAULT_OPTION);
@@ -177,17 +185,18 @@ public class VoteUI extends JFrame
             }
             else
             {    
-                String alert = "Do you want to vote " + select ;
+                String alert = "Do you want to vote " + selectTeam ;
                 int result = JOptionPane.showConfirmDialog((Component)
                         null, alert , "Submit Vote!!!", JOptionPane.YES_NO_OPTION);
                 if(result == 0)
                 {
-                    boolean canVote = ballotBox.putBallot(select,typeTeam);
-                    if(canVote)
-                    {
-                        ballot--;
-                        status.setText("Status : "+type+" : "+String.valueOf(ballot)+" Ballot");
-                    }
+                	 boolean canVote = ballott.putBallot(selectTeam,typeTeam,voter);
+                     
+                     if(canVote)
+                     {
+                     	
+                         status.setText("Status : "+type+" : "+String.valueOf(voter.getballotLeft())+" Ballot");
+                     }
                 }
             }
             //System.out.print(result);
@@ -204,11 +213,31 @@ public class VoteUI extends JFrame
         public void actionPerformed(ActionEvent e)
         {   
             JButton o = (JButton)e.getSource();
-            select = o.getText();
-            teamSelect.setText("Team : "+select);
+            selectTeam = o.getText();
+            teamSelect.setText("Team : "+selectTeam);
         }
     }
+    
+    private class backAction extends AbstractAction{ 
 
+        public backAction()
+        { 
+            super(); 
+        } 
+
+        public void actionPerformed(ActionEvent e)
+        {   
+            serviceUI.runByName("voteTypeUI");
+            close();
+        }
+    }
+    
+    public void close()
+    {
+        setVisible(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
     /*
      * set team in UI,
      */
@@ -226,6 +255,11 @@ public class VoteUI extends JFrame
     {
        this.typeTeam = type;
        txtpnTeamlist.setText("TeamList: "+typeTeam);
+    }
+    
+    public void addService(SeviceUI serviceUI)
+    {
+        this.serviceUI = serviceUI;
     }
     
     /*

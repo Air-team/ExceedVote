@@ -1,23 +1,87 @@
 package exceedvote.air.model;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.*;
+
+import exceed.air.persistence.BallotDao;
+import exceed.air.persistence.DaoFactory;
+
 /**
- * The Ballot class represents the vote from the user. Each ballot contains the vote(s), separated by the kind of user,
- * that the user votes for their favorite them.
- * @author Busarat Jumrusvimonrat
+ * Entity implementation class for Entity: Ballot
+ *
  */
-public class Ballot {
+@Entity
+public class Ballot implements Serializable {
 
-	/** The vote of a ballot */
-	public int value;
-	private Team team;
+	
+	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Ballot constructor. Initialize value.
-	 */
 	public Ballot() {
+		super();
+	}
+	
+	
+   
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	private String teamName;
+	private String topic;
+	
+	
+	private Voter voter;
+	private int value;
+	
+	
+	/** TeamList */
+	@OneToOne(cascade=CascadeType.PERSIST)
+	private TeamList teamList;
+	private Team team;
+	
+	/** The List of teams to vote */
+	private List<Team> list;
+	/** Log4j */
+	@OneToOne(cascade=CascadeType.PERSIST)
+	private Tracking track = new Tracking();
+	/** Log for tracking the action of this class */
+	
+
+	
+	public Ballot(TeamList teamList) {
+		this();
+		
+		this.teamList = teamList;
+		list = teamList.getTeam();
 		value = 0;
+		
+	}   
+	
+
+	public Integer getId() {
+		return this.id;
 	}
 
+	public String getTeamName() {
+		return teamName;
+	}
+	
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+	
+	public String getTopic() {
+		return topic;
+	}
+	
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	/**
 	 * Get the vote of the ballot.
 	 * @return value is the vote of the ballot.
@@ -25,26 +89,36 @@ public class Ballot {
 	public int getValue() {
 		return this.value;
 	}
-
+	
 	/**
-	 * Set the value(s) of the ballot, separated by the kind of the user.
-	 * @param name the kind of the user. There are 2 kind "STUDENT" and "TEACHER".(for now)
+	 * Put the Ballot into the BallotBox. And set the vote, that the user vote, to the team.
+	 * @param teamName is name of the team that the user wants to vote.
 	 */
-	public void setValue(String name) {
-		if (name.equals("STUDENT"))
-			this.value = 1;
-		else if (name.equals("TEACHER"))
-			this.value = 3;
+	public boolean putBallot(String teamName,String typeTeam,Voter voter) {
+		
+		for (int i = 0; i < list.size(); i++) {
+			
+			if ( list.get(i).getName().equals(teamName) ) {
+				
+				this.voter = voter;
+				int value  = voter.getballotLeft();
+				this.team = list.get(i);
+				int score = team.getScore(typeTeam);
+				score++;
+				team.setScore(score, typeTeam);
+				BallotDao dao = DaoFactory.getInstance().getBallotDao();
+				dao.save(this);
+				voter.setballotLeft(value-1);
+				track.addLog(teamName,typeTeam);
+				return true;
+			}
+		}		
+		return false;
 	}
-
-	/**
-	 * Reduce the value of the vote in the ballot.
-	 * @param value the reducing value.
-	 */
-	public void reduceValue(int value) {
-		if (this.value > 0)
-			this.value -= value;
-		else
-			this.value = 0;
-	}
+	
+	public String[] getTeamNames()
+    {
+        return teamList.getTeamNames();
+    }
+   
 }
