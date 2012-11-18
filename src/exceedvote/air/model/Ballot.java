@@ -81,7 +81,13 @@ public class Ballot implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public void setVoter(Voter voter) {
+		this.voter = voter;
+	}
 	
+	public Voter getVoter() {
+		return Voter;
+	}
 	
 	/**
 	 * Put the Ballot into the BallotBox. And set the vote, that the user vote, to the team.
