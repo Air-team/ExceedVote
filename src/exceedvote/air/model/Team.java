@@ -1,48 +1,54 @@
 package exceedvote.air.model;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.swing.*;
+
+import exceed.air.persistence.DaoFactory;
+import exceed.air.persistence.TeamDao;
+import exceed.air.persistence.VoteTopicDao;
 
 /**
  * Class Team represent the  
  * @author Air Team
  */
-public class Team {
+@Entity
+public class Team implements Serializable{
 	// instance variables - replace the example below with your own
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
 	private String name;
 	private int score;
-	private Map<VoteTopic,Integer> topic;
-	Iterator<Entry<VoteTopic, Integer>> it;
+	private VoteTopic topic;
+
 	/**
 	 * Constructor for objects of class Team
 	 * @param type 
 	 */
 	public Team(String name, TeamDescription td, List<VoteTopic> type) {
-		this.name = name;
-		topic = new HashMap<VoteTopic,Integer>();
-		addTopic(type);
-		
-		
+		this();
+		this.name = name;		
+	}
+	
+	public Team(){
+		super();
 	}
 	public int getScore(String topicName) {
-		 it = topic.entrySet().iterator();
-		while( it.hasNext() ){
-			Entry<VoteTopic, Integer> key =  it.next();
-			VoteTopic t = key.getKey();
-			String text = t.getTitle();
-		
-			if( text.equals(topicName) ){
-//				System.out.println(topicName+" "+topic.get(t));
-				return topic.get(t);
-			}
-		}
-		return 0;
+		return score;
 	}
 
 	public String getName() {
@@ -50,29 +56,10 @@ public class Team {
 	}
 
 	public void setScore(int score,String topicName) {
+		VoteTopicDao dao2 = DaoFactory.getInstance().getVoteTopicDao();
+		topic = dao2.find(topicName);
+		this.score = score;
+	}
+	
 
-		this.score = this.getScore(topicName) + 1;
-		 it = topic.entrySet().iterator();
-		while( it.hasNext() ){
-			Entry<VoteTopic, Integer> key =  it.next();
-			VoteTopic t = key.getKey();
-			String text = t.getTitle();
-		System.out.println(text);
-			if( text.equals(topicName) ){
-				topic.put(t, this.score);
-				JOptionPane.showConfirmDialog((Component) null, name, name + " has been vote", JOptionPane.DEFAULT_OPTION);
-				return;
-			}
-		}
-		
-	}
-	
-	public void addTopic(List<VoteTopic> type){
-		
-		for(int i=0;i<type.size();i++) {
-			topic.put(type.get(i), 0);	
-		}
-	
-	
-	}
 }

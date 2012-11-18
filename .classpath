@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="src/log4j-1.2.17.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/eclipselink.jar"/>
-	<classpathentry kind="lib" path="lib/javax.persistence_2.0.4.v201112161009.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.21-bin.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Derby"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.4.1 - Juno">
+		<attributes>
+			<attribute name="owner.project.facets" value="jpt.jpa"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/lib/db-derby-10.9.1.0-bin/db-derby-10.9.1.0-bin/lib/derby.jar"/>
+	<classpathentry kind="lib" path="C:/lib/eclipselink/jlib/jpa/javax.persistence_2.0.3.v201010191057.jar"/>
+	<classpathentry kind="lib" path="C:/lib/eclipselink/jlib/jpa/eclipselink-jpa-modelgen_2.3.2.v20111125-r10461.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

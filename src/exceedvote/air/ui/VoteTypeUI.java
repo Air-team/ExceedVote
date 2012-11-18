@@ -1,27 +1,30 @@
 package exceedvote.air.ui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTextPane;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 
-
+import exceedvote.air.model.Voter;
 /**
  * VoteType user interface
  * 
  * @author AIr Team
  * @version 2012.11.3
  */
-public class VoteTypeUI extends JFrame 
+public class VoteTypeUI extends JFrame implements RunUI
 {
 
     private JPanel contentPane;
@@ -46,13 +49,18 @@ public class VoteTypeUI extends JFrame
     private String labelSelect = "";
 
     // voteUi run after user select and click submit button
-    private VoteUI voteUI;
+    //ballotleft
+    private JLabel ballotLeft;
+    
+    //service for call other ui
+    SeviceUI serviceUI;
+    private int ballot = 0;
     /**
      * Create the frame.
      */
-    public VoteTypeUI(VoteUI voteUi) 
+    public VoteTypeUI(Voter voter) 
     {
-        this.voteUI = voteUi;
+        ballot = voter.getballotLeft();
     }
 
     /*
@@ -71,7 +79,7 @@ public class VoteTypeUI extends JFrame
         txtpnVotetype.setEditable(false);
         txtpnVotetype.setFont(new Font("Tahoma", Font.PLAIN, 36));
         txtpnVotetype.setText("VoteType");
-        txtpnVotetype.setBounds(10, 11, 248, 50);
+        txtpnVotetype.setBounds(10, 11, 176, 50);
         contentPane.add(txtpnVotetype);
 
         lblSelectTheType.setBounds(20, 72, 185, 14);
@@ -79,16 +87,12 @@ public class VoteTypeUI extends JFrame
 
         btnBeautifulUI = new JButton(new ActionSelect());
         btnBeautifulUI.setText("Beautiful UI");
- 
         btnGoodFunction = new JButton(new ActionSelect());
         btnGoodFunction.setText("Good Function");
-     
         btnNoBug = new JButton(new ActionSelect());
         btnNoBug.setText("No Bug");
-      
         btnPresentation = new JButton(new ActionSelect());
         btnPresentation.setText("Presentation");
-      
 
         btnBeautifulUI.setBounds(30, 97, 379, 30);
         contentPane.add(btnBeautifulUI);
@@ -102,7 +106,7 @@ public class VoteTypeUI extends JFrame
         btnPresentation.setBounds(30, 220, 379, 30);
         contentPane.add(btnPresentation);
 
-        btnGoToVote = new JButton(new ActionSubmit(voteUI));
+        btnGoToVote = new JButton(new ActionSubmit());
         btnGoToVote.setText("Go to vote page");
         btnGoToVote.setBounds(255, 406, 169, 23);
         contentPane.add(btnGoToVote);
@@ -114,6 +118,11 @@ public class VoteTypeUI extends JFrame
         selectType.setText("none");
         selectType.setBounds(86, 410, 199, 14);
         contentPane.add(selectType);
+        
+        String shows = "You Have : "+String.valueOf(ballot)+" Ballot";
+        ballotLeft = new JLabel(shows);
+		ballotLeft.setBounds(267, 11, 142, 14);
+		contentPane.add(ballotLeft);
 
     }
 
@@ -143,12 +152,9 @@ public class VoteTypeUI extends JFrame
      */
     private class ActionSubmit extends AbstractAction{ 
 
-        private VoteUI voteUI;
-
-        public ActionSubmit(VoteUI voteUI)
+        public ActionSubmit()
         { 
             super(); 
-            this.voteUI = voteUI;
         } 
 
         public void actionPerformed(ActionEvent e)
@@ -160,18 +166,27 @@ public class VoteTypeUI extends JFrame
             }
             else
             {
-                if(voteUI != null){
-//                	VoteTopic voteTopic = new VoteTopic(labelSelect);
-                    voteUI.run(labelSelect);
-                }
+                    serviceUI.runByName("voteUI",labelSelect);
+                    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    close();
             }
         }
+    }
+    
+    public void close()
+    {
+       this.setVisible(false);
+    }
+    
+    public void addService(SeviceUI serviceUI)
+    {
+        this.serviceUI = serviceUI;
     }
     
     /*
      * run this frame 
      */
-    public void run()
+    public void run(String info)
     {
         this.initComponent();
         this.setVisible(true);

@@ -1,14 +1,26 @@
 package exceedvote.air.model;
 
-import org.apache.log4j.Logger;
+import java.io.Serializable;
+
+import org.apache.log4j.Logger;import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Class Tracking is used for track the action of each class.
  * @author Chupan
  */
-public class Tracking {
+
+@Entity
+public class Tracking  implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	/** final attribute of Logger */
-	final static Logger lg = Logger.getLogger( BallotBox.class );
+	final static Logger lg = Logger.getLogger( Ballot.class );
 
 	/**
 	 * Constructor for objects of class Tracking.
@@ -21,7 +33,8 @@ public class Tracking {
 	 * Add Log.
 	 * @param teamName
 	 */
-	public void addLog(String teamName){
-		lg.info("vote For "+teamName);
+	public void addLog(String teamName,String type){
+		lg.info("vote For "+teamName+" topic: "+ type);
 	}
 }
+	
