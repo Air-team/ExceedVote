@@ -50,7 +50,11 @@ public class Ballot implements Serializable {
 
 	
 	public Ballot(TeamList teamList) {
+<<<<<<< HEAD
 		this();
+=======
+		super();
+>>>>>>> 01f1f7895d9e57516ebd49aa63215e1ae0d2da0a
 		
 		this.teamList = teamList;
 		list = teamList.getTeam();
