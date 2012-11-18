@@ -40,6 +40,22 @@ public class BallotDaoJpa implements BallotDao {
 		String queryStatement = "SELECT vt FROM Ballot vt";
 		return em.createQuery(queryStatement).getResultList();
 	}
+
+	/**
+	 * Remove Ballot.
+	 */
+	
+	public boolean deleteBallot(Ballot ballot) {
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.remove(ballot);
+			tx.commit();
+			//System.out.printf("Delete Success");
+		} catch (Exception ex) {
+			getLogger().error("Error Delete Ballot "+ ex);
+			if (tx.isActive()) tx.rollback();
+		}
 	
 	@Override
 	public void remove(Ballot ballot){
