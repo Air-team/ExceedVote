@@ -51,6 +51,7 @@ public class VoteUI extends JFrame implements RunUI
     private JLabel lblVote = new JLabel("vote");
     private JLabel lblRevote = new JLabel("revote");
     private JButton btnBack;
+    
     /*
      * ballot test
      */
@@ -126,6 +127,11 @@ public class VoteUI extends JFrame implements RunUI
         voteBtn.setText("+");
         voteBtn.setBounds(250, 152, 89, 23);
         contentPane.add(voteBtn);
+        
+        revoteBtn = new JButton(new ReVoteAction());
+        revoteBtn.setText("-");
+        revoteBtn.setBounds(349, 152, 89, 23);
+        contentPane.add(revoteBtn);
 
         teamSelect.setEditable(false);
         teamSelect.setBackground(Color.BLACK);
@@ -180,7 +186,7 @@ public class VoteUI extends JFrame implements RunUI
             }
             else if(ballot == 0)
             {
-                JOptionPane.showConfirmDialog((Component)
+                	JOptionPane.showConfirmDialog((Component)
                     null, "No ballot !!", "No Ballot!!", JOptionPane.DEFAULT_OPTION);
             }
             else
@@ -194,13 +200,46 @@ public class VoteUI extends JFrame implements RunUI
                      
                      if(canVote)
                      {
-                     	
+                     	ballot--;
                          status.setText("Status : "+type+" : "+String.valueOf(voter.getballotLeft())+" Ballot");
                      }
                 }
             }
-            //System.out.print(result);
+//            System.out.print(result);
         }
+    }
+
+    private class ReVoteAction extends AbstractAction{ 
+    	  public ReVoteAction() { 
+              super(); 
+          } 
+    	
+
+		public void actionPerformed(ActionEvent arg0) {
+			
+			 if(selectTeam.equals(""))
+	         {
+	             JOptionPane.showConfirmDialog((Component)
+	                 null, "Please Click to select the team", "Select the team", JOptionPane.DEFAULT_OPTION);
+	         }
+	   
+	         else
+	         {    
+	             String alert = "Do you want to vote " + selectTeam ;
+	             int result = JOptionPane.showConfirmDialog((Component)
+	                     null, alert , "Submit Vote!!!", JOptionPane.YES_NO_OPTION);
+	             if(result == 0)
+	             {
+	             	 boolean canVote = ballott.returnBallot(selectTeam,typeTeam,voter);
+	     
+	                  if(canVote)
+	                  {
+	                  	ballot++;
+	                      status.setText("Status : "+type+" : "+String.valueOf(voter.getballotLeft())+" Ballot");
+	                  }
+	             }
+	         }
+		}	
     }
 
     private class ActionSelect extends AbstractAction{ 
@@ -216,6 +255,11 @@ public class VoteUI extends JFrame implements RunUI
             selectTeam = o.getText();
             teamSelect.setText("Team : "+selectTeam);
         }
+    }
+    
+    public void reTeam()
+    {
+    	listTeam.removeAll();
     }
     
     private class backAction extends AbstractAction{ 
@@ -242,13 +286,14 @@ public class VoteUI extends JFrame implements RunUI
      * set team in UI,
      */
     public void updateTeam()
-    {   
-        for(int i = 0 ; i < names.length ; i++)
-        {    
-            JButton eachTeam = new JButton(new ActionSelect());
-            eachTeam.setText(names[i]);
-            listTeam.add(eachTeam);
-        }
+    { 
+    reTeam();
+    for(int i = 0 ; i < names.length ; i++)
+    { 
+    JButton eachTeam = new JButton(new ActionSelect());
+    eachTeam.setText(names[i]);
+    listTeam.add(eachTeam);
+    }
     }
 
     public void setType(String type)

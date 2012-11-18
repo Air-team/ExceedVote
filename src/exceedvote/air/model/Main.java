@@ -3,10 +3,11 @@ package exceedvote.air.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import exceed.air.persistence.DaoFactory;
-import exceed.air.persistence.TeamDao;
-import exceed.air.persistence.VoteTopicDao;
-import exceed.air.persistence.VoterDao;
+import exceedvote.air.persistence.DaoFactory;
+import exceedvote.air.persistence.TeamDao;
+import exceedvote.air.persistence.VoteTopicDao;
+import exceedvote.air.persistence.VoterDao;
+
 import exceedvote.air.ui.LoginUI;
 import exceedvote.air.ui.SeviceUI;
 import exceedvote.air.ui.VoteTypeUI;
@@ -24,8 +25,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-			VoteTopicDao dao1 = DaoFactory.getInstance().getVoteTopicDao();
-			VoteTopic beauti = new VoteTopic("Beautiful UI");
+		VoteTopicDao dao1 = DaoFactory.getInstance().getVoteTopicDao();
+		VoteTopic beauti = new VoteTopic("Beautiful UI");
 		  dao1.save(beauti);
 		  VoteTopic goodFunc = new VoteTopic("Good Function");
 		  dao1.save(goodFunc);
@@ -50,13 +51,13 @@ public class Main {
 
 		
 		TeamDao dao2 = DaoFactory.getInstance().getTeamDao();
-		Team durian = new Team("Durian", durianDes,topic);
+		Team durian = new Team("Durian", durianDes);
 		dao2.save(durian);
-		Team amaze = new Team("Amaze", amazeDes,topic);
+		Team amaze = new Team("Amaze", amazeDes);
 		dao2.save(amaze);
-		Team test1 = new Team("OOP", amazeDes,topic);
+		Team test1 = new Team("OOP", amazeDes);
 		dao2.save(test1);
-		Team test2 = new Team("PANDA", amazeDes,topic);
+		Team test2 = new Team("PANDA", amazeDes);
 		dao2.save(test2);
 		TeamList list = new TeamList();
 		list.addTeam(durian);

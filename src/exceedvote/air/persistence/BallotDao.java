@@ -1,4 +1,4 @@
-package exceed.air.persistence;
+package exceedvote.air.persistence;
 
 import java.util.List;
 
@@ -8,4 +8,6 @@ public interface BallotDao {
 	public void save(Ballot ballot);
 
 	public abstract List<Ballot> findAll();
+
+	public void remove(Ballot ballot);
 }

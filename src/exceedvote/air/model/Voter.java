@@ -3,8 +3,8 @@ package exceedvote.air.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import exceed.air.persistence.DaoFactory;
-import exceed.air.persistence.VoterDao;
+import exceedvote.air.persistence.DaoFactory;
+import exceedvote.air.persistence.VoterDao;
 
 /**
  * Entity implementation class for Entity: Voter

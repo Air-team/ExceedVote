@@ -1,4 +1,4 @@
-package exceed.air.persistence;
+package exceedvote.air.persistence;
 
 import exceedvote.air.persistence.jpa.DaoFactoryJpa;
 

@@ -16,9 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.swing.*;
 
-import exceed.air.persistence.DaoFactory;
-import exceed.air.persistence.TeamDao;
-import exceed.air.persistence.VoteTopicDao;
+import exceedvote.air.persistence.DaoFactory;
+import exceedvote.air.persistence.TeamDao;
+import exceedvote.air.persistence.VoteTopicDao;
 
 /**
  * Class Team represent the  
@@ -39,7 +39,7 @@ public class Team implements Serializable{
 	 * Constructor for objects of class Team
 	 * @param type 
 	 */
-	public Team(String name, TeamDescription td, List<VoteTopic> type) {
+	public Team(String name, TeamDescription td) {
 		this();
 		this.name = name;		
 	}

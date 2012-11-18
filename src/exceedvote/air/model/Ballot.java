@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import exceed.air.persistence.BallotDao;
-import exceed.air.persistence.DaoFactory;
+import exceedvote.air.persistence.BallotDao;
+import exceedvote.air.persistence.DaoFactory;
 
 /**
  * Entity implementation class for Entity: Ballot
@@ -32,12 +32,12 @@ public class Ballot implements Serializable {
 	
 	
 	private Voter voter;
-	private int value;
 	
 	
 	/** TeamList */
 	@OneToOne(cascade=CascadeType.PERSIST)
 	private TeamList teamList;
+	@OneToOne(cascade=CascadeType.PERSIST)
 	private Team team;
 	
 	/** The List of teams to vote */
@@ -50,16 +50,11 @@ public class Ballot implements Serializable {
 
 	
 	public Ballot(TeamList teamList) {
-<<<<<<< HEAD
 		this();
-=======
-		super();
->>>>>>> 01f1f7895d9e57516ebd49aa63215e1ae0d2da0a
 		
 		this.teamList = teamList;
 		list = teamList.getTeam();
-		value = 0;
-		
+
 	}   
 	
 
@@ -86,13 +81,7 @@ public class Ballot implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	/**
-	 * Get the vote of the ballot.
-	 * @return value is the vote of the ballot.
-	 */
-	public int getValue() {
-		return this.value;
-	}
+	
 	
 	/**
 	 * Put the Ballot into the BallotBox. And set the vote, that the user vote, to the team.
@@ -113,7 +102,7 @@ public class Ballot implements Serializable {
 				BallotDao dao = DaoFactory.getInstance().getBallotDao();
 				dao.save(this);
 				voter.setballotLeft(value-1);
-				track.addLog(teamName,typeTeam);
+				track.addLogVote(teamName,typeTeam);
 				return true;
 			}
 		}		
@@ -124,5 +113,29 @@ public class Ballot implements Serializable {
     {
         return teamList.getTeamNames();
     }
+
+
+	public boolean returnBallot(String teamName, String typeTeam, Voter voter) {
+			
+		for (int i = 0; i < list.size(); i++) {
+			
+			if ( list.get(i).getName().equals(teamName) ) {
+				
+				this.voter = voter;
+				int value  = voter.getballotLeft();
+				this.team = list.get(i);
+				int score = team.getScore(typeTeam);
+				score--;
+				team.setScore(score, typeTeam);
+				BallotDao dao = DaoFactory.getInstance().getBallotDao();
+				voter.setballotLeft(value+1);
+				dao.remove(this);
+				track.addLogRevote(teamName,typeTeam);
+				return true;
+			}
+		}
+		return false;
+	
+	}
    
 }

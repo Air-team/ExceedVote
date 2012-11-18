@@ -21,13 +21,13 @@ import exceedvote.air.model.VoteTopic;
  * @author Team AIR
  * @version 2555-10-23
  */
-public class TestTeam
+public class TeamTest
 {
 	 List<VoteTopic> topic = new ArrayList<VoteTopic>();
     /**
      * Default constructor for test class TestTeam
      */
-    public TestTeam()
+    public TeamTest()
     {
     	VoteTopic beauti = new VoteTopic("Beautiful UI");
 		  VoteTopic goodFunc = new VoteTopic("Good Function");
@@ -68,7 +68,7 @@ public class TestTeam
     @Test
 	public void testTeam() {
 		TeamList teamList1 = new TeamList();
-		Team team1 = new Team("air", new TeamDescription("Hi"),topic);
+		Team team1 = new Team("air", new TeamDescription("Hi"));
 		teamList1.addTeam(team1);
 		assertEquals("air", team1.getName());
 		team1.setScore(1,"Beautiful UI");

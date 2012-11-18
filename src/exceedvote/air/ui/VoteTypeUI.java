@@ -54,12 +54,14 @@ public class VoteTypeUI extends JFrame implements RunUI
     
     //service for call other ui
     SeviceUI serviceUI;
+    private Voter voter;
     private int ballot = 0;
     /**
      * Create the frame.
      */
     public VoteTypeUI(Voter voter) 
     {
+    	this.voter = voter;
         ballot = voter.getballotLeft();
     }
 
@@ -118,7 +120,7 @@ public class VoteTypeUI extends JFrame implements RunUI
         selectType.setText("none");
         selectType.setBounds(86, 410, 199, 14);
         contentPane.add(selectType);
-        
+        ballot = voter.getballotLeft();
         String shows = "You Have : "+String.valueOf(ballot)+" Ballot";
         ballotLeft = new JLabel(shows);
 		ballotLeft.setBounds(267, 11, 142, 14);

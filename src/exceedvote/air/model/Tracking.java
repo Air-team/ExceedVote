@@ -33,8 +33,13 @@ public class Tracking  implements Serializable{
 	 * Add Log.
 	 * @param teamName
 	 */
-	public void addLog(String teamName,String type){
+	public void addLogVote(String teamName,String type){
 		lg.info("vote For "+teamName+" topic: "+ type);
+	}
+	
+	
+	public void addLogRevote(String teamName,String type){
+		lg.info("revote For "+teamName+" topic: "+ type);
 	}
 }
 	

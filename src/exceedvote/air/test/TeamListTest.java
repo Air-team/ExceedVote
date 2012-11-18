@@ -39,7 +39,7 @@ public class TeamListTest {
 	 */
 	@Test
 	public void testAddOneTeam() {
-		Team team1 = new Team("iSelf", new TeamDescription("diary"),topic);
+		Team team1 = new Team("iSelf", new TeamDescription("diary"));
 		TeamList tlist = new TeamList();
 		assertEquals(true, tlist.addTeam(team1));
 	}
@@ -48,16 +48,16 @@ public class TeamListTest {
 	 */
 	@Test
 	public void testAddTenTeam() {
-		Team team1 = new Team("iSelf", new TeamDescription("diary"),topic);
-		Team team2 = new Team("Poo Poo", new TeamDescription("game"),topic);
-		Team team3 = new Team("Bee", new TeamDescription("game"),topic);
-		Team team4 = new Team("Air", new TeamDescription("element"),topic);
-		Team team5 = new Team("Ant", new TeamDescription("animal"),topic);
-		Team team6 = new Team("Fish", new TeamDescription("animal"),topic);
-		Team team7 = new Team("Mad", new TeamDescription("human"),topic);
-		Team team8 = new Team("Uncle", new TeamDescription("family"),topic);
-		Team team9 = new Team("Love", new TeamDescription("emotion"),topic);
-		Team team10 = new Team("JetPack", new TeamDescription("game"),topic);
+		Team team1 = new Team("iSelf", new TeamDescription("diary"));
+		Team team2 = new Team("Poo Poo", new TeamDescription("game"));
+		Team team3 = new Team("Bee", new TeamDescription("game"));
+		Team team4 = new Team("Air", new TeamDescription("element"));
+		Team team5 = new Team("Ant", new TeamDescription("animal"));
+		Team team6 = new Team("Fish", new TeamDescription("animal"));
+		Team team7 = new Team("Mad", new TeamDescription("human"));
+		Team team8 = new Team("Uncle", new TeamDescription("family"));
+		Team team9 = new Team("Love", new TeamDescription("emotion"));
+		Team team10 = new Team("JetPack", new TeamDescription("game"));
 		TeamList tlist = new TeamList();
 		assertEquals(true, tlist.addTeam(team1));
 		assertEquals(true, tlist.addTeam(team2));
@@ -76,8 +76,8 @@ public class TeamListTest {
 	 */
 	@Test
 	public void testAddSameTeam() {
-		Team team1 = new Team("iSelf", new TeamDescription("diary"),topic);
-		Team team2 = new Team("Poo Poo jet", new TeamDescription("game"),topic);
+		Team team1 = new Team("iSelf", new TeamDescription("diary"));
+		Team team2 = new Team("Poo Poo jet", new TeamDescription("game"));
 		TeamList tlist = new TeamList();
 		
 		assertEquals(true, tlist.addTeam(team1));
@@ -90,7 +90,7 @@ public class TeamListTest {
 	 */
 	@Test
 	public void testGetTeam() {
-		Team team1 = new Team("iSelf", new TeamDescription("diary"),topic);
+		Team team1 = new Team("iSelf", new TeamDescription("diary"));
 		TeamList tlist = new TeamList();
 		List<Team> list = new ArrayList<Team>();
 		
@@ -101,22 +101,6 @@ public class TeamListTest {
 		assertEquals(1, list.size());
 	}
 	
-	/**
-	 * try to add ballot and test if it's added
-	 */
-	@Test
-	public void testSetBallot() {
-		Team team1 = new Team("iSelf", new TeamDescription("diary"),topic);
-		TeamList tlist = new TeamList();
-		
-		assertEquals(true, tlist.addTeam(team1));
-		
-		tlist.setBallot("iSelf","Presentation");
-		assertEquals(1, team1.getScore("Presentation"));
-		tlist.setBallot("iSelf","Presentation");
-		assertEquals(2, team1.getScore("Presentation"));
-		tlist.setBallot("iSelf","Presentation");
-		assertEquals(3, team1.getScore("Presentation"));
-	}
+
 }
 

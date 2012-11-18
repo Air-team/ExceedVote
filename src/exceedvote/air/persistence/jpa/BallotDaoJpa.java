@@ -1,20 +1,12 @@
-package exceed.air.persistence.jpa;
+package exceedvote.air.persistence.jpa;
 
 import java.util.List;
-import java.util.Scanner;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
 import org.apache.log4j.Logger;
-
-import exceed.air.persistence.BallotDao;
-import exceed.air.persistence.DaoFactory;
-import exceed.air.persistence.VoteTopicDao;
 import exceedvote.air.model.Ballot;
-import exceedvote.air.model.TeamList;
-import exceedvote.air.model.VoteTopic;
-import exceedvote.air.model.Voter;
+import exceedvote.air.persistence.BallotDao;
+
 
 public class BallotDaoJpa implements BallotDao {
 
@@ -47,6 +39,11 @@ public class BallotDaoJpa implements BallotDao {
 	public List<Ballot> findAll(){
 		String queryStatement = "SELECT vt FROM Ballot vt";
 		return em.createQuery(queryStatement).getResultList();
+	}
+	
+	@Override
+	public void remove(Ballot ballot){
+		em.remove(ballot);
 	}
 	
 	private static Logger getLogger() {

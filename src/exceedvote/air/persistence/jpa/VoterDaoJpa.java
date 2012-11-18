@@ -1,21 +1,16 @@
-package exceed.air.persistence.jpa;
+package exceedvote.air.persistence.jpa;
 
 import java.util.List;
-import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
-import exceed.air.persistence.DaoFactory;
-import exceed.air.persistence.VoteTopicDao;
-import exceed.air.persistence.VoterDao;
-import exceedvote.air.model.Ballot;
-import exceedvote.air.model.Team;
-import exceedvote.air.model.VoteTopic;
+
 import exceedvote.air.model.Voter;
+
+import exceedvote.air.persistence.VoterDao;
 
 /**
  * Persistence operations for VoteTopic objects.

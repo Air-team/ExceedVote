@@ -1,4 +1,4 @@
-package exceed.air.persistence.jpa;
+package exceedvote.air.persistence.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -6,11 +6,11 @@ import javax.persistence.Persistence;
 
 import org.apache.log4j.Logger;
 
-import exceed.air.persistence.BallotDao;
-import exceed.air.persistence.DaoFactory;
-import exceed.air.persistence.TeamDao;
-import exceed.air.persistence.VoteTopicDao;
-import exceed.air.persistence.VoterDao;
+import exceedvote.air.persistence.BallotDao;
+import exceedvote.air.persistence.DaoFactory;
+import exceedvote.air.persistence.TeamDao;
+import exceedvote.air.persistence.VoteTopicDao;
+import exceedvote.air.persistence.VoterDao;
 /**
  * Factory for DAO that use JPA.
  * @author Negisu
