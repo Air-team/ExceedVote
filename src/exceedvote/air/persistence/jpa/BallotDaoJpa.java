@@ -40,6 +40,15 @@ public class BallotDaoJpa implements BallotDao {
 		String queryStatement = "SELECT vt FROM Ballot vt";
 		return em.createQuery(queryStatement).getResultList();
 	}
+	/**
+	 * Find Single Ballot.
+	 */
+
+	public Ballot findSingle(String teamName, String topic, Voter voter, List<Ballot> allBallot){
+		for (Ballot bl : allBallot) {
+			if (bl.getTopic() == topic) && (bl.getTeamName() == teamName)&& (bl.getVoter()==voter){return bl;}
+		}
+	}
 
 	/**
 	 * Remove Ballot.
