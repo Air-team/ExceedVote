@@ -7,82 +7,89 @@ import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.VoterDao;
 
 /**
- * Entity implementation class for Entity: Voter
- *
+ * Voter represents the a kind of user that appear for voting the competitors.
+ * 
+ * @author Air Team
+ * @version 2012.11.20
  */
 @Entity
-
 public class Voter implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
-
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-   private Integer id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	private String name;
 	private String type;
 	private int amountOfBallot;
 
 	/**
-	 * Constructor for objects of class Voter.
-	 * @param name is the name of the voter.
-	 * @param type is a kind of the voter such "STUDENT" or "TEACHER".(for now)
-	 * @param ballot is the ballot that the voter has.
-	 * @param bb is ballot box.
-	 * @param teamList is the team list.
+	 * Voter Constructor.
+	 */
+	private Voter() {
+		super();
+	}
+
+	/**
+	 * Initialize the Voter that has name and type.
+	 * 
+	 * @param name
+	 *            - the name of the user.
+	 * @param type
+	 *            - the type such as STUDENT or TEACHER.
 	 */
 	public Voter(String name, String type) {
 		this();
 		this.name = name;
 		this.type = type;
-		setFistQuata(type);
+		setFistQuota(type);
 	}
 
-	public Voter() {
-		super();
-	}
-   
-	private void setFistQuata(String type) {
-		if(type.equals("STUDENT")){
+	/**
+	 * Set the quota for each user depend on what kind of the user.
+	 * 
+	 * @param type
+	 *            - the type of user.
+	 */
+	private void setFistQuota(String type) {
+		if (type.equals("STUDENT")) {
 			this.amountOfBallot = 5;
-		}
-		else if(type.equals("TEACHER")){
+		} else if (type.equals("TEACHER")) {
 			this.amountOfBallot = 10;
 		}
 	}
 
 	/**
-	 * Get the voter name.
-	 * @return String name of the voter.
+	 * Return Voter's name.
+	 * 
+	 * @return String represents Voter's name.
 	 */
 	public String getName() {
 		return this.name;
 	}
 
 	/**
-	 * Get the type of the voter such as "STUDENT" or "TEACHER".
-	 * @return
+	 * Return the type of the user such as "STUDENT" or "TEACHER".
+	 * 
+	 * @return String represents the type of the user.
 	 */
 	public String getType() {
 		return this.type;
 	}
 
-	
-	public Integer getId(){
+	public Integer getId() {
 		return this.id;
 	}
-	
-	public void setballotLeft(int value){
+
+	public void setballotLeft(int value) {
 		this.amountOfBallot = value;
 		VoterDao dao = DaoFactory.getInstance().getVoterDao();
 		dao.save(this);
 	}
-	
-	public int getballotLeft(){
+
+	public int getballotLeft() {
 		return amountOfBallot;
 	}
-	
+
 }
