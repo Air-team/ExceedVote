@@ -79,14 +79,16 @@ public class Main {
 	
 		
 		LoginUI loginUI = new LoginUI();
+		
 		SeviceUI serviceUI = new SeviceUI();
 		serviceUI.addUI("voteUI",voteUI);
 		serviceUI.addUI("voteTypeUI",voteTypeUI);
 		voteTypeUI.addService(serviceUI);
 		voteUI.addService(serviceUI);
-		voteTypeUI.run("");
 	
-//		LoginUI loginUI = new LoginUI();
-//		loginUI.run();
+		voteTypeUI.run("");
+		
+		//loginUI.run();
+		
 	}
 }

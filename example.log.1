@@ -1,4 +1,11 @@
-2012-11-18 17:04:51 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
+2012-11-19 00:42:25 INFO exceedvote.air.model.Ballot:addLogVote - vote For PANDA topic: Beautiful UI
+2012-11-19 00:42:33 INFO exceedvote.air.model.Ballot:addLogVote - vote For PANDA topic: Good Function
+2012-11-19 00:42:35 INFO exceedvote.air.model.Ballot:addLogVote - vote For PANDA topic: Good Function
+2012-11-19 00:44:36 INFO exceedvote.air.model.Ballot:addLogVote - vote For PANDA topic: Good Function
+2012-11-19 00:44:40 INFO exceedvote.air.model.Ballot:addLogVote - vote For Durian topic: Good Function
+2012-11-19 00:47:23 INFO exceedvote.air.model.Ballot:addLogVote - vote For PANDA topic: Beautiful UI
+2012-11-19 00:48:04 INFO exceedvote.air.model.Ballot:addLogVote - vote For PANDA topic: No Bug
+2012-11-19 00:48:24 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
 javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
 Error Code: 40000
@@ -10,29 +17,7 @@ Error Code: 40000
 	at exceedvote.air.persistence.jpa.DaoFactoryJpa.<init>(DaoFactoryJpa.java:32)
 	at exceedvote.air.persistence.DaoFactory.init(DaoFactory.java:31)
 	at exceedvote.air.persistence.DaoFactory.getInstance(DaoFactory.java:22)
-	at exceedvote.air.test.BallotTest.<init>(BallotTest.java:33)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:513)
-	at org.junit.runners.BlockJUnit4ClassRunner.createTest(BlockJUnit4ClassRunner.java:187)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.runReflectiveCall(BlockJUnit4ClassRunner.java:236)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
-	at org.junit.runners.BlockJUnit4ClassRunner.methodBlock(BlockJUnit4ClassRunner.java:233)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
-	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+	at exceedvote.air.model.Main.main(Main.java:28)
 Caused by: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
 Error Code: 40000
@@ -43,7 +28,7 @@ Error Code: 40000
 	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.loginAndDetectDatasource(DatabaseSessionImpl.java:685)
 	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryProvider.login(EntityManagerFactoryProvider.java:213)
 	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:542)
-	... 30 more
+	... 8 more
 Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
@@ -58,17 +43,17 @@ Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongs
 	at java.sql.DriverManager.getConnection(DriverManager.java:582)
 	at java.sql.DriverManager.getConnection(DriverManager.java:154)
 	at org.eclipse.persistence.sessions.DefaultConnector.connect(DefaultConnector.java:98)
-	... 34 more
+	... 12 more
 Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 47 more
+	... 25 more
 Caused by: java.sql.SQLException: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/MyDB.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	... 44 more
+	... 22 more
 Caused by: ERROR XSDB6: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/MyDB.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.store.raw.data.BaseDataFileFactory.privGetJBMSLockOnDB(Unknown Source)
@@ -99,10 +84,26 @@ Caused by: ERROR XSDB6: Another instance of Derby may have already booted the da
 	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(Unknown Source)
 	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(Unknown Source)
 	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Unknown Source)
-	... 44 more
-2012-11-18 17:06:55 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
+	... 22 more
+2012-11-19 00:48:37 INFO exceedvote.air.model.Ballot:addLogVote - vote For OOP topic: Beautiful UI
+2012-11-19 00:49:28 INFO exceedvote.air.model.Ballot:addLogVote - vote For OOP topic: Good Function
+2012-11-19 00:49:34 INFO exceedvote.air.model.Ballot:addLogVote - vote For PANDA topic: Beautiful UI
+2012-11-19 00:49:37 INFO exceedvote.air.model.Ballot:addLogVote - vote For OOP topic: Beautiful UI
+2012-11-19 00:51:55 INFO exceedvote.air.model.Ballot:addLogVote - vote For OOP topic: No Bug
+2012-11-19 00:54:20 INFO exceedvote.air.model.Ballot:addLogVote - vote For OOP topic: Good Function
+2012-11-19 00:55:51 INFO exceedvote.air.model.Ballot:addLogVote - vote For OOP topic: Beautiful UI
+2012-11-19 00:56:35 INFO exceedvote.air.model.Ballot:addLogVote - vote For OOP topic: Good Function
+2012-11-19 00:56:37 INFO exceedvote.air.model.Ballot:addLogVote - vote For Amaze topic: Good Function
+2012-11-19 00:56:50 INFO exceedvote.air.model.Ballot:addLogVote - vote For PANDA topic: No Bug
+2012-11-19 00:59:23 INFO exceedvote.air.model.Ballot:addLogVote - vote For Amaze topic: Good Function
+2012-11-19 00:59:25 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Amaze topic: Good Function
+2012-11-19 00:59:30 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Amaze topic: Good Function
+2012-11-19 01:02:21 INFO exceedvote.air.model.Ballot:addLogVote - vote For Amaze topic: Good Function
+2012-11-19 01:02:23 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Amaze topic: Good Function
+2012-11-19 01:02:41 INFO exceedvote.air.model.Ballot:addLogVote - vote For Amaze topic: Good Function
+2012-11-19 14:21:13 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
 javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
+Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@1ef6a746, see the next exception for details.
 Error Code: 40000
 	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:602)
 	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.getDatabaseSession(EntityManagerFactoryDelegate.java:186)
@@ -112,31 +113,9 @@ Error Code: 40000
 	at exceedvote.air.persistence.jpa.DaoFactoryJpa.<init>(DaoFactoryJpa.java:32)
 	at exceedvote.air.persistence.DaoFactory.init(DaoFactory.java:31)
 	at exceedvote.air.persistence.DaoFactory.getInstance(DaoFactory.java:22)
-	at exceedvote.air.test.BallotTest.<init>(BallotTest.java:33)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:513)
-	at org.junit.runners.BlockJUnit4ClassRunner.createTest(BlockJUnit4ClassRunner.java:187)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.runReflectiveCall(BlockJUnit4ClassRunner.java:236)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
-	at org.junit.runners.BlockJUnit4ClassRunner.methodBlock(BlockJUnit4ClassRunner.java:233)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
-	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+	at exceedvote.air.model.Main.main(Main.java:28)
 Caused by: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
+Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@1ef6a746, see the next exception for details.
 Error Code: 40000
 	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:324)
 	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:319)
@@ -145,8 +124,8 @@ Error Code: 40000
 	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.loginAndDetectDatasource(DatabaseSessionImpl.java:685)
 	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryProvider.login(EntityManagerFactoryProvider.java:213)
 	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:542)
-	... 30 more
-Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
+	... 8 more
+Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@1ef6a746, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.seeNextException(Unknown Source)
@@ -160,17 +139,17 @@ Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongs
 	at java.sql.DriverManager.getConnection(DriverManager.java:582)
 	at java.sql.DriverManager.getConnection(DriverManager.java:154)
 	at org.eclipse.persistence.sessions.DefaultConnector.connect(DefaultConnector.java:98)
-	... 34 more
-Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
+	... 12 more
+Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/MyDB' with class loader sun.misc.Launcher$AppClassLoader@1ef6a746, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 47 more
+	... 25 more
 Caused by: java.sql.SQLException: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/MyDB.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	... 44 more
+	... 22 more
 Caused by: ERROR XSDB6: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/MyDB.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.store.raw.data.BaseDataFileFactory.privGetJBMSLockOnDB(Unknown Source)
@@ -201,4 +180,6 @@ Caused by: ERROR XSDB6: Another instance of Derby may have already booted the da
 	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(Unknown Source)
 	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(Unknown Source)
 	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Unknown Source)
-	... 44 more
+	... 22 more
+2012-11-19 14:23:54 INFO exceedvote.air.model.Ballot:addLogVote - vote For OOP topic: Good Function
+2012-11-19 14:23:56 INFO exceedvote.air.model.Ballot:addLogRevote - revote For OOP topic: Good Function

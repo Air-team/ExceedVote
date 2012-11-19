@@ -10,8 +10,10 @@ public interface BallotDao {
 
 	public abstract List<Ballot> findAll();
 
-	public void remove(Ballot ballot);
+	
 
 	public Ballot findSingle(String teamName, String topic, Voter voter,
 			List<Ballot> allBallot);
+
+	public boolean deleteBallot(Ballot ballot);
 }

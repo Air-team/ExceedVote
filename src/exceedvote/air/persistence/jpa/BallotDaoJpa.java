@@ -46,8 +46,9 @@ public class BallotDaoJpa implements BallotDao {
 	 */
 	@Override
 	public Ballot findSingle(String teamName, String topic, Voter voter, List<Ballot> allBallot){
-		for (Ballot bl : allBallot) {
-			if ( (bl.getTopic() == topic) && (bl.getTeamName() == teamName)&& (bl.getVoter()==voter )){return bl;}
+		for (int i=0;i<allBallot.size();i++) {
+			Ballot bl = allBallot.get(i);
+			if ( (bl.getTopic().equals(topic)) && (bl.getTeamName().equals(teamName))&& (bl.getVoter().equals(voter) )){return bl;}
 		}
 		return null;
 	}
@@ -55,7 +56,7 @@ public class BallotDaoJpa implements BallotDao {
 	/**
 	 * Remove Ballot.
 	 */
-	
+	@Override
 	public boolean deleteBallot(Ballot ballot) {
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -71,10 +72,8 @@ public class BallotDaoJpa implements BallotDao {
 		}
 		
 	}
-	@Override
-	public void remove(Ballot ballot){
-		em.remove(ballot);
-	}
+	
+
 	
 	private static Logger getLogger() {
 		if (logger == null) logger = Logger.getLogger(VoterDaoJpa.class);

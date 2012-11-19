@@ -84,7 +84,8 @@ public class LoginUI extends JFrame {
 		btnLogin.setBounds(119, 164, 89, 23);
 		contentPane.add(btnLogin);
 		
-		btnRegister = new JButton("Register");
+		btnRegister = new JButton(new Regis());
+		btnRegister.setText("Register");
 		btnRegister.setBounds(222, 164, 89, 23);
 		contentPane.add(btnRegister);
 		
@@ -124,6 +125,22 @@ public class LoginUI extends JFrame {
         }
     }
 	
+	 /*
+		 * action in regist button
+		 */
+		 private class Regis extends AbstractAction{ 
+
+	        public Regis()
+	        { 
+	            super(); 
+	        } 
+
+	        public void actionPerformed(ActionEvent e)
+	        {   
+	            RegisterUI re = new RegisterUI();
+	            re.run();
+	        }
+	    }
 	
 	/*
 	 * start this frame
@@ -136,13 +153,13 @@ public class LoginUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	/*
-	 * main to start this frame
-	 * (test)
-	 */
-	public static void main(String[] args)
-	{
-	   LoginUI logui = new LoginUI();
-	   logui.run();
-	}
+//	/*
+//	 * main to start this frame
+//	 * (test)
+//	 */
+//	public static void main(String[] args)
+//	{
+//	   LoginUI logui = new LoginUI();
+//	   logui.run();
+//	}
 }
