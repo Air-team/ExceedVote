@@ -14,42 +14,36 @@ import exceedvote.air.ui.VoteTypeUI;
 import exceedvote.air.ui.VoteUI;
 
 /**
- * Start Vote system
+ * Main class for launch the program.
+ * 
  * @author Air Team
- * @version 2012.10.1
+ * @version 2012.11.20
  */
 public class Main {
 
-	/**
-	 * Initialize the Objects and runs the program.
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		VoteTopicDao dao1 = DaoFactory.getInstance().getVoteTopicDao();
 		VoteTopic beauti = new VoteTopic("Beautiful UI");
-		  dao1.save(beauti);
-		  VoteTopic goodFunc = new VoteTopic("Good Function");
-		  dao1.save(goodFunc);
-		  VoteTopic noBug = new VoteTopic("No Bug");
-		  dao1.save(noBug);
-		  VoteTopic presentation = new VoteTopic("Presentation");
-		  dao1.save(presentation);
-		  List<VoteTopic> topic = new ArrayList<VoteTopic>();
-		
-		
-		  topic.add(beauti);
-		  topic.add(goodFunc);
-		  topic.add(noBug);
-		  topic.add(presentation);
-		
-		 // test team
-        TeamDescription durianDes = new TeamDescription("name: Durian");
+		dao1.save(beauti);
+		VoteTopic goodFunc = new VoteTopic("Good Function");
+		dao1.save(goodFunc);
+		VoteTopic noBug = new VoteTopic("No Bug");
+		dao1.save(noBug);
+		VoteTopic presentation = new VoteTopic("Presentation");
+		dao1.save(presentation);
+		List<VoteTopic> topic = new ArrayList<VoteTopic>();
+
+		topic.add(beauti);
+		topic.add(goodFunc);
+		topic.add(noBug);
+		topic.add(presentation);
+
+		// test team
+		TeamDescription durianDes = new TeamDescription("name: Durian");
 		TeamDescription amazeDes = new TeamDescription("name: Amaze");
 		TeamDescription desTest1 = new TeamDescription("name: OOP");
 		TeamDescription desTest2 = new TeamDescription("name: PANDA");
-		
 
-		
 		TeamDao dao2 = DaoFactory.getInstance().getTeamDao();
 		Team durian = new Team("Durian", durianDes);
 		dao2.save(durian);
@@ -64,31 +58,26 @@ public class Main {
 		list.addTeam(amaze);
 		list.addTeam(test1);
 		list.addTeam(test2);
-	
-	   
-	     
-	   
+
 		Ballot ballot = new Ballot(list);
 		Voter voter = new Voter("Air", "STUDENT");
 		VoterDao dao = DaoFactory.getInstance().getVoterDao();
 		dao.save(voter);
-        
-		
+
 		VoteUI voteUI = new VoteUI(voter, ballot);
 		VoteTypeUI voteTypeUI = new VoteTypeUI(voter);
-	
-		
+
 		LoginUI loginUI = new LoginUI();
-		
+
 		SeviceUI serviceUI = new SeviceUI();
-		serviceUI.addUI("voteUI",voteUI);
-		serviceUI.addUI("voteTypeUI",voteTypeUI);
+		serviceUI.addUI("voteUI", voteUI);
+		serviceUI.addUI("voteTypeUI", voteTypeUI);
 		voteTypeUI.addService(serviceUI);
 		voteUI.addService(serviceUI);
-	
+
 		voteTypeUI.run("");
-		
-		//loginUI.run();
-		
+
+		// loginUI.run();
+
 	}
 }
