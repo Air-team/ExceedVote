@@ -1,27 +1,33 @@
 package exceedvote.air.persistence;
 
 import java.util.List;
-
-import exceedvote.air.model.Team;
+import exceedvote.air.model.Voter;
 
 /**
- * Team Data Access Object is a DAO for Team objects. This class represents 
- * the interface of the database that related to Team objects.
+ * Voter Data Access Object is a DAO for Voter objects. This class represents 
+ * the interface of the database that related to Voter objects.
  * 
  * @author Air Team
  */
-public interface TeamDao {
+public interface VoterDao {
 
 	/**
-	 * Save Team to the persistent storage.
-	 * @param Team is object represents the competitor that can be voted.
+	 * Save Voter to the persistent storage.
+	 * @param Voter is object represents the user that has right to vote.
 	 */
-	public void save(Team team);
+	public void save(Voter voter);
 
 	/**
-	 * Find all the Teams and return a list of all Teams.
-	 * @return a list of all Teams that saved on the persistent storage.
+	 * Find all the Voters and return a list of all Voters.
+	 * @return a list of all Voters that saved on the persistent storage.
 	 */
-	public abstract List<Team> findAll();
+	public abstract List<Voter> findAll();
+
+	/**
+	 * Find the Voter in the persistent storage by ID.
+	 * @param id - The integer represents the Voter. One ID related to only one Voter.
+	 * @return Voter object that represents the registered user.
+	 */
+	public Voter find(Integer id);
 
 }
