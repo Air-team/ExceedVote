@@ -56,13 +56,12 @@ public class TeamDaoJpa implements TeamDao {
 	}
 
 	/**
-	 * Get the Logger of VoteTopicDaoJpa class.
+	 * Get the Logger of TeamDaoJpa class.
 	 * @return new Logger if it is null else return Logger.
 	 */
-	// At "VoteTopicDaoJpa.class" should it be "TeamDaoJpa.class"
 	private static Logger getLogger() {
 		if (logger == null)
-			logger = Logger.getLogger(VoteTopicDaoJpa.class);
+			logger = Logger.getLogger(TeamDaoJpa.class);
 		return logger;
 	}
 
