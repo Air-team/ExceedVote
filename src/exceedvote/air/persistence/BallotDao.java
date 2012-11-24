@@ -1,5 +1,6 @@
 package exceedvote.air.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import exceedvote.air.model.Ballot;
@@ -36,10 +37,16 @@ public interface BallotDao {
 	public Ballot findSingle(String teamName, String topic, Voter voter,
 			List<Ballot> allBallot);
 
+<<<<<<< HEAD
 	/**
 	 * Delete a given ballot from the persistent storage.
 	 * @param ballot - A ballot that you want to delete.
 	 * @return false if the ballot doesn't contain in the persistent storage or it's null.
 	 */
 	boolean deleteBallot(Ballot ballot);
+=======
+	public boolean deleteBallot(Ballot ballot);
+
+	public List<ArrayList> history(Voter voter);
+>>>>>>> Implement login
 }

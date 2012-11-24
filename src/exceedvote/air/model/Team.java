@@ -9,6 +9,7 @@ import javax.persistence.Id;
 
 import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.VoteTopicDao;
+import exceedvote.air.persistence.jpa.TeamDaoJpa;
 
 /**
  * Team represents the competitor in the Exceed camp.
@@ -77,8 +78,12 @@ public class Team implements Serializable {
 	 */
 	public void setScore(int score, String topicName) {
 		VoteTopicDao dao2 = DaoFactory.getInstance().getVoteTopicDao();
-		topic = dao2.find(topicName);
+		TeamDao daoTeam = DaoFactory.getInstance().getTeamDao();
+		daoTeam.save(this);
+		this.topic = dao2.find(topicName);
 		this.score = score;
+	
+		
 	}
 
 }

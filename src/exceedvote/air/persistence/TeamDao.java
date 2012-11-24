@@ -17,6 +17,11 @@ public interface TeamDao {
 	 * @param Team is object represents the competitor that can be voted.
 	 */
 	public void save(Team team);
+<<<<<<< HEAD
+=======
+	public abstract List<Team> findAll();
+	public Team findSingle(String teamName);
+>>>>>>> Implement login
 
 	/**
 	 * Find all the Teams and return a list of all Teams.

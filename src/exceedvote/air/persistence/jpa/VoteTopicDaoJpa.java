@@ -63,11 +63,21 @@ public class VoteTopicDaoJpa implements VoteTopicDao {
 	public VoteTopic find(String title) {
 		return em.find(VoteTopic.class, title);
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Get the Logger of VoteTopicDaoJpa class.
 	 * @return new Logger if it is null else return Logger.
 	 */
+=======
+	
+	@Override
+	public boolean findTilte(String title){
+		 if( em.find(VoteTopic.class, title) == null ) return false;
+		 else return true;
+	}
+	
+>>>>>>> Implement login
 	private static Logger getLogger() {
 		if (logger == null)
 			logger = Logger.getLogger(VoteTopicDaoJpa.class);

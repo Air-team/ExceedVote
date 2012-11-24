@@ -7,6 +7,11 @@ import javax.persistence.EntityTransaction;
 
 import org.apache.log4j.Logger;
 
+<<<<<<< HEAD
+=======
+
+import exceedvote.air.model.Ballot;
+>>>>>>> Implement login
 import exceedvote.air.model.Voter;
 
 import exceedvote.air.persistence.VoterDao;
@@ -32,7 +37,7 @@ public class VoterDaoJpa implements VoterDao {
 	 * @param Voter is object represents the user that has right to vote.
 	 */
 	@Override
-	public void save(Voter voter) {
+	public boolean save(Voter voter) {
 		EntityTransaction tx = em.getTransaction();
 		try {
 			tx.begin();
@@ -45,7 +50,22 @@ public class VoterDaoJpa implements VoterDao {
 			// should rethrow exception so the application knows
 			// that save failed
 			throw ex;
+			
 		}
+		return true;
+	}
+	
+	/**
+	 * Find Single Ballot.
+	 */
+	@Override
+	public Voter findSingle(String username,String password){
+		List<Voter> allVoters = findAll();
+		for (int i=0;i<allVoters.size();i++) {
+			Voter voter = allVoters.get(i);
+			if (voter.getName().equals(username) && voter.getPassword().equals(password)){return voter;}
+		}
+		return null;
 	}
 
 	/**

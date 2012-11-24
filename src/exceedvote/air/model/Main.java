@@ -22,6 +22,7 @@ import exceedvote.air.ui.VoteUI;
 public class Main {
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		VoteTopicDao dao1 = DaoFactory.getInstance().getVoteTopicDao();
 		VoteTopic beauti = new VoteTopic("Beautiful UI");
 		dao1.save(beauti);
@@ -79,5 +80,89 @@ public class Main {
 
 		// loginUI.run();
 
+=======
+		
+		Committee com = new Committee();
+		com.setTime("31", "feb", "2012", "12", "30", "0");
+		com.setName("Amaze");
+		com.setName("OOP");
+		com.setName("PANDA");
+		com.setTopicName("No bug");
+		com.setTopicName("Presentation");
+//		System.out.println(com.getTime());
+	
+//		VoteTopicDao dao1 = DaoFactory.getInstance().getVoteTopicDao();
+//		VoteTopic beauti = new VoteTopic("Beautiful UI");
+//		  if( !dao1.findTilte("Beautiful UI")) dao1.save(beauti);
+//		  VoteTopic goodFunc = new VoteTopic("Good Function");
+//		  if( !dao1.findTilte("Good Function"))  dao1.save(goodFunc);
+//		  VoteTopic noBug = new VoteTopic("No Bug");
+//		  if( !dao1.findTilte("No Bug")) dao1.save(noBug);
+//		  VoteTopic presentation = new VoteTopic("Presentation");
+//		  if( !dao1.findTilte("Presentation")) dao1.save(presentation);
+//		  List<VoteTopic> topic = new ArrayList<VoteTopic>();
+//		
+//		
+//		  topic.add(beauti);
+//		  topic.add(goodFunc);
+//		  topic.add(noBug);
+//		  topic.add(presentation);
+//		
+//		 // test team
+//        TeamDescription durianDes = new TeamDescription("name: Durian");
+//		TeamDescription amazeDes = new TeamDescription("name: Amaze");
+//		TeamDescription desTest1 = new TeamDescription("name: OOP");
+//		TeamDescription desTest2 = new TeamDescription("name: PANDA");
+//		
+//
+//		
+//		TeamDao dao2 = DaoFactory.getInstance().getTeamDao();
+//		Team durian = new Team("Durian", durianDes);
+//		 if( dao2.findSingle("Durian") == null) dao2.save(durian);
+//		Team amaze = new Team("Amaze", amazeDes);
+//		 if( dao2.findSingle("Amaze") == null) 	dao2.save(amaze);
+//		Team test1 = new Team("OOP", amazeDes);
+//		if( dao2.findSingle("OOP") == null)dao2.save(test1);
+//		Team test2 = new Team("PANDA", amazeDes);
+//		if( dao2.findSingle("PANDA") == null)dao2.save(test2);
+//		TeamList list = new TeamList();
+//		list.addTeam(durian);
+//		list.addTeam(amaze);
+//		list.addTeam(test1);
+//		list.addTeam(test2);
+//	
+//	   
+//	     
+//	   
+//		Ballot ballot = new Ballot(list);
+//		ballot.setInstance(ballot);
+//		
+////		Voter voter = new Voter("Air", "STUDENT");
+////		VoterDao dao = DaoFactory.getInstance().getVoterDao();
+////		dao.save(voter);
+//        
+//		
+//	
+//		
+//		LoginUI loginUI = new LoginUI();
+//		
+//		
+////		VoteUI voteUI = new VoteUI(voter);
+//		
+////		VoteTypeUI voteTypeUI = new VoteTypeUI(voter);
+//		
+//		SeviceUI serviceUI = new SeviceUI();
+//		serviceUI.addUI("LoginUI",loginUI);
+//		loginUI.addService(serviceUI);
+////		serviceUI.addUI("voteUI",voteUI);
+////		serviceUI.addUI("voteTypeUI",voteTypeUI);
+////		voteTypeUI.addService(serviceUI);
+////		voteUI.addService(serviceUI);
+//	
+////		voteTypeUI.run("");
+//		
+//		loginUI.run("");
+		
+>>>>>>> Implement login
 	}
 }

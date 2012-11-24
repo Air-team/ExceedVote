@@ -71,19 +71,22 @@ public class VoteUI extends JFrame implements RunUI
    
     private Voter voter;
     private Ballot ballott;
-    public VoteUI(Voter voter,Ballot ballott)
+    public VoteUI(Voter voter)
     {
         this.voter = voter;
-        this.ballott = ballott;
         ballot = voter.getballotLeft();
-        names = ballott.getTeamNames();
         type = voter.getType();
         nameVoter = voter.getName();
+        setBallot();
         
     }
      //service for call other ui
     SeviceUI serviceUI;
-
+    
+    public void setBallot(){
+    	ballott = Ballot.getInstance();
+    	 names = ballott.getTeamNames();
+    }
 
     /*
      * init all component
@@ -133,6 +136,11 @@ public class VoteUI extends JFrame implements RunUI
         revoteBtn.setBounds(349, 152, 89, 23);
         contentPane.add(revoteBtn);
 
+        btnHistory = new JButton(new historyAction());
+        btnHistory.setText("History");
+		btnHistory.setBounds(250, 216, 89, 23);
+		contentPane.add(btnHistory);
+		
         teamSelect.setEditable(false);
         teamSelect.setBackground(Color.BLACK);
         teamSelect.setForeground(Color.ORANGE);
@@ -168,7 +176,25 @@ public class VoteUI extends JFrame implements RunUI
         btnBack.setText("Back");
 		btnBack.setBounds(349, 342, 89, 23);
 		contentPane.add(btnBack);
+		
+		
     }
+    private class historyAction extends AbstractAction{ 
+
+        public historyAction()
+        { 
+            super(); 
+        } 
+
+        public void actionPerformed(ActionEvent e)
+        {   
+          HistoryUI historyUI = new HistoryUI();
+     	  historyUI.run();
+     	 historyUI.addData(voter.history());
+          voter.history();
+        }
+    }
+
 
     private class UpAction extends AbstractAction{ 
 
@@ -280,6 +306,7 @@ public class VoteUI extends JFrame implements RunUI
         }
     }
     
+
     public void close()
     {
         setVisible(false);

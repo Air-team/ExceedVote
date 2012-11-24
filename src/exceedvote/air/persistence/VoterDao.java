@@ -10,6 +10,7 @@ import exceedvote.air.model.Voter;
  * @author Air Team
  */
 public interface VoterDao {
+<<<<<<< HEAD
 
 	/**
 	 * Save Voter to the persistent storage.
@@ -21,6 +22,9 @@ public interface VoterDao {
 	 * Find all the Voters and return a list of all Voters.
 	 * @return a list of all Voters that saved on the persistent storage.
 	 */
+=======
+	public boolean save(Voter voter);
+>>>>>>> Implement login
 	public abstract List<Voter> findAll();
 
 	/**
@@ -29,5 +33,10 @@ public interface VoterDao {
 	 * @return Voter object that represents the registered user.
 	 */
 	public Voter find(Integer id);
+<<<<<<< HEAD
 
+=======
+	public Voter findSingle(String username, String password);
+	
+>>>>>>> Implement login
 }

@@ -13,7 +13,7 @@ import javax.swing.*;
 public class SeviceUI
 {
     private static Map<String,RunUI> mp = new HashMap<String,RunUI>();
-
+    
     //private static SeviceUI seviceUI = null;
     
     /**
@@ -31,6 +31,7 @@ public class SeviceUI
     
     public void runByName(String name)
     {   
+    	
         Set s=mp.entrySet();
         Iterator it=s.iterator();
         while(it.hasNext())

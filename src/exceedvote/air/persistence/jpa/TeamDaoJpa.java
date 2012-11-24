@@ -5,6 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.apache.log4j.Logger;
 import exceedvote.air.model.Team;
+import exceedvote.air.model.VoteTopic;
+import exceedvote.air.model.Voter;
 
 import exceedvote.air.persistence.TeamDao;
 
@@ -22,10 +24,32 @@ public class TeamDaoJpa implements TeamDao {
 		super();
 		this.em = em;
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Save Team to the persistent storage.
 	 * @param Team is object represents the competitor that can be voted.
+=======
+	
+	@Override
+	public List<Team> findAll(){
+		String queryStatement = "SELECT t FROM Team t";
+		return em.createQuery(queryStatement).getResultList();
+	}
+	
+	@Override
+	public Team findSingle(String teamName){
+		List<Team> teams = findAll();
+		for (int i=0;i<teams.size();i++) {
+			Team team = teams.get(i);
+			if (team.getName().equals(teamName))  return team; }
+		
+		return null;
+	}
+	
+	/* (non-Javadoc)
+	 * @see exceedvote.air.persistence.jpa.VoteTopicDao#save(exceedvote.air.model.VoteTopic)
+>>>>>>> Implement login
 	 */
 	@Override
 	public void save(Team team) {

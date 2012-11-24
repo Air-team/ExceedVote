@@ -1,5 +1,6 @@
 package exceedvote.air.persistence.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -100,11 +101,33 @@ public class BallotDaoJpa implements BallotDao {
 			return false;
 		}
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Get the Logger of BallotDaoJpa class.
 	 * @return new Logger if it is null else return Logger.
 	 */
+=======
+	
+	@Override
+	public List<ArrayList>  history(Voter voter){
+		List<Ballot> allBallot = this.findAll();
+		
+		List<ArrayList> his = new ArrayList<ArrayList>();
+		for (int i=0;i<allBallot.size();i++) {
+			Ballot bl = allBallot.get(i);
+			if (  (bl.getVoter().equals(voter) )){				
+				ArrayList<String> info = new ArrayList<String>();
+				info.add(bl.getTeamName());
+				info.add(bl.getTopic());
+				info.add(bl.getTime());
+				his.add(info);
+			}
+		}
+		
+		return his;
+	}
+>>>>>>> Implement login
 	private static Logger getLogger() {
 		if (logger == null)
 			logger = Logger.getLogger(BallotDaoJpa.class);

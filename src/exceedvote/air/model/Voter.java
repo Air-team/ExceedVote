@@ -1,8 +1,12 @@
 package exceedvote.air.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
+import exceedvote.air.persistence.BallotDao;
 import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.VoterDao;
 
@@ -18,10 +22,16 @@ public class Voter implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+<<<<<<< HEAD
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+=======
+	@GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
+>>>>>>> Implement login
 	private String name;
 	private String type;
+	private String password;
 	private int amountOfBallot;
 
 	/**
@@ -39,13 +49,15 @@ public class Voter implements Serializable {
 	 * @param type
 	 *            - the type such as STUDENT or TEACHER.
 	 */
-	public Voter(String name, String type) {
+	public Voter(String username,String password,String type) {
 		this();
-		this.name = name;
+		this.name = username;
+		this.password = password;
 		this.type = type;
 		setFistQuota(type);
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Set the quota for each user depend on what kind of the user.
 	 * 
@@ -56,6 +68,17 @@ public class Voter implements Serializable {
 		if (type.equals("STUDENT")) {
 			this.amountOfBallot = 5;
 		} else if (type.equals("TEACHER")) {
+=======
+	public Voter() {
+		super();
+	}
+   
+	private void setFistQuata(String type) {
+		if(type.equals("Student")){
+			this.amountOfBallot = 5;
+		}
+		else if(type.equals("Teacher")){
+>>>>>>> Implement login
 			this.amountOfBallot = 10;
 		}
 	}
@@ -91,5 +114,26 @@ public class Voter implements Serializable {
 	public int getballotLeft() {
 		return amountOfBallot;
 	}
+<<<<<<< HEAD
 
+=======
+	
+	public List<ArrayList> history(){
+		BallotDao dao = DaoFactory.getInstance().getBallotDao();
+		return dao.history(this);
+	}
+	
+	public void saveInfo(Voter voter){
+		VoterDao dao = DaoFactory.getInstance().getVoterDao();
+		dao.save(voter);
+//		System.out.println(dao.save(voter));
+	}
+
+	
+	public String getPassword(){
+		return password;
+	}
+	
+	
+>>>>>>> Implement login
 }
