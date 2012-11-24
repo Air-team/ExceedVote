@@ -1,4 +1,6 @@
 package exceedvote.air.ui;
+//package exceedvote.air.ui;
+ 
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,7 +27,8 @@ import javax.swing.JButton;
  * @author AIr Team
  * @version 2012.10.25
  */
-public class LoginUI extends JFrame {
+public class LoginUI extends JFrame implements RunUI
+{
     
 	private JPanel contentPane;
 	
@@ -41,6 +44,16 @@ public class LoginUI extends JFrame {
 	// button submit register
 	private JButton btnRegister;
 	
+	private JComboBox comboBox;
+    
+	private JLabel lblUsername = new JLabel("Username");
+	private JLabel lblPassword = new JLabel("Password");
+	//private Message message  = null;
+	
+	//service for call other ui
+    private SeviceUI serviceUI;
+	
+	private String[] language = {"eng","th"};
 	/**
 	 * Create the frame.
 	 */
@@ -84,18 +97,35 @@ public class LoginUI extends JFrame {
 		btnLogin.setBounds(119, 164, 89, 23);
 		contentPane.add(btnLogin);
 		
-		btnRegister = new JButton(new Regis());
-		btnRegister.setText("Register");
+		btnRegister = new JButton("Register");
 		btnRegister.setBounds(222, 164, 89, 23);
 		contentPane.add(btnRegister);
 		
-		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setBounds(49, 95, 60, 14);
 		contentPane.add(lblUsername);
 		
-		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setBounds(49, 126, 60, 14);
 		contentPane.add(lblPassword);
+		
+		comboBox = new JComboBox();
+		comboBox.setToolTipText("");
+		comboBox.setBounds(369, 231, 55, 20);
+		contentPane.add(comboBox); 
+		
+		for(int i = 0 ; i < language.length ; i++)
+		comboBox.addItem(language[i]);
+		
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    String select = ((String)comboBox.getSelectedItem()).toString();
+			    if(((String)comboBox.getSelectedItem()).toString().equals("eng")) select ="";
+				//message.setLocal(select);
+			}
+		});
+		
+		JLabel lblSelectLanguage = new JLabel("Select Language");
+		lblSelectLanguage.setBounds(260, 234, 113, 14);
+		contentPane.add(lblSelectLanguage);
 	}
 	
 	/*
@@ -125,27 +155,15 @@ public class LoginUI extends JFrame {
         }
     }
 	
-	 /*
-		 * action in regist button
-		 */
-		 private class Regis extends AbstractAction{ 
-
-	        public Regis()
-	        { 
-	            super(); 
-	        } 
-
-	        public void actionPerformed(ActionEvent e)
-	        {   
-	            RegisterUI re = new RegisterUI();
-	            re.run();
-	        }
-	    }
-	
+	public void addService(SeviceUI serviceUI)
+    {
+        this.serviceUI = serviceUI;
+    }
+    
 	/*
 	 * start this frame
 	 */
-	public void run()
+	public void run(String info)
 	{
 	    this.initComponent();
         this.setVisible(true);
@@ -153,13 +171,13 @@ public class LoginUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-//	/*
-//	 * main to start this frame
-//	 * (test)
-//	 */
-//	public static void main(String[] args)
-//	{
-//	   LoginUI logui = new LoginUI();
-//	   logui.run();
-//	}
+	/*
+	 * main to start this fram
+	 * (test)
+	 */
+	public static void main(String[] args)
+	{
+	   LoginUI logui = new LoginUI();
+	   logui.run("");
+	}
 }
