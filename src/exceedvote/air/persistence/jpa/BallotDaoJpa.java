@@ -101,13 +101,13 @@ public class BallotDaoJpa implements BallotDao {
 			return false;
 		}
 	}
-<<<<<<< HEAD
+
 
 	/**
 	 * Get the Logger of BallotDaoJpa class.
 	 * @return new Logger if it is null else return Logger.
 	 */
-=======
+
 	
 	@Override
 	public List<ArrayList>  history(Voter voter){
@@ -127,7 +127,7 @@ public class BallotDaoJpa implements BallotDao {
 		
 		return his;
 	}
->>>>>>> Implement login
+
 	private static Logger getLogger() {
 		if (logger == null)
 			logger = Logger.getLogger(BallotDaoJpa.class);

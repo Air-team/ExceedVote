@@ -14,9 +14,8 @@ import javax.persistence.Id;
  * @author Air Team
  * @version 2012.11.20
  */
-
 @Entity
-public class Tracking implements Serializable {
+public class Tracking {
 
 	private static final long serialVersionUID = 1L;
 	@Id

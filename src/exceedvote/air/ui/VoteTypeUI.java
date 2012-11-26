@@ -14,9 +14,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import exceedvote.air.model.Committee;
+import exceedvote.air.model.VoteTopic;
 import exceedvote.air.model.Voter;
 /**
  * VoteType user interface
@@ -27,6 +32,7 @@ import exceedvote.air.model.Voter;
 public class VoteTypeUI extends JFrame implements RunUI
 {
 
+	private  VoteTypeUI voteTypeUI;
     private JPanel contentPane;
     private JTextPane txtpnVotetype = new JTextPane();
     // button type beautiful
@@ -52,10 +58,15 @@ public class VoteTypeUI extends JFrame implements RunUI
     //ballotleft
     private JLabel ballotLeft;
     
+    private Map<String, JButton> dynamicButtons = new HashMap<String, JButton>();
+    
     //service for call other ui
     SeviceUI serviceUI;
     private Voter voter;
     private int ballot = 0;
+    private Object [] names;
+    private Committee committee = new Committee(); 
+    private int lastPos = 0;
     /**
      * Create the frame.
      */
@@ -63,9 +74,36 @@ public class VoteTypeUI extends JFrame implements RunUI
     {
     	this.voter = voter;
         ballot = voter.getballotLeft();
+        names = committee.getTopic().toArray();
+       
+     
     }
+    
 
-    /*
+    private void setButton(Object[] names) {
+    	int pos = 55;
+    	for(int i=0;i<names.length;i++){
+    		pos += 30;
+	    	JButton topicBtn = new JButton();
+	    	topicBtn.setText(((VoteTopic)names[i]).getTitle());
+	    	topicBtn.addActionListener(new ActionSelect());
+	    	dynamicButtons.put( ((VoteTopic)names[i]).getTitle(), topicBtn);
+	    	topicBtn.setBounds(20, pos, 379, 30);
+	    	contentPane.add(topicBtn);
+	    	if(i == (names.length-1)) {
+	    		lastPos = pos;
+	    	
+	    	}
+    	}
+    	    
+	    	contentPane.invalidate();
+	    	contentPane.repaint();
+	    	
+		  
+	}
+    
+	
+	/*
      * set all component
      */
     public void initComponent()
@@ -87,44 +125,26 @@ public class VoteTypeUI extends JFrame implements RunUI
         lblSelectTheType.setBounds(20, 72, 185, 14);
         contentPane.add(lblSelectTheType);
 
-        btnBeautifulUI = new JButton(new ActionSelect());
-        btnBeautifulUI.setText("Beautiful UI");
-        btnGoodFunction = new JButton(new ActionSelect());
-        btnGoodFunction.setText("Good Function");
-        btnNoBug = new JButton(new ActionSelect());
-        btnNoBug.setText("No Bug");
-        btnPresentation = new JButton(new ActionSelect());
-        btnPresentation.setText("Presentation");
-
-        btnBeautifulUI.setBounds(30, 97, 379, 30);
-        contentPane.add(btnBeautifulUI);
-
-        btnGoodFunction.setBounds(30, 138, 379, 30);
-        contentPane.add(btnGoodFunction);
-
-        btnNoBug.setBounds(30, 179, 379, 30);
-        contentPane.add(btnNoBug);
-
-        btnPresentation.setBounds(30, 220, 379, 30);
-        contentPane.add(btnPresentation);
-
+        setButton(names);
+        
         btnGoToVote = new JButton(new ActionSubmit());
         btnGoToVote.setText("Go to vote page");
-        btnGoToVote.setBounds(255, 406, 169, 23);
+        btnGoToVote.setBounds(232, lastPos+50, 169, 23);
         contentPane.add(btnGoToVote);
 
-        select.setBounds(30, 410, 46, 14);
+        select.setBounds(30, lastPos+50, 46, 14);
         contentPane.add(select);
 
         selectType = new JLabel();
         selectType.setText("none");
-        selectType.setBounds(86, 410, 199, 14);
+        selectType.setBounds(86, lastPos+50, 199, 14);
         contentPane.add(selectType);
         ballot = voter.getballotLeft();
         String shows = "You Have : "+String.valueOf(ballot)+" Ballot";
         ballotLeft = new JLabel(shows);
 		ballotLeft.setBounds(267, 11, 142, 14);
 		contentPane.add(ballotLeft);
+		lastPos = lastPos+50;
 
     }
 
@@ -143,6 +163,7 @@ public class VoteTypeUI extends JFrame implements RunUI
         {   
             JButton o = (JButton)e.getSource();
             labelSelect = o.getText();
+            System.out.println(labelSelect);
             selectType.setText(labelSelect);
         }
     }
@@ -150,7 +171,7 @@ public class VoteTypeUI extends JFrame implements RunUI
     /*
      * Action event when user click submit button
      * if type was select, run voterUi.
-     * Show messaebox when user click submit but don't select any type. 
+     * Show messagebox when user click submit but don't select any type. 
      */
     private class ActionSubmit extends AbstractAction{ 
 
@@ -190,11 +211,21 @@ public class VoteTypeUI extends JFrame implements RunUI
      */
     public void run(String info)
     {
+    	
         this.initComponent();
         this.setVisible(true);
-        this.setResizable(false);
+        this.setResizable(true);
+//        this.pack();
+        this.setMinimumSize(this.getSize());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+    }    
+    
+    public void refresh(){
+    	this.refresh();
     }
+    
+   
 
 }
 

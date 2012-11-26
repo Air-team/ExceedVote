@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import exceedvote.air.persistence.DaoFactory;
+import exceedvote.air.persistence.TeamDao;
 import exceedvote.air.persistence.VoteTopicDao;
 import exceedvote.air.persistence.jpa.TeamDaoJpa;
 
@@ -85,5 +86,15 @@ public class Team implements Serializable {
 	
 		
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	
 
 }

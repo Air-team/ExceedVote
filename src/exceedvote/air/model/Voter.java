@@ -22,13 +22,10 @@ public class Voter implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-<<<<<<< HEAD
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-=======
-	@GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
->>>>>>> Implement login
+
+
 	private String name;
 	private String type;
 	private String password;
@@ -54,31 +51,23 @@ public class Voter implements Serializable {
 		this.name = username;
 		this.password = password;
 		this.type = type;
-		setFistQuota(type);
+		setFirstQuata(type);
 	}
 
-<<<<<<< HEAD
+	
+
 	/**
 	 * Set the quota for each user depend on what kind of the user.
 	 * 
 	 * @param type
 	 *            - the type of user.
 	 */
-	private void setFistQuota(String type) {
-		if (type.equals("STUDENT")) {
-			this.amountOfBallot = 5;
-		} else if (type.equals("TEACHER")) {
-=======
-	public Voter() {
-		super();
-	}
-   
-	private void setFistQuata(String type) {
-		if(type.equals("Student")){
+	private void setFirstQuata(String type) {
+		if(type.equalsIgnoreCase("Student")){
 			this.amountOfBallot = 5;
 		}
-		else if(type.equals("Teacher")){
->>>>>>> Implement login
+		else if(type.equalsIgnoreCase("Teacher")){
+
 			this.amountOfBallot = 10;
 		}
 	}
@@ -114,9 +103,7 @@ public class Voter implements Serializable {
 	public int getballotLeft() {
 		return amountOfBallot;
 	}
-<<<<<<< HEAD
 
-=======
 	
 	public List<ArrayList> history(){
 		BallotDao dao = DaoFactory.getInstance().getBallotDao();
@@ -133,7 +120,5 @@ public class Voter implements Serializable {
 	public String getPassword(){
 		return password;
 	}
-	
-	
->>>>>>> Implement login
+
 }

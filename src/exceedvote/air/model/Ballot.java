@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import exceedvote.air.persistence.BallotDao;
 import exceedvote.air.persistence.DaoFactory;
+import exceedvote.air.persistence.TeamDao;
 
 /**
  * Ballot represent the right that each user have in their hands to vote for the
@@ -20,16 +21,12 @@ import exceedvote.air.persistence.DaoFactory;
 public class Ballot implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
-=======
 	private static Ballot ballot;
-	public Ballot() {
-		super();
-	}
+	
 	
 	
    
->>>>>>> Implement login
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -38,51 +35,39 @@ public class Ballot implements Serializable {
 
 	private Voter voter;
 
-	/** TeamList */
-	@OneToOne(cascade = CascadeType.PERSIST)
-	private TeamList teamList;
+
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Team team;
 
 	/** The List of teams to vote */
 	private List<Team> list;
 	/** Log4j for tracking the action of this class */
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@Transient
 	private Tracking track = new Tracking();
-<<<<<<< HEAD
 
-	/**
-	 * Ballot Constructor with no parameter.
-	 */
-	private Ballot() {
-		super();
-	}
 
+	
 	/**
 	 * Ballot Constructor that receive the list of team.
 	 * 
 	 * @param teamList is a list of all team in the competition.
 	 */
-=======
+
 	/** Log for tracking the action of this class */
 	
 	private String time = "";
-	
->>>>>>> Implement login
-	public Ballot(TeamList teamList) {
-		this();
-		this.teamList = teamList;
-		list = teamList.getTeam();
+
+	public Ballot() {
+		super();
+		
 	}
 
-<<<<<<< HEAD
+
 	/**
 	 * Return the Ballot ID. 
 	 * @return an Integer represent the ID.
 	 */
-=======
-	}   
-	
+
 	public static Ballot getInstance(){
 		return ballot;
 	}
@@ -90,9 +75,7 @@ public class Ballot implements Serializable {
 	public void setInstance(Ballot ballot){
 		this.ballot = ballot;
 	}
-	
 
->>>>>>> Implement login
 	public Integer getId() {
 		return this.id;
 	}
@@ -114,11 +97,12 @@ public class Ballot implements Serializable {
 	}
 
 	/**
-	 * Return the list of all team name. 
-	 * @return Array of String represent all the team names.
+	 * Return the list of all team . 
+	 * @return List of Team represent all the team.
 	 */
-	public String[] getTeamNames() {
-		return teamList.getTeamNames();
+	public List<Team> getTeam() {
+		TeamDao teamDao = DaoFactory.getInstance().getTeamDao();
+		return teamDao.findAll();
 	}
 
 	/**
@@ -169,6 +153,7 @@ public class Ballot implements Serializable {
 	 * @return true if successfully put the ballot.
 	 */
 	public boolean putBallot(String teamName, String typeTeam, Voter voter) {
+		list = getTeam();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getName().equals(teamName)) {
 				Ballot ballot = new Ballot();
@@ -178,13 +163,11 @@ public class Ballot implements Serializable {
 				ballot.setTeamName(teamName);
 				ballot.setTopic(typeTeam);
 				ballot.setVoter(voter);
-<<<<<<< HEAD
+
 				this.voter = voter;
 				int value = voter.getballotLeft();
-=======
+
 				ballot.voter = voter;
-				int value  = voter.getballotLeft();
->>>>>>> Implement login
 				this.team = list.get(i);
 				int score = team.getScore(typeTeam);
 				score++;
@@ -198,13 +181,8 @@ public class Ballot implements Serializable {
 		}
 		return false;
 	}
-<<<<<<< HEAD
-=======
+
 	
-	public String[] getTeamNames()
-    {
-        return teamList.getTeamNames();
-    }
 	
 	public void setTime(String time){
 		this.time = time;
@@ -215,7 +193,6 @@ public class Ballot implements Serializable {
 	}
 	
 
->>>>>>> Implement login
 
 	/**
 	 * To give the ballot back for the revoting.
@@ -229,7 +206,6 @@ public class Ballot implements Serializable {
 		BallotDao dao = DaoFactory.getInstance().getBallotDao();
 		List<Ballot> allBallot = dao.findAll();
 		Ballot bb = dao.findSingle(teamName, typeTeam, voter, allBallot);
-<<<<<<< HEAD
 
 		// if(bb==null) System.out.println("aaa");
 		if (bb != null) {
@@ -244,22 +220,10 @@ public class Ballot implements Serializable {
 			return true;
 		} else
 			return false;
-=======
-	
-		if(bb!=null){
-				this.voter = voter;
-				int value  = voter.getballotLeft();
-				int score = team.getScore(typeTeam);
-				score--;
-				team.setScore(score, typeTeam);
-				voter.setballotLeft(value+1);
-				dao.deleteBallot(bb);
-				track.addLogRevote(teamName,typeTeam);
-				return true;
-		}else
-		return false;
+
 		
->>>>>>> Implement login
+		
+
 	}
 
 }

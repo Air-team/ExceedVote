@@ -17,6 +17,7 @@ import java.awt.FlowLayout;
 import javax.swing.JTextPane;
 
 import exceedvote.air.model.Ballot;
+import exceedvote.air.model.Team;
 import exceedvote.air.model.Voter;
 
 import java.awt.Color;
@@ -52,6 +53,7 @@ public class VoteUI extends JFrame implements RunUI
     private JLabel lblRevote = new JLabel("revote");
     private JButton btnBack;
     
+    
     /*
      * ballot test
      */
@@ -64,7 +66,7 @@ public class VoteUI extends JFrame implements RunUI
     
     private String typeTeam = ""; 
     
-    String[] names;
+    Object[] names;
     // name select
     String selectTeam ="";
     // Voter
@@ -85,7 +87,9 @@ public class VoteUI extends JFrame implements RunUI
     
     public void setBallot(){
     	ballott = Ballot.getInstance();
-    	 names = ballott.getTeamNames();
+    	
+    	names =(ballott.getTeam().toArray());
+    	 
     }
 
     /*
@@ -318,13 +322,13 @@ public class VoteUI extends JFrame implements RunUI
      */
     public void updateTeam()
     { 
-    reTeam();
-    for(int i = 0 ; i < names.length ; i++)
-    { 
-    JButton eachTeam = new JButton(new ActionSelect());
-    eachTeam.setText(names[i]);
-    listTeam.add(eachTeam);
-    }
+	    reTeam();
+	    for(int i = 0 ; i < names.length ; i++)
+	    { 
+		    JButton eachTeam = new JButton(new ActionSelect());
+		    eachTeam.setText(((Team)names[i]).getName());
+		    listTeam.add(eachTeam);
+	    }	
     }
 
     public void setType(String type)

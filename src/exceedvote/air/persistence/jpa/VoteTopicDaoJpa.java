@@ -4,6 +4,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.apache.log4j.Logger;
+
+import exceedvote.air.model.Team;
 import exceedvote.air.model.VoteTopic;
 import exceedvote.air.persistence.VoteTopicDao;
 
@@ -63,21 +65,39 @@ public class VoteTopicDaoJpa implements VoteTopicDao {
 	public VoteTopic find(String title) {
 		return em.find(VoteTopic.class, title);
 	}
-<<<<<<< HEAD
 
 	/**
 	 * Get the Logger of VoteTopicDaoJpa class.
 	 * @return new Logger if it is null else return Logger.
 	 */
-=======
-	
+
 	@Override
 	public boolean findTilte(String title){
 		 if( em.find(VoteTopic.class, title) == null ) return false;
 		 else return true;
 	}
 	
->>>>>>> Implement login
+	/**
+	 * Delete the team out of persistence
+	 * @param team that want to delete
+	 */
+	@Override
+	public boolean remove(VoteTopic topic){
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.remove(topic);
+			tx.commit();
+			return true;
+			// System.out.printf("Delete Success");
+		} catch (Exception ex) {
+			getLogger().error("Error Delete topic " + ex);
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			return false;
+		}
+	}
 	private static Logger getLogger() {
 		if (logger == null)
 			logger = Logger.getLogger(VoteTopicDaoJpa.class);

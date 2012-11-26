@@ -7,11 +7,6 @@ import javax.persistence.EntityTransaction;
 
 import org.apache.log4j.Logger;
 
-<<<<<<< HEAD
-=======
-
-import exceedvote.air.model.Ballot;
->>>>>>> Implement login
 import exceedvote.air.model.Voter;
 
 import exceedvote.air.persistence.VoterDao;

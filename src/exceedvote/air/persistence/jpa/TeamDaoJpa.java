@@ -24,17 +24,17 @@ public class TeamDaoJpa implements TeamDao {
 		super();
 		this.em = em;
 	}
-<<<<<<< HEAD
+
 
 	/**
 	 * Save Team to the persistent storage.
 	 * @param Team is object represents the competitor that can be voted.
-=======
+	*/
 	
 	@Override
 	public List<Team> findAll(){
 		String queryStatement = "SELECT t FROM Team t";
-		return em.createQuery(queryStatement).getResultList();
+		 return em.createQuery(queryStatement).getResultList();
 	}
 	
 	@Override
@@ -49,7 +49,6 @@ public class TeamDaoJpa implements TeamDao {
 	
 	/* (non-Javadoc)
 	 * @see exceedvote.air.persistence.jpa.VoteTopicDao#save(exceedvote.air.model.VoteTopic)
->>>>>>> Implement login
 	 */
 	@Override
 	public void save(Team team) {
@@ -74,7 +73,7 @@ public class TeamDaoJpa implements TeamDao {
 	 * @return a list of all Teams that saved on the persistent storage.
 	 */
 	@Override
-	public List<Team> findAll() {
+	public List<VoteTopic> findAllTopic() {
 		String queryStatement = "SELECT vt FROM VoteTopic vt";
 		return em.createQuery(queryStatement).getResultList();
 	}
@@ -87,6 +86,42 @@ public class TeamDaoJpa implements TeamDao {
 		if (logger == null)
 			logger = Logger.getLogger(TeamDaoJpa.class);
 		return logger;
+	}
+	
+	/**
+	 * Delete the team out of persistence
+	 * @param team that want to delete
+	 */
+	@Override
+	public boolean remove(Team team){
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.remove(team);
+			tx.commit();
+			return true;
+			// System.out.printf("Delete Success");
+		} catch (Exception ex) {
+			getLogger().error("Error Delete Ballot " + ex);
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			return false;
+		}
+	}
+	
+	/**
+	 * Check has this team in persistence or not
+	 * @param team that want to check
+	 * @return true, this team has in the persistence
+	 */
+	@Override
+	public boolean hasVoter(Team team){
+		List<Team> listTeam = this.findAll();
+		for(int i=0;i<listTeam.size();i++){
+			if(listTeam.equals(team)) return true;
+		}
+		return false;
 	}
 
 }

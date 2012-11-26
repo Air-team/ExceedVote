@@ -33,4 +33,6 @@ public interface VoteTopicDao {
 
 	public boolean findTilte(String title);
 
+	public boolean remove(VoteTopic topic);
+
 }
