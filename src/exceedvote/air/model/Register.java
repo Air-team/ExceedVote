@@ -1,7 +1,6 @@
 package exceedvote.air.model;
 
-import exceedvote.air.persistence.DaoFactory;
-import exceedvote.air.persistence.VoterDao;
+
 
 public class Register {
 	private String userName;
@@ -9,6 +8,7 @@ public class Register {
 	private String firstName;
 	private String lastName;
 	private String type;
+	
 	
 	public String getUserName() {
 		return userName;
@@ -50,9 +50,15 @@ public class Register {
 		return type;
 	}
 	
-	public void addVoter(String name,String pass,String type){
+	public boolean addVoter(String name,String pass,String type){
 		Voter voter = new Voter(name,pass,type);
-		voter.saveInfo(voter);
+		Login login = new Login(name, pass);
+		if(login.hasVoter()) return false;
+		else {
+			voter.saveInfo(voter);
+			return true;
+		}
+		
 	}
 	
 }

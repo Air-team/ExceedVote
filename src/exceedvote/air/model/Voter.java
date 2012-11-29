@@ -29,7 +29,7 @@ public class Voter implements Serializable {
 	private String name;
 	private String type;
 	private String password;
-	private int amountOfBallot;
+	private int amountOfBallot = 100;
 
 	/**
 	 * Voter Constructor.

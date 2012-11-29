@@ -1,15 +1,28 @@
 package exceedvote.air.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * TeamDescription represents the description of a team.
  * 
  * @author Air Team
  * @version 2012.11.20
  */
-public class TeamDescription {
+@Entity
+public class TeamDescription implements Serializable {
 
 	/** the information of a team. */
 	private String info;
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
 	/**
 	 * Initialize TeamDescription with information.
@@ -18,7 +31,12 @@ public class TeamDescription {
 	 *            - the information of a team.
 	 */
 	public TeamDescription(String info) {
+		this();
 		this.info = info;
+	}
+	
+	public TeamDescription() {
+		super();
 	}
 
 	/**

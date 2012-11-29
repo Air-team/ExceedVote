@@ -32,7 +32,7 @@ public class Ballot implements Serializable {
 	private int id;
 	private String teamName;
 	private String topic;
-
+	private Committee committee;
 	private Voter voter;
 
 
@@ -144,6 +144,14 @@ public class Ballot implements Serializable {
 	public Voter getVoter() {
 		return voter;
 	}
+	
+	public void setCommittee(Committee committee){
+		this.committee = committee;
+	}
+	
+	public Committee getCommittee(){
+		return committee;
+	}
 
 	/**
 	 * Put the Ballot into the BallotBox and set the score to the team. 
@@ -175,6 +183,36 @@ public class Ballot implements Serializable {
 				BallotDao dao = DaoFactory.getInstance().getBallotDao();
 				dao.save(ballot);
 				voter.setballotLeft(value - 1);
+				track.addLogVote(teamName, typeTeam);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean putBallot(String teamName, String typeTeam, Committee committee) {
+		list = getTeam();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getName().equals(teamName)) {
+				Ballot ballot = new Ballot();
+				Date date = new Date();
+				String time = date.toLocaleString();
+				ballot.setTime(time);
+				ballot.setTeamName(teamName);
+				ballot.setTopic(typeTeam);
+				ballot.setCommittee(committee);
+
+				this.committee = committee;
+				int value = committee.getballotLeft();
+
+				ballot.committee = committee;
+				this.team = list.get(i);
+				int score = team.getScore(typeTeam);
+				score++;
+				team.setScore(score, typeTeam);
+				BallotDao dao = DaoFactory.getInstance().getBallotDao();
+				dao.save(ballot);
+				committee.setballotLeft(value - 1);
 				track.addLogVote(teamName, typeTeam);
 				return true;
 			}
@@ -220,10 +258,28 @@ public class Ballot implements Serializable {
 			return true;
 		} else
 			return false;
+		}
+	
+	public boolean returnBallot(String teamName, String typeTeam, Committee committee) {
+		BallotDao dao = DaoFactory.getInstance().getBallotDao();
+		List<Ballot> allBallot = dao.findAll();
+		Ballot bb = dao.findSingle(teamName, typeTeam, committee, allBallot);
 
-		
-		
-
-	}
+		// if(bb==null) System.out.println("aaa");
+		if (bb != null) {
+			this.committee = committee;
+			int value = committee.getballotLeft();
+			int score = team.getScore(typeTeam);
+			score--;
+			team.setScore(score, typeTeam);
+			committee.setballotLeft(value + 1);
+			dao.deleteBallot(bb);
+			track.addLogRevote(teamName, typeTeam);
+			return true;
+		} else
+			return false;
+		}
+	
+	
 
 }

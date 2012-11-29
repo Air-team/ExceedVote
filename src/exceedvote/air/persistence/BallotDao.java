@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exceedvote.air.model.Ballot;
+import exceedvote.air.model.Committee;
 import exceedvote.air.model.Voter;
 
 /**
@@ -46,5 +47,12 @@ public interface BallotDao {
 	public boolean deleteBallot(Ballot ballot);
 
 	public List<ArrayList> history(Voter voter);
+
+	public List<Ballot> findAllOfSingleVoter(Voter voter);
+
+	public List<ArrayList> historyCom(Committee committee);
+
+	public Ballot findSingle(String teamName, String typeTeam,
+			Committee committee, List<Ballot> allBallot);
 
 }

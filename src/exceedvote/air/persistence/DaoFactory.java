@@ -51,4 +51,6 @@ public abstract class DaoFactory {
 	 * else return this TeamDao object.	
 	 */
 	public abstract TeamDao getTeamDao();
+	
+	public abstract CommitteeDao getCommitteeDao();
 }

@@ -39,7 +39,7 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 	/**
 	 * @wbp.nonvisual location=37,-31
 	 */
-	private final JButton button = new JButton("New button");
+	
 	private JPasswordField passwordInput;
 	private JPasswordField passwordConfirm;
 	private JTextField usenameInput;
@@ -158,14 +158,28 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 			} else if (username != "" && pass != "" && passConfrim != "") {
 				if (pass.equals(passConfrim)) {
 					Register regis = new Register();
-					regis.addVoter(username,pass,type);
-					JOptionPane.showConfirmDialog((Component) null,
-							"Complete regist", "regist",
-							JOptionPane.DEFAULT_OPTION);
-					// back to loginUI and close this UI
+					if(type==null){
+						JOptionPane.showConfirmDialog((Component) null,
+								"Please select type", "regist",
+								JOptionPane.DEFAULT_OPTION);
+					}else{
+					 boolean make = regis.addVoter(username,pass,type);
+					 if(make) {
+						 JOptionPane.showConfirmDialog((Component) null,
+									"Complete regist", "regist",
+									JOptionPane.DEFAULT_OPTION);
+							// back to loginUI and close this UI
+							
+							serviceUI.runByName("LoginUI", "");
+							close();
+					 }else{
+						 JOptionPane.showConfirmDialog((Component) null,
+									"This name already use!!", "regist",
+									JOptionPane.DEFAULT_OPTION);
+							// back to loginUI and close this UI
+					 }
 					
-					serviceUI.runByName("LoginUI", "");
-					close();
+					}
 				} else {
 					JOptionPane.showConfirmDialog((Component) null,
 							" Password and Confirmationpassword Not match",
@@ -213,8 +227,4 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 
 	}
 
-//	public static void main(String[] args) {
-//		RegisterUI ui = new RegisterUI();
-//		ui.run("");
-//	}
 }

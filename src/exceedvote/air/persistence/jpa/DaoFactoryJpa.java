@@ -7,6 +7,7 @@ import javax.persistence.Persistence;
 import org.apache.log4j.Logger;
 
 import exceedvote.air.persistence.BallotDao;
+import exceedvote.air.persistence.CommitteeDao;
 import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.TeamDao;
 import exceedvote.air.persistence.VoteTopicDao;
@@ -26,6 +27,7 @@ public class DaoFactoryJpa extends DaoFactory {
 	private VoterDao voterDao;
 	private BallotDao ballotDao;
 	private TeamDao teamDao;
+	private CommitteeDao committeDao;
 
 	/**
 	 * constructor for DaoFactoryJpa.
@@ -87,6 +89,13 @@ public class DaoFactoryJpa extends DaoFactory {
 		if (teamDao == null)
 			teamDao = new TeamDaoJpa(em);
 		return teamDao;
+	}
+
+	@Override
+	public CommitteeDao getCommitteeDao() {
+		if(committeDao == null)
+			committeDao = new CommitteeDaoJpa(em);
+		return committeDao;
 	}
 
 }

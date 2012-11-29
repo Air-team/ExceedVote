@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.apache.log4j.Logger;
 import exceedvote.air.model.Ballot;
+import exceedvote.air.model.Committee;
 import exceedvote.air.model.Voter;
 import exceedvote.air.persistence.BallotDao;
 
@@ -56,6 +57,21 @@ public class BallotDaoJpa implements BallotDao {
 		String queryStatement = "SELECT vt FROM Ballot vt";
 		return em.createQuery(queryStatement).getResultList();
 	}
+	
+	@Override
+	public Ballot findSingle(String teamName, String topic,Committee committee, List<Ballot> allBallot){
+		for (int i = 0; i < allBallot.size(); i++) {
+			Ballot bl = allBallot.get(i);
+			if(bl.getCommittee() == null) continue;
+			if ((bl.getTopic().equals(topic))
+					&& (bl.getTeamName().equals(teamName))
+					&& (bl.getCommittee().equals(committee))) {
+				return bl;
+			}
+		}
+		return null;
+	}
+
 
 	/**
 	 * Find a ballot by search for teamname, topic and voter from a list of all ballots.
@@ -70,6 +86,7 @@ public class BallotDaoJpa implements BallotDao {
 			List<Ballot> allBallot) {
 		for (int i = 0; i < allBallot.size(); i++) {
 			Ballot bl = allBallot.get(i);
+			if(bl.getVoter() == null) continue;
 			if ((bl.getTopic().equals(topic))
 					&& (bl.getTeamName().equals(teamName))
 					&& (bl.getVoter().equals(voter))) {
@@ -110,13 +127,34 @@ public class BallotDaoJpa implements BallotDao {
 
 	
 	@Override
+	public List<ArrayList>  historyCom(Committee committee){
+		List<Ballot> allBallot = this.findAll();
+		
+		List<ArrayList> his = new ArrayList<ArrayList>();
+		for (int i=0;i<allBallot.size();i++) {
+			Ballot bl = allBallot.get(i);
+			if(bl.getCommittee() == null) continue;
+			if (  (bl.getCommittee().equals(committee) )){				
+				ArrayList<String> info = new ArrayList<String>();
+				info.add(bl.getTeamName());
+				info.add(bl.getTopic());
+				info.add(bl.getTime());
+				his.add(info);
+			}
+		}
+		
+		return his;
+	}
+	
+	@Override
 	public List<ArrayList>  history(Voter voter){
 		List<Ballot> allBallot = this.findAll();
 		
 		List<ArrayList> his = new ArrayList<ArrayList>();
 		for (int i=0;i<allBallot.size();i++) {
 			Ballot bl = allBallot.get(i);
-			if (  (bl.getVoter().equals(voter) )){				
+			if(bl.getVoter() == null) continue;
+			 if (  (bl.getVoter().equals(voter) )){				
 				ArrayList<String> info = new ArrayList<String>();
 				info.add(bl.getTeamName());
 				info.add(bl.getTopic());
@@ -128,6 +166,23 @@ public class BallotDaoJpa implements BallotDao {
 		return his;
 	}
 
+	
+	@Override
+	public List<Ballot>  findAllOfSingleVoter(Voter voter){
+		List<Ballot> allBallot = this.findAll();
+//		List<Ballot> ballot = new ArrayList<Ballot>();
+		
+		for (int i=0;i<allBallot.size();i++) {
+			Ballot bl = allBallot.get(i);
+			if(bl.getVoter() == null) continue;
+			if (  (bl.getVoter().equals(voter) )){				
+				allBallot.add(bl);
+			}
+		}
+		
+		return allBallot;
+	}
+	
 	private static Logger getLogger() {
 		if (logger == null)
 			logger = Logger.getLogger(BallotDaoJpa.class);

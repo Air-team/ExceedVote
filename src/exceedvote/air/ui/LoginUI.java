@@ -16,7 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
-
+import java.util.TimerTask;
+import java.util.Timer;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -24,6 +25,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 import exceedvote.air.model.Ballot;
+import exceedvote.air.model.Clock;
+import exceedvote.air.model.ClockTask;
+import exceedvote.air.model.Committee;
 import exceedvote.air.model.Login;
 import exceedvote.air.model.Voter;
 
@@ -126,19 +130,54 @@ public class LoginUI extends JFrame implements RunUI {
             boolean correct = login.hasVoter();
             if(!correct)
             {
+            	  if(login.isAdmin()) {
+                  	AdminUI adminUI = new AdminUI();
+                  	serviceUI.addUI("AdminUI", adminUI);
+                  	adminUI.addService(serviceUI);
+                  	adminUI.run("");
+                  	close();
+             
+                  }
+                  else if(login.hasCommittee()){
+                	  Committee committee = login.getCommittee();
+                  	 ControlPanel controlPanel = new ControlPanel(committee);
+                  		serviceUI.addUI("ControlPanel", controlPanel);
+                  		controlPanel.addService(serviceUI);
+                  		controlPanel.run("");
+                      	close();
+                  }
+            	  
+                  else {
+                	  
                 JOptionPane.showConfirmDialog((Component)
                     null, "Wrong username or password", "Incorrect!!!", JOptionPane.DEFAULT_OPTION);
+                  }
             }
+           
             else
             {
             	Voter voter = login.getVoter();
-            	VoteUI voteUI = new VoteUI(voter);
-        		VoteTypeUI voteTypeUI = new VoteTypeUI(voter);
+            	
+            	Clock t = new Clock();
+            	VoteUI voteUI = new VoteUI(voter,t);
+        		t.addObserver(voteUI);
+        		
+        	
+        		VoteTypeUI voteTypeUI = new VoteTypeUI(voter,t);
+        		t.addObserver(voteTypeUI);
         		serviceUI.addUI("voteUI",voteUI);
         		serviceUI.addUI("voteTypeUI",voteTypeUI);
         		voteTypeUI.addService(serviceUI);
         		voteUI.addService(serviceUI);
-        		voteTypeUI.run("");
+        		TimerTask clocktask = new ClockTask( t );
+        		Timer timer = new Timer();
+        		long delay = 1000 - System.currentTimeMillis()%1000;
+        		final long INTERVAL = 1000; 
+        		timer.scheduleAtFixedRate(clocktask, delay, INTERVAL);
+        		t.start();
+        		voteTypeUI.run("voteTypeUI");
+        		close();
+        		
                 JOptionPane.showConfirmDialog((Component)
                     null, "Login Complete", "Correct", JOptionPane.DEFAULT_OPTION);
             }
@@ -146,6 +185,8 @@ public class LoginUI extends JFrame implements RunUI {
         }
     }
 
+	 
+	 
 	/*
 	 * action in regist button
 	 */
@@ -167,6 +208,13 @@ public class LoginUI extends JFrame implements RunUI {
 	public void addService(SeviceUI serviceUI) {
 		this.serviceUI = serviceUI;
 	}
+	
+ 	public void close() {
+   		this.setVisible(false);
+   	}
+   	
+   
+    
 
 	/*
 	 * start this frame

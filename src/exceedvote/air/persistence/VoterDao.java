@@ -34,4 +34,8 @@ public interface VoterDao {
 
 	public Voter findSingle(String username, String password);
 
+	public Voter findbyName(String username);
+
+	public boolean remove(Voter voter);
+
 }

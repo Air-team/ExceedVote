@@ -7,9 +7,11 @@
 		<class>exceedvote.air.model.Ballot</class>
 		<class>exceedvote.air.model.TeamList</class>
 		<class>exceedvote.air.model.Tracking</class>
+		<class>exceedvote.air.model.TeamDescription</class>
+		<class>exceedvote.air.model.Committee</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"></property>
-			<property name="javax.persistence.jdbc.url" value="jdbc:derby:/Users/prisadumrongsiri/MyDB;create=true"></property>
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby:/Users/prisadumrongsiri/DB;create=true"></property>
 			<property name="javax.persistence.jdbc.user" value=""></property>
 		</properties>
 	</persistence-unit>

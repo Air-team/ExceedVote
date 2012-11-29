@@ -2,10 +2,15 @@ package exceedvote.air.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.TeamDao;
@@ -28,7 +33,11 @@ public class Team implements Serializable {
 	private String name;
 	private int score;
 	private VoteTopic topic;
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private TeamDescription teamdes;
 
+	
+	
 	/**
 	 * Team constructor.
 	 */
@@ -47,6 +56,7 @@ public class Team implements Serializable {
 	public Team(String name, TeamDescription td) {
 		this();
 		this.name = name;
+		this.teamdes = td;
 	}
 
 	/**
@@ -93,6 +103,12 @@ public class Team implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public void saveInfo(String name,TeamDescription td){
+		Team team = new Team(name,td);
+		TeamDao dao = DaoFactory.getInstance().getTeamDao();
+		dao.save(team);
 	}
 	
 	

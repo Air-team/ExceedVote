@@ -40,7 +40,7 @@ public class HistoryUI extends JFrame {
 	 */
 	public HistoryUI()
 	{
-		
+		initComponent();
 	}
 	
 	public void initComponent()
@@ -85,9 +85,6 @@ public class HistoryUI extends JFrame {
 		table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.getColumnModel().getColumn(1).setPreferredWidth(130);
 		table.getColumnModel().getColumn(2).setPreferredWidth(200);
-//		table.getColumnModel().getColumn(3).setPreferredWidth(74);
-//		table.setBounds(10, 53, 467, 320);
-//		table.setRowHeight(100);
 		table.setGridColor(Color.GRAY);
 		table.setPreferredScrollableViewportSize(new Dimension(400, 300));
         table.setFillsViewportHeight(true);
@@ -95,12 +92,7 @@ public class HistoryUI extends JFrame {
 		
 		
 		
-	
-		// How to add team
-//		model.insertRow(0,new Object[]{"Ranjan","50"});
-//		model.insertRow(1,new Object[]{"TestTeam","Test Topic","12.00","vote"});
-		//model.insertRow(table.getRowCount(),new Object[]{"TestTeam","Test Topic","12.00","vote"});
-		//Create the scroll pane and add the table to it.
+
         JScrollPane scrollPane = new JScrollPane(table);
  
         //Add the scroll pane to this panel.
@@ -121,7 +113,7 @@ public class HistoryUI extends JFrame {
 	    this.initComponent();
         this.setVisible(true);
         this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 //	public static void main(String[] args)

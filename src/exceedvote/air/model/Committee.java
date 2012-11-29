@@ -1,27 +1,93 @@
 package exceedvote.air.model;
 
-import java.util.Calendar;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.*;
+
+import exceedvote.air.persistence.BallotDao;
+import exceedvote.air.persistence.CommitteeDao;
 import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.TeamDao;
 import exceedvote.air.persistence.VoteTopicDao;
+import exceedvote.air.persistence.VoterDao;
 
-public class Committee {
-	private String name = "aaa";
- 	private String teamName;
+/**
+ * Entity implementation class for Entity: Committee
+ *
+ */
+@Entity
+public class Committee implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+
+	
+	
+	private String username="";
+	private String password="";
+	private String type = "";
+	private int amountOfBallot = 0;
+ 	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+		
+	}
+
+	private String teamName;
 	private String topicName;
-	// private Calendar calender = Calendar.getInstance();
+	@Temporal( TemporalType.DATE ) 
 	private Date date;
 	
+
+	public Committee() {
+		super();
+	}
 	
+	
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getName() {
-		return name;
+		return username;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.username = name;
+	}
+	
+	public void setballotLeft(int value) {
+		this.amountOfBallot = value;
+		CommitteeDao dao = DaoFactory.getInstance().getCommitteeDao();
+		dao.saveCom(this);
+	}
+
+	public int getballotLeft() {
+		return amountOfBallot;
+	}
+	
+	public void saveInfo(Committee committee){
+		CommitteeDao dao = DaoFactory.getInstance().getCommitteeDao();
+		dao.saveCom(committee);
+	}
+	
+	public List<ArrayList> history(){
+		BallotDao dao = DaoFactory.getInstance().getBallotDao();
+		return dao.historyCom(this);
 	}
 	
 	public List<Team> getTeam() {
@@ -78,6 +144,7 @@ public class Committee {
 	public boolean deleteTeam(String teamName){
 		TeamDao teamDao = DaoFactory.getInstance().getTeamDao();
 		if (teamDao.findSingle(teamName).getName().equals(teamName)){
+			teamDao.remove(teamDao.findSingle(teamName));
 			return true;
 		}	
 		else {
@@ -132,7 +199,17 @@ public class Committee {
 		min = Integer.parseInt(mins);
 		second = Integer.parseInt(seconds);
 		date = new Date(y - 1900, m, d, h, min, second);
-
+	
 	}
 
+	public long getTime(){
+		return date.getTime();
+	}
+
+	public int getScore(String typeTeam) {
+	
+		return 0;
+	}
+		
+   
 }
