@@ -22,10 +22,6 @@ public class Ballot implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static Ballot ballot;
-	
-	
-	
-   
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,7 +30,6 @@ public class Ballot implements Serializable {
 	private String topic;
 	private Committee committee;
 	private Voter voter;
-
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Team team;
@@ -45,34 +40,33 @@ public class Ballot implements Serializable {
 	@Transient
 	private Tracking track = new Tracking();
 
-
-	
 	/**
 	 * Ballot Constructor that receive the list of team.
 	 * 
-	 * @param teamList is a list of all team in the competition.
+	 * @param teamList
+	 *            is a list of all team in the competition.
 	 */
 
 	/** Log for tracking the action of this class */
-	
+
 	private String time = "";
 
 	public Ballot() {
 		super();
-		
+
 	}
 
-
 	/**
-	 * Return the Ballot ID. 
+	 * Return the Ballot ID.
+	 * 
 	 * @return an Integer represent the ID.
 	 */
 
-	public static Ballot getInstance(){
+	public static Ballot getInstance() {
 		return ballot;
 	}
-	
-	public void setInstance(Ballot ballot){
+
+	public void setInstance(Ballot ballot) {
 		this.ballot = ballot;
 	}
 
@@ -81,7 +75,8 @@ public class Ballot implements Serializable {
 	}
 
 	/**
-	 * Return the team name. 
+	 * Return the team name.
+	 * 
 	 * @return String represent team name.
 	 */
 	public String getTeamName() {
@@ -89,15 +84,18 @@ public class Ballot implements Serializable {
 	}
 
 	/**
-	 * Set the team name. 
-	 * @param teamName is a String represent team name.
+	 * Set the team name.
+	 * 
+	 * @param teamName
+	 *            is a String represent team name.
 	 */
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
 
 	/**
-	 * Return the list of all team . 
+	 * Return the list of all team .
+	 * 
 	 * @return List of Team represent all the team.
 	 */
 	public List<Team> getTeam() {
@@ -106,7 +104,8 @@ public class Ballot implements Serializable {
 	}
 
 	/**
-	 * Return the the Vote topic. 
+	 * Return the the Vote topic.
+	 * 
 	 * @return String represent the vote topic.
 	 */
 	public String getTopic() {
@@ -114,16 +113,20 @@ public class Ballot implements Serializable {
 	}
 
 	/**
-	 * Set the vote topic. 
-	 * @param topic is the topic for vote.
+	 * Set the vote topic.
+	 * 
+	 * @param topic
+	 *            is the topic for vote.
 	 */
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
 
 	/**
-	 * Set the Ballot ID. 
-	 * @param id is an Integer represent the ID.
+	 * Set the Ballot ID.
+	 * 
+	 * @param id
+	 *            is an Integer represent the ID.
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -131,7 +134,9 @@ public class Ballot implements Serializable {
 
 	/**
 	 * Set the voter that has this ballot.
-	 * @param voter - Voter object that has name and type.
+	 * 
+	 * @param voter
+	 *            - Voter object that has name and type.
 	 */
 	public void setVoter(Voter voter) {
 		this.voter = voter;
@@ -139,25 +144,30 @@ public class Ballot implements Serializable {
 
 	/**
 	 * Return the voter the has this ballot.
+	 * 
 	 * @return Voter object that has name and type.
 	 */
 	public Voter getVoter() {
 		return voter;
 	}
-	
-	public void setCommittee(Committee committee){
+
+	public void setCommittee(Committee committee) {
 		this.committee = committee;
 	}
-	
-	public Committee getCommittee(){
+
+	public Committee getCommittee() {
 		return committee;
 	}
 
 	/**
-	 * Put the Ballot into the BallotBox and set the score to the team. 
-	 * @param teamName - is name of the team that the user wants to vote.
-	 * @param typeTeam - the team type.
-	 * @param voter - the person who vote.
+	 * Put the Ballot into the BallotBox and set the score to the team.
+	 * 
+	 * @param teamName
+	 *            - is name of the team that the user wants to vote.
+	 * @param typeTeam
+	 *            - the team type.
+	 * @param voter
+	 *            - the person who vote.
 	 * @return true if successfully put the ballot.
 	 */
 	public boolean putBallot(String teamName, String typeTeam, Voter voter) {
@@ -190,7 +200,8 @@ public class Ballot implements Serializable {
 		return false;
 	}
 
-	public boolean putBallot(String teamName, String typeTeam, Committee committee) {
+	public boolean putBallot(String teamName, String typeTeam,
+			Committee committee) {
 		list = getTeam();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getName().equals(teamName)) {
@@ -220,24 +231,23 @@ public class Ballot implements Serializable {
 		return false;
 	}
 
-	
-	
-	public void setTime(String time){
+	public void setTime(String time) {
 		this.time = time;
 	}
-	
-	public String getTime(){
+
+	public String getTime() {
 		return time;
 	}
-	
-
 
 	/**
 	 * To give the ballot back for the revoting.
 	 * 
-	 * @param teamName - is name of the team that the user voted.
-	 * @param typeTeam - the team type.
-	 * @param voter - the person who vote.
+	 * @param teamName
+	 *            - is name of the team that the user voted.
+	 * @param typeTeam
+	 *            - the team type.
+	 * @param voter
+	 *            - the person who vote.
 	 * @return true if the user can get the ballot back.
 	 */
 	public boolean returnBallot(String teamName, String typeTeam, Voter voter) {
@@ -258,14 +268,14 @@ public class Ballot implements Serializable {
 			return true;
 		} else
 			return false;
-		}
-	
-	public boolean returnBallot(String teamName, String typeTeam, Committee committee) {
+	}
+
+	public boolean returnBallot(String teamName, String typeTeam,
+			Committee committee) {
 		BallotDao dao = DaoFactory.getInstance().getBallotDao();
 		List<Ballot> allBallot = dao.findAll();
 		Ballot bb = dao.findSingle(teamName, typeTeam, committee, allBallot);
 
-		// if(bb==null) System.out.println("aaa");
 		if (bb != null) {
 			this.committee = committee;
 			int value = committee.getballotLeft();
@@ -278,8 +288,6 @@ public class Ballot implements Serializable {
 			return true;
 		} else
 			return false;
-		}
-	
-	
+	}
 
 }

@@ -29,6 +29,7 @@ import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
 import exceedvote.air.model.Clock;
 import exceedvote.air.model.Committee;
+import exceedvote.air.model.Poll;
 import exceedvote.air.model.VoteTopic;
 import exceedvote.air.model.Voter;
 /**
@@ -44,6 +45,7 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
     private JPanel contentPane;
     private JTextPane txtpnVotetype = new JTextPane();
     private JButton btnHistory = new JButton("History");
+    private JButton btnPoll = new JButton("Poll");
     private JLabel lblSelectTheType = new JLabel("Click to select the type");
 
     // button submit 
@@ -169,9 +171,16 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
 			 btnHistory.setText("History");
 			 btnHistory.setBounds(150, lastPos+50, 89, 23);
 		        contentPane.add(btnHistory);
+		        
+		        btnPoll = new JButton(new pollAction());
+		        btnPoll.setText("Poll");
+		        btnPoll.setBounds(180, 60, 218, 23);
+		        if(clock.isRun()==false)   btnPoll.setEnabled(true);
+		        else  btnPoll.setEnabled(false);
+			     contentPane.add(btnPoll);
 		        lastPos = lastPos+50;
 			  setSize(430, lastPos+100);
-				
+		
 				
     }
 
@@ -204,6 +213,24 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
 	    	
 		  
 	}
+   
+   private class pollAction extends AbstractAction{ 
+
+       public pollAction()
+       { 
+           super(); 
+       } 
+
+       public void actionPerformed(ActionEvent e){
+    	   Poll poll = new Poll();
+    	  
+    	   
+    	  TotalResult result = new TotalResult();
+    	  result.addData( poll.totalInfo());
+    	  result.run();
+    	   
+       }
+   }
    
     private class historyAction extends AbstractAction{ 
 
@@ -307,7 +334,7 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		 if(clock.isRun()==false)  {  fieldWatch.setText("00:00:00");}
+		 if(clock.isRun()==false)  {  btnPoll.setEnabled(true);  fieldWatch.setText("00:00:00");}
 		 else fieldWatch.setText(clock.time());
    
     

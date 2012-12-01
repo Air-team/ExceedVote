@@ -1,5 +1,6 @@
 package exceedvote.air.persistence.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -125,5 +126,20 @@ public class TeamDaoJpa implements TeamDao {
 		}
 		return false;
 	}
+	
+	@Override
+	public List<Team> findSingleTeamAlltopic(String name){
+		List<Team> listTeam = this.findAll();
+		List<Team> oneTeamAlltopic = new ArrayList<Team> ();
+		for(int i=0;i<listTeam.size();i++){
+			if(listTeam.get(i).getName().equals(name)) oneTeamAlltopic.add(listTeam.get(i));
+		}
+		return oneTeamAlltopic;
+		
+	}
+
+
+
+	
 
 }

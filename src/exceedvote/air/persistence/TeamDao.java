@@ -38,4 +38,9 @@ public interface TeamDao {
 
 	public boolean remove(Team team);
 
+
+	public List<Team> findSingleTeamAlltopic(String name);
+	
+
+
 }

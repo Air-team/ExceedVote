@@ -1,15 +1,10 @@
 package exceedvote.air.persistence.jpa;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
 import org.apache.log4j.Logger;
-
-import exceedvote.air.model.Team;
 import exceedvote.air.model.Voter;
-
 import exceedvote.air.persistence.VoterDao;
 
 /**

@@ -234,25 +234,15 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 			String text = addTeamInput.getText();
 
 			if (!teamModel.contains(text)) {
-				final AddTeamPanel teamDes = new AddTeamPanel();
+				final AddTeamPanel teamDes = new AddTeamPanel(serviceUI);
 				teamDes.setTeamName(text);
 				teamDes.setModel(teamModel);
 				final SeviceUI serviceUI = new SeviceUI();
 				serviceUI.addUI("teamDes", teamDes);
 				teamDes.addService(serviceUI);
 				serviceUI.runByName("teamDes");
-//				Timer delay = new Timer(500, new ActionListener() {
-//					@Override
-//					public void actionPerformed(ActionEvent e) {
-//						teamDes.dispose();
-//						serviceUI.runByName("teamDes");
-//
-//					}
-//				});
-
-//				delay.setRepeats(false);
-//				delay.start();
-
+				
+				
 				close();
 
 				if (teamDes.check()) {

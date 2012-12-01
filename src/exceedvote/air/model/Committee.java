@@ -12,11 +12,11 @@ import exceedvote.air.persistence.CommitteeDao;
 import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.TeamDao;
 import exceedvote.air.persistence.VoteTopicDao;
-import exceedvote.air.persistence.VoterDao;
+
 
 /**
  * Entity implementation class for Entity: Committee
- *
+ * 
  */
 @Entity
 public class Committee implements Serializable {
@@ -27,33 +27,29 @@ public class Committee implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	
-	
-	private String username="";
-	private String password="";
+	private String username = "";
+	private String password = "";
 	private String type = "";
 	private int amountOfBallot = 0;
- 	public String getType() {
+
+	public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
-		
+
 	}
 
 	private String teamName;
 	private String topicName;
-	@Temporal( TemporalType.DATE ) 
+	@Temporal(TemporalType.DATE)
 	private Date date;
-	
 
 	public Committee() {
 		super();
 	}
-	
-	
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -69,7 +65,7 @@ public class Committee implements Serializable {
 	public void setName(String name) {
 		this.username = name;
 	}
-	
+
 	public void setballotLeft(int value) {
 		this.amountOfBallot = value;
 		CommitteeDao dao = DaoFactory.getInstance().getCommitteeDao();
@@ -79,17 +75,17 @@ public class Committee implements Serializable {
 	public int getballotLeft() {
 		return amountOfBallot;
 	}
-	
-	public void saveInfo(Committee committee){
+
+	public void saveInfo(Committee committee) {
 		CommitteeDao dao = DaoFactory.getInstance().getCommitteeDao();
 		dao.saveCom(committee);
 	}
-	
-	public List<ArrayList> history(){
+
+	public List<ArrayList> history() {
 		BallotDao dao = DaoFactory.getInstance().getBallotDao();
 		return dao.historyCom(this);
 	}
-	
+
 	public List<Team> getTeam() {
 		TeamDao teamDao = DaoFactory.getInstance().getTeamDao();
 		return teamDao.findAll();
@@ -126,7 +122,7 @@ public class Committee implements Serializable {
 
 	public List<VoteTopic> getTopic() {
 		VoteTopicDao dao = DaoFactory.getInstance().getVoteTopicDao();
-		return 	dao.findAll();
+		return dao.findAll();
 	}
 
 	public boolean setTopic(String topicName) {
@@ -140,31 +136,29 @@ public class Committee implements Serializable {
 			return true;
 		}
 	}
-	
-	public boolean deleteTeam(String teamName){
+
+	public boolean deleteTeam(String teamName) {
 		TeamDao teamDao = DaoFactory.getInstance().getTeamDao();
-		if (teamDao.findSingle(teamName).getName().equals(teamName)){
+		if (teamDao.findSingle(teamName).getName().equals(teamName)) {
 			teamDao.remove(teamDao.findSingle(teamName));
 			return true;
-		}	
-		else {
-			
+		} else {
+
 			return false;
 		}
 	}
-	
-	public boolean deleteTopic(String topicName){
+
+	public boolean deleteTopic(String topicName) {
 		VoteTopicDao topicDao = DaoFactory.getInstance().getVoteTopicDao();
-		if (topicDao.find(topicName).getTitle().equals(topicName)){
+		if (topicDao.find(topicName).getTitle().equals(topicName)) {
 			topicDao.remove(topicDao.find(topicName));
 			return true;
-		}	
-		else {
-			
+		} else {
+
 			return false;
 		}
 	}
-	
+
 	public void setTime(String day, String month, String year, String hours,
 			String mins, String seconds) {
 		int d = 0, m = 0, y = 0, h, min = 0, second = 0;
@@ -199,17 +193,16 @@ public class Committee implements Serializable {
 		min = Integer.parseInt(mins);
 		second = Integer.parseInt(seconds);
 		date = new Date(y - 1900, m, d, h, min, second);
-	
+
 	}
 
-	public long getTime(){
+	public long getTime() {
 		return date.getTime();
 	}
 
 	public int getScore(String typeTeam) {
-	
+
 		return 0;
 	}
-		
-   
+
 }

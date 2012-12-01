@@ -1,7 +1,5 @@
 package exceedvote.air.model;
 
-import java.io.Serializable;
-
 import org.apache.log4j.Logger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

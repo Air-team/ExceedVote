@@ -10,33 +10,33 @@ public class Clock extends Observable {
 	private Committee committee = new Committee();
 
 	public Clock() {
-		committee.setTime("29", "nov", "2012", "2", "45", "0");
+		committee.setTime("1", "dec", "2012", "2", "45", "0");
 	}
 
-	public boolean isRun(){
+	public boolean isRun() {
 		return running;
 	}
 
 	public void start() {
 		this.startTime = System.currentTimeMillis();
 		this.stopTime = committee.getTime();
-		if(committee.getTime()>System.currentTimeMillis()) this.running = true;
-		
-		
+		if (committee.getTime() > System.currentTimeMillis())
+			this.running = true;
+
 	}
 
 	// elaspsed time in milliseconds
 	public long getElapsedTime() {
 		long elapsed = 0;
-		if(running)elapsed = (committee.getTime() - System.currentTimeMillis());
-		if(elapsed==0) running = false;
+		if (running)
+			elapsed = (committee.getTime() - System.currentTimeMillis());
+		if (elapsed == 0)
+			running = false;
 		return elapsed;
 	}
 
-
-
 	public String time() {
-	 
+
 		long time = this.getElapsedTime() / 1000;
 		String seconds = Integer.toString((int) (time % 60));
 		String minutes = Integer.toString((int) ((time % 3600) / 60));
@@ -52,7 +52,8 @@ public class Clock extends Observable {
 				hours = "0" + hours;
 			}
 		}
-		if(running==false) return 00 + ":" + 00 + ":" + 00;
+		if (running == false)
+			return 00 + ":" + 00 + ":" + 00;
 		// System.out.println(hours+":"+minutes+":"+seconds);
 		return hours + ":" + minutes + ":" + seconds;
 
@@ -75,7 +76,7 @@ public class Clock extends Observable {
 	 * Set the current time every 1 minute
 	 */
 	public void updateTime() {
-		if(running==true){
+		if (running == true) {
 			time = getElapsedTime();
 			this.setTime(time);
 		}

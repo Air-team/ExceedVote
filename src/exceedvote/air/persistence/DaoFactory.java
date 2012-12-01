@@ -53,4 +53,7 @@ public abstract class DaoFactory {
 	public abstract TeamDao getTeamDao();
 	
 	public abstract CommitteeDao getCommitteeDao();
+
+	public abstract TeamDescriptionDao getTeamDescriptionDao();
+	
 }

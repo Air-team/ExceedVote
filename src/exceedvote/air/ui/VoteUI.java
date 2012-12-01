@@ -149,7 +149,6 @@ public class VoteUI extends JFrame implements RunUI,Observer
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-
         
         listTeam.setBounds(10, 64, 218, 301);
         contentPane.add(listTeam);
@@ -267,10 +266,13 @@ public class VoteUI extends JFrame implements RunUI,Observer
          } 
 
          public void actionPerformed(ActionEvent e)
-         {   
-           InfomationUI informationUI = new InfomationUI();
+         {  
+               	 String teamName = selectTeam;
+        	
+        	
+           InfomationUI informationUI = new InfomationUI(teamName);
            informationUI.run("");
-//           Team team = team  
+
          }
     }
   

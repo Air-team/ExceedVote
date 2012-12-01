@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 import exceedvote.air.model.Admin;
 import exceedvote.air.model.Committee;
 import exceedvote.air.model.Team;
+import exceedvote.air.model.VoteTopic;
 import exceedvote.air.model.Voter;
 
 public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
@@ -82,6 +83,7 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 		buttonChVoter.setBounds(250, 120, 70, 30);
 		contentPane.add(buttonChVoter);
 
+			
 		listVoter = new JList();
 		listVoter.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listVoter.setSelectedIndex(0);
@@ -102,8 +104,7 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 			if (!comModel.contains(com.get(i).getName()))
 				comModel.addElement(com.get(i).getName());
 		listCommitee.setModel(comModel);
-		System.out.println(voteModel.toString());
-		System.out.println(comModel.toString());
+		
 //		int indexCom = listCommitee.getSelectedIndex();
 		JScrollPane scrollPaneVoter = new JScrollPane(listVoter);
 		scrollPaneVoter.setBounds(330, 50, 190, 126);
@@ -112,6 +113,12 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 		JScrollPane scrollPaneComittee = new JScrollPane(listCommitee);
 		scrollPaneComittee.setBounds(50, 50, 190, 126);
 		contentPane.add(scrollPaneComittee);
+		
+
+//		if(listVoter.getSelectedIndex()==0)  buttonChCom.setEnabled(false);
+//		else  buttonChCom.setEnabled(true);
+//		if(listCommitee.getSelectedIndex()==0)  buttonChVoter.setEnabled(false);
+//		else buttonChVoter.setEnabled(true);
 
 	}
 	//change to committee
@@ -123,18 +130,23 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			int index = listVoter.getSelectedIndex();
-			if (index < 0) {
-				buttonChCom.setEnabled(false);
-			} else {
-				buttonChCom.setEnabled(true);
+			
+			if(index >= 0){ 
 				String name = user.get(index).getName();
-				Voter voter = admin.getSingleVoter(name);
 				
+			int size = voteModel.getSize();
+			if (size ==  0) {
+				buttonChCom.setEnabled(false);
+			}
+				voteModel.remove(index);
+				user.remove(index);
+				Voter voter = admin.getSingleVoter(name);
+				System.out.println(voter);
 				String username = admin.getSingleVoter(name).getName();
 				String password = admin.getSingleVoter(name).getPassword();
 				int amountBallot = admin.getSingleVoter(name).getballotLeft();
 				String type = admin.getSingleVoter(name).getType();
-						
+				
 				Committee committee = new Committee();
 				
 				// removed item in last position
@@ -144,13 +156,13 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 					committee.setPassword(password);
 					admin.removeVoter(name);
 					admin.saveCommitee(name, password, amountBallot, type);
-					voteModel.remove(index);
+					
 					int i = comModel.getSize();
 					comModel.add(i, name);
-					inicomponent();
+					com.add(i, committee);
+				
 				}
 			}
-
 		}
 	}
 
@@ -162,17 +174,23 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			
+			
 			int index = listCommitee.getSelectedIndex();
-			if (index < 0) {
-				buttonChVoter.setEnabled(false);
-			} else {
-				buttonChVoter.setEnabled(true);
+			
+			if(index >= 0) { 
+				
 				String name = com.get(index).getName();
 				Committee committee = admin.getSingleCommittee(name);
-				
 				int size = comModel.getSize();
-
-				// removed item in last position
+				if (size== 0) {
+					buttonChVoter.setEnabled(false);
+				} 
+				
+				
+				comModel.remove(index);
+				com.remove(index);
+				
 				if (committee != null) {
 					
 					String username = admin.getSingleCommittee(name).getName();
@@ -180,21 +198,22 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 					String type = admin.getSingleCommittee(name).getType();
 					int amountBallot = admin.getSingleCommittee(name).getballotLeft();
 					Voter voter = new Voter(username, password, type);
+					
 					if ( admin.removeCommittee(name) ){
 						voter.saveInfo(voter);
 						voter.setballotLeft(amountBallot);
-						comModel.remove(index);
+					
+					
 						int i = voteModel.getSize();
 						voteModel.add(i, name);
+						user.add(i, voter);
 						
-						 contentPane.invalidate();
-					   	 contentPane.repaint();
-					   	
 					}
 				}
 			}
-
+			
 		}
+		
 
 	}
 	

@@ -65,10 +65,11 @@ public class AddTeamPanel extends JFrame implements RunUI {
 
     /**
      * Create the frame.
+     * @param serviceUI 
      */
-    public AddTeamPanel() 
+    public AddTeamPanel(SeviceUI serviceUI) 
     {
-    	
+    	this.serviceUI = serviceUI;
     }
     
     public void setModel(DefaultListModel teamModel ){
@@ -165,8 +166,10 @@ public class AddTeamPanel extends JFrame implements RunUI {
         public void actionPerformed(ActionEvent e) {
         	checkComplete = false;
         	ControlPanel panel = new ControlPanel(commitee);
-            panel.run("");
-        	close();
+        	serviceUI.addUI("Panel",panel);
+        	panel.addService(serviceUI);
+        	panel.run("");
+        	dispose();
         }
     }
 
@@ -197,9 +200,13 @@ public class AddTeamPanel extends JFrame implements RunUI {
                 }  
                 ImageIO.write(rendered, "JPEG", new File(chooser.getSelectedFile().getName()));  
             	TeamDescription teamDes = new TeamDescription("");
+            	teamDes.setFilePic(chooser.getSelectedFile().getName());
             	teamDes.setInfo(descriptionText.getText());
+            	teamDes.saveTeamDes(teamDes);
             	String text = teamName.getText();
             	Team team = new Team(teamName.getText(),teamDes);
+            	
+            	team.saveInfo(text, teamDes);
             	
             	
             	if(commitee.setTeam(text)){
@@ -213,9 +220,12 @@ public class AddTeamPanel extends JFrame implements RunUI {
 			           
 			             
             	}
-            	 ControlPanel panel = new ControlPanel(commitee);
-	             panel.run("");
-	             close();
+            	ControlPanel panel = new ControlPanel(commitee);
+            	serviceUI.addUI("Panel",panel);
+            	panel.addService(serviceUI);
+            	panel.run("");
+            	dispose();
+	             
                
             }
             catch(Exception x){
@@ -244,19 +254,12 @@ public class AddTeamPanel extends JFrame implements RunUI {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-//    public static void main(String[] args)
-//    {
-////    	SeviceUI serviceUI = new SeviceUI();
-////    	serviceUI.addUI("", ui)
-//        AddTeamPanel addTeamPanel = new AddTeamPanel();
-//        addTeamPanel.run();
-//    }
 
     /*
    	 * close
    	 */
    	public void close() {
-   		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
    	}
    	
     public void addService(SeviceUI serviceUI)
@@ -269,7 +272,7 @@ public class AddTeamPanel extends JFrame implements RunUI {
 		this.initComponent();
 		this.setVisible(true);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	}
 }
