@@ -135,11 +135,7 @@ public class TeamDaoJpa implements TeamDao {
 			if(listTeam.get(i).getName().equals(name)) oneTeamAlltopic.add(listTeam.get(i));
 		}
 		return oneTeamAlltopic;
-		
-	}
-
-
-
 	
-
+	}
+	
 }

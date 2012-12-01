@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import exceedvote.air.persistence.BallotDao;
 import exceedvote.air.persistence.DaoFactory;
@@ -33,15 +34,17 @@ public class Team implements Serializable {
 	private Integer id;
 	private String name;
 	private int score;
+	@Transient
 	private VoteTopic topic;
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private TeamDescription teamdes;
-	private Map<String, Integer> map = new HashMap<String, Integer>();
+	private Map<String, Integer> map;
 	
 	/**
 	 * Team constructor.
 	 */
 	public Team() {
+		 
 		super();
 	}
 
@@ -54,12 +57,13 @@ public class Team implements Serializable {
 	 *            - Team description.
 	 */
 	public Team(String name, TeamDescription td) {
+		
 		this();
 		this.name = name;
 		this.teamdes = td;
 		
 		List<VoteTopic> topic = new ArrayList<VoteTopic>();
-
+		map = new HashMap<String, Integer>();
 		VoteTopicDao dao2 = DaoFactory.getInstance().getVoteTopicDao();
 		topic = dao2.findAll();
 		
@@ -68,6 +72,31 @@ public class Team implements Serializable {
 		}
 
 
+	}
+	
+	public void refreshMap(){
+		TeamDao teamDao = DaoFactory.getInstance().getTeamDao();
+		List<Team> teamList = teamDao.findAll();
+		List<VoteTopic> topic = new ArrayList<VoteTopic>();
+		VoteTopicDao dao2 = DaoFactory.getInstance().getVoteTopicDao();
+		topic = dao2.findAll();
+		
+		for(int i=0;i<teamList.size();i++){
+			Map<String, Integer> mapp = new HashMap<String, Integer>();
+			map = teamList.get(i).getMap();
+			for(int j=0;j<topic.size();j++){
+				int value = 0;
+				if(map.get(topic.get(j).getTitle()) == null)  value = 0;
+				else value = map.get(topic.get(j).getTitle());
+				mapp.put(topic.get(j).getTitle(),value );
+			}
+			
+			teamList.get(i).setMap(mapp);
+			teamDao.save(teamList.get(i));
+			
+		}
+	
+		
 	}
 
 	/**
@@ -117,7 +146,6 @@ public class Team implements Serializable {
 	public void saveInfo(String name, TeamDescription td) {
 		Team team = new Team(name, td);
 		TeamDao dao = DaoFactory.getInstance().getTeamDao();
-
 		dao.save(team);
 	}
 
@@ -140,6 +168,32 @@ public class Team implements Serializable {
 		}
 		return sum;
 	}
+	
+
+	
+	public Map<String, Integer> getMap() {
+		return map;
+	}
+
+	public void setMap(Map<String, Integer> map) {
+		this.map = map;
+	}
+
+	public List<ArrayList> getScoreAlltopic(String name){
+		TeamDao teamDao = DaoFactory.getInstance().getTeamDao();
+		Team team = teamDao.findSingle(name);
+		Map<String, Integer> map = team.getMap();
+		List <ArrayList> list = new ArrayList<ArrayList>();
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			ArrayList<String> info = new ArrayList<String>();
+			info.add(entry.getKey());
+			info.add(entry.getValue()+"");
+			list.add(info);
+		}
+		return list;
+	}
+	
+
 	
 	
 

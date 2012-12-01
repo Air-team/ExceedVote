@@ -10,7 +10,7 @@ public class Clock extends Observable {
 	private Committee committee = new Committee();
 
 	public Clock() {
-		committee.setTime("1", "dec", "2012", "2", "45", "0");
+		
 	}
 
 	public boolean isRun() {
@@ -20,6 +20,7 @@ public class Clock extends Observable {
 	public void start() {
 		this.startTime = System.currentTimeMillis();
 		this.stopTime = committee.getTime();
+
 		if (committee.getTime() > System.currentTimeMillis())
 			this.running = true;
 

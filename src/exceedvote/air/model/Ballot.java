@@ -1,6 +1,7 @@
 package exceedvote.air.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -288,6 +289,21 @@ public class Ballot implements Serializable {
 			return true;
 		} else
 			return false;
+	}
+	
+	public List<ArrayList> getScoreEachTeam(String topic){
+		TeamDao teamDao = DaoFactory.getInstance().getTeamDao();
+		List<Team> team = teamDao.findAll();
+		List<ArrayList> list  = new ArrayList<ArrayList>();
+	
+		for(int i=0;i<team.size();i++){
+			ArrayList<String> info = new ArrayList<String>();
+				info.add(team.get(i).getName());
+				info.add(team.get(i).getScore(topic)+"");
+				list.add(info);
+		}
+		
+		return list;
 	}
 
 }

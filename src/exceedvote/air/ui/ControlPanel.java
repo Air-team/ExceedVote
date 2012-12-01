@@ -33,6 +33,8 @@ import exceedvote.air.model.ClockTask;
 import exceedvote.air.model.Committee;
 import exceedvote.air.model.Team;
 import exceedvote.air.model.VoteTopic;
+import exceedvote.air.persistence.DaoFactory;
+
 import java.util.TimerTask;
 
 
@@ -237,7 +239,6 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 				final AddTeamPanel teamDes = new AddTeamPanel(serviceUI);
 				teamDes.setTeamName(text);
 				teamDes.setModel(teamModel);
-				final SeviceUI serviceUI = new SeviceUI();
 				serviceUI.addUI("teamDes", teamDes);
 				teamDes.addService(serviceUI);
 				serviceUI.runByName("teamDes");
@@ -280,6 +281,8 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 
 				if (commitee.setTopic(criteraiInput.getText())) {
 					voteTypeUI.initComponent();
+					Team team = new Team();
+					team.refreshMap();
 					topicModel.addElement(criteraiInput.getText());
 					JOptionPane.showConfirmDialog((Component) null,
 							"Add successful", "add the topic",
@@ -305,7 +308,11 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		}
 
 		public void actionPerformed(ActionEvent e) {
-
+			SetTimeUI timeUI = new SetTimeUI(serviceUI);
+			serviceUI.addUI("timeUI", timeUI);
+			timeUI.addService(serviceUI);
+			serviceUI.runByName("timeUI");
+			dispose();
 		}
 	}
 
@@ -378,7 +385,8 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 						// removed item in last position
 
 						index--;
-
+						Team team = new Team();
+						team.refreshMap();
 						voteUI.initComponent();
 
 						listTeam.setSelectedIndex(index);

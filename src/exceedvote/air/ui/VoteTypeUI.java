@@ -175,6 +175,9 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
 		        btnPoll = new JButton(new pollAction());
 		        btnPoll.setText("Poll");
 		        btnPoll.setBounds(180, 60, 218, 23);
+		        
+		        if(clock == null) clock = new Clock();
+		      
 		        if(clock.isRun()==false)   btnPoll.setEnabled(true);
 		        else  btnPoll.setEnabled(false);
 			     contentPane.add(btnPoll);
@@ -270,7 +273,7 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
         {   
             JButton o = (JButton)e.getSource();
             labelSelect = o.getText();
-            System.out.println(labelSelect);
+          
             selectType.setText(labelSelect);
         }
     }

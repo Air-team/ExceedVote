@@ -56,4 +56,9 @@ public abstract class DaoFactory {
 
 	public abstract TeamDescriptionDao getTeamDescriptionDao();
 	
+
+	public abstract TimeDao getTimeDao();
+	
+	
+	
 }

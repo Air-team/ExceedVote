@@ -12,6 +12,7 @@ import exceedvote.air.persistence.CommitteeDao;
 import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.TeamDao;
 import exceedvote.air.persistence.TeamDescriptionDao;
+import exceedvote.air.persistence.TimeDao;
 import exceedvote.air.persistence.VoteTopicDao;
 import exceedvote.air.persistence.VoterDao;
 
@@ -31,6 +32,7 @@ public class DaoFactoryJpa extends DaoFactory {
 	private TeamDao teamDao;
 	private CommitteeDao committeDao;
 	private TeamDescriptionDao teamDescriptionDao;
+	private TimeDao timeDao;
 
 	/**
 	 * constructor for DaoFactoryJpa.
@@ -107,5 +109,13 @@ public class DaoFactoryJpa extends DaoFactory {
 		return teamDescriptionDao;
 		
 	}
+
+	@Override
+	public TimeDao getTimeDao() {
+		if(timeDao == null) timeDao = new TimeDaoJpa(em);
+		return timeDao;
+	}
+
+	
 
 }

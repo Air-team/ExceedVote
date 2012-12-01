@@ -45,7 +45,7 @@ public class Committee implements Serializable {
 	private String topicName;
 	@Temporal(TemporalType.DATE)
 	private Date date;
-
+	private long time = 0;
 	public Committee() {
 		super();
 	}
@@ -158,7 +158,7 @@ public class Committee implements Serializable {
 			return false;
 		}
 	}
-
+	
 	public void setTime(String day, String month, String year, String hours,
 			String mins, String seconds) {
 		int d = 0, m = 0, y = 0, h, min = 0, second = 0;
@@ -193,11 +193,14 @@ public class Committee implements Serializable {
 		min = Integer.parseInt(mins);
 		second = Integer.parseInt(seconds);
 		date = new Date(y - 1900, m, d, h, min, second);
-
+		Time time = new Time(this);
+		time.setTime(date.getTime());
+		time.saveTime();
 	}
 
 	public long getTime() {
-		return date.getTime();
+		Time time = new Time(this);
+		return time.getTime();
 	}
 
 	public int getScore(String typeTeam) {

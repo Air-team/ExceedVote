@@ -239,6 +239,7 @@ public class VoteUI extends JFrame implements RunUI,Observer
         fieldWatch.setForeground(Color.orange);
 		contentPane.add(fieldWatch);
 		
+		if(clock ==null) clock = new Clock();
 		  if(clock.isRun()==false) closeBtn();
     }
     
