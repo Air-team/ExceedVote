@@ -19,7 +19,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 
+import exceedvote.air.model.Committee;
 import exceedvote.air.model.Poll;
+import exceedvote.air.model.Team;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +32,8 @@ public class TotalResult extends JFrame {
     private JPanel contentPane;
     private JTable resultTable;
     private DefaultTableModel model;
-    private JButton btnGo;
+    private JButton btnTopic;
+    private JButton btnDetail;
     private Poll poll;
 
     /**
@@ -56,7 +59,7 @@ public class TotalResult extends JFrame {
 		Object[][] data = new Object[1][1] ;
 		
         String[] col = {
-            Messages.getString("TotalResult.table.ranking"), Messages.getString("TotalResult.table.team"), Messages.getString("TotalResult.table.totalscore") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            "Ranking", "Team", "Total Score"
         };
         model = new DefaultTableModel(data,col);
 
@@ -65,7 +68,7 @@ public class TotalResult extends JFrame {
         resultTable = new JTable(data,col);
         resultTable.setForeground(Color.BLACK);
         resultTable.setFillsViewportHeight(true);
-        resultTable.setEnabled(false);
+        resultTable.setEnabled(true);
         resultTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         resultTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		model = new DefaultTableModel(data,col){
@@ -93,26 +96,49 @@ public class TotalResult extends JFrame {
         //Add the scroll pane to this panel.
         contentPane.add(scrollPane);
 
-        JLabel lblTotalResult = new JLabel(Messages.getString("TotalResult.label.totalresult")); //$NON-NLS-1$
-        lblTotalResult.setFont(new Font("Tahoma", Font.PLAIN, 35)); //$NON-NLS-1$
+        JLabel lblTotalResult = new JLabel("Total Result");
+        lblTotalResult.setFont(new Font("Tahoma", Font.PLAIN, 35));
         lblTotalResult.setBounds(10, 11, 354, 35);
         contentPane.add(lblTotalResult);
 
-        JLabel lblSeeResultIn = new JLabel(Messages.getString("TotalResult.label.indetail")); //$NON-NLS-1$
-        lblSeeResultIn.setFont(new Font("Tahoma", Font.PLAIN, 18)); //$NON-NLS-1$
+        JLabel lblSeeResultIn = new JLabel("See result in detial");
+        lblSeeResultIn.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lblSeeResultIn.setBounds(138, 453, 175, 28);
         contentPane.add(lblSeeResultIn);
 
-        btnGo = new JButton(Messages.getString("TotalResult.butt.go")); //$NON-NLS-1$
-        btnGo.setBounds(323, 458, 89, 23);
-        contentPane.add(btnGo);  
-        btnGo.addActionListener(new GoToDetail());
+        btnTopic = new JButton("View Score Each topic");
+        btnTopic.setBounds(323, 458, 100, 30);
+        contentPane.add(btnTopic);  
+        btnTopic.addActionListener(new TopicAction());
+        
+        
+        btnDetail = new JButton("Detail");
+        btnDetail.addActionListener(new DetailAction());
+        btnDetail.setBounds(10, 458, 89, 30);
+        contentPane.add(btnDetail);  
+
     }
     
-    private class GoToDetail implements ActionListener
+    private class DetailAction implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
-          
+        	String teamName = (String) model.getValueAt(resultTable.getSelectedRow(), 1);
+        		TeamScoreUI teamUI = new TeamScoreUI(teamName);
+        		Team team = new Team();
+        		teamUI.addData( team.getScoreAlltopic(teamName) );
+        		teamUI.run("");
+        		
+        }
+    }
+    
+    private class TopicAction implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e) {
+        
+//        	
+        	Committee com = new Committee();
+        	Detail detail =  new Detail(com);
+        	detail.run("");
         }
     }
     
@@ -121,7 +147,7 @@ public class TotalResult extends JFrame {
 	    
 	   for(int i=0;i<list.size();i++){
 		   List<String> info = list.get(i);
-		   String t = (i+1)+""; //$NON-NLS-1$
+		   String t = (i+1)+"";
 		   model.insertRow(i,new Object[]{t,info.get(0),info.get(1)});
 	   }
 	}
@@ -132,10 +158,5 @@ public class TotalResult extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    public static void main(String[] args)
-    {
-        TotalResult totalResult = new TotalResult();
-        totalResult.run();
-//        totalResult.addData("1","AIR","2500000");
-    }
+  
 }

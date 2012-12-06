@@ -25,6 +25,8 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
+
 import exceedvote.air.model.Ballot;
 import exceedvote.air.model.Clock;
 import exceedvote.air.model.Committee;
@@ -43,15 +45,15 @@ public class Detail extends JFrame implements RunUI
 //	private  VoteTypeUI voteTypeUI;
     private JPanel contentPane;
     private JTextPane txtpnVotetype = new JTextPane();
-    private JLabel lblSelectTheType = new JLabel(Messages.getString("Detail.label.clicktype")); //$NON-NLS-1$
+    private JLabel lblSelectTheType = new JLabel("Click to select the type");
 
     // button submit 
     private JButton btnGoToVote;
-    private JLabel select = new JLabel(Messages.getString("Detail.label.select")); //$NON-NLS-1$
+    private JLabel select = new JLabel("Select :");
 
     // label shows which user select type
     private JLabel selectType;
-    private String labelSelect = ""; //$NON-NLS-1$
+    private String labelSelect = "";
 
     // voteUi run after user select and click submit button
     //ballotleft
@@ -98,7 +100,7 @@ public class Detail extends JFrame implements RunUI
     public void initComponent()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        font = new Font("Monaco",Font.BOLD,20); //$NON-NLS-1$
+        font = new Font("Monaco",Font.BOLD,20);
 
         setBounds(100, 100, 450, 478);
        
@@ -111,8 +113,8 @@ public class Detail extends JFrame implements RunUI
         setButton();
         
         txtpnVotetype.setEditable(false);
-        txtpnVotetype.setFont(new Font("Tahoma", Font.PLAIN, 36)); //$NON-NLS-1$
-        txtpnVotetype.setText(Messages.getString("Detail.text.votetype")); //$NON-NLS-1$
+        txtpnVotetype.setFont(new Font("Tahoma", Font.PLAIN, 36));
+        txtpnVotetype.setText("VoteType");
         txtpnVotetype.setBounds(10, 11, 176, 50);
         contentPane.add(txtpnVotetype);
 
@@ -120,12 +122,12 @@ public class Detail extends JFrame implements RunUI
         contentPane.add(lblSelectTheType);
 
         selectType = new JLabel();
-        selectType.setText(Messages.getString("Detail.label.none")); //$NON-NLS-1$
+        selectType.setText("none");
         selectType.setBounds(86, lastPos+50, 199, 14);
         contentPane.add(selectType);
         
         btnGoToVote = new JButton(new ActionSubmit());
-        btnGoToVote.setText(Messages.getString("Detail.butt.resultpage")); //$NON-NLS-1$
+        btnGoToVote.setText("Go to result page");
         btnGoToVote.setBounds(232, lastPos+50, 169, 23);
         contentPane.add(btnGoToVote);
 
@@ -202,10 +204,10 @@ public class Detail extends JFrame implements RunUI
 
         public void actionPerformed(ActionEvent e)
         {       
-            if(labelSelect.equals("")) //$NON-NLS-1$
+            if(labelSelect.equals(""))
             {
                 JOptionPane.showConfirmDialog((Component)
-                    null, Messages.getString("Detail.pop.clicktype"), Messages.getString("Detail.pop.selecttype"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
+                    null, "Please Click to select the type", "Select the type", JOptionPane.DEFAULT_OPTION);
             }
             else
             {
@@ -214,7 +216,7 @@ public class Detail extends JFrame implements RunUI
             		Ballot ballot = Ballot.getInstance();
 	
             		detail.addData(ballot.getScoreEachTeam(labelSelect));
-            		detail.run(""); //$NON-NLS-1$
+            		detail.run("");
             		
             }
         }
