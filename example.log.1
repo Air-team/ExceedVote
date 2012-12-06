@@ -1,4 +1,4 @@
-2012-12-01 17:53:42 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
+2012-12-06 13:42:28 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
 javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@535ff48b, see the next exception for details.
 Error Code: 40000
@@ -10,7 +10,8 @@ Error Code: 40000
 	at exceedvote.air.persistence.jpa.DaoFactoryJpa.<init>(DaoFactoryJpa.java:43)
 	at exceedvote.air.persistence.DaoFactory.getInstance(DaoFactory.java:23)
 	at exceedvote.air.model.Login.hasVoter(Login.java:30)
-	at exceedvote.air.ui.LoginUI$UpAction.actionPerformed(LoginUI.java:130)
+	at exceed.air.controller.ControllerLogin.checkLogin(ControllerLogin.java:40)
+	at exceedvote.air.ui.LoginUI$UpAction.actionPerformed(LoginUI.java:145)
 	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2028)
 	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2351)
 	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:387)
@@ -57,7 +58,7 @@ Error Code: 40000
 	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.loginAndDetectDatasource(DatabaseSessionImpl.java:685)
 	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryProvider.login(EntityManagerFactoryProvider.java:213)
 	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:542)
-	... 44 more
+	... 45 more
 Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@535ff48b, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
@@ -72,17 +73,17 @@ Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongs
 	at java.sql.DriverManager.getConnection(DriverManager.java:582)
 	at java.sql.DriverManager.getConnection(DriverManager.java:154)
 	at org.eclipse.persistence.sessions.DefaultConnector.connect(DefaultConnector.java:98)
-	... 48 more
+	... 49 more
 Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@535ff48b, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 61 more
+	... 62 more
 Caused by: java.sql.SQLException: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/DB.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	... 58 more
+	... 59 more
 Caused by: ERROR XSDB6: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/DB.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.store.raw.data.BaseDataFileFactory.privGetJBMSLockOnDB(Unknown Source)
@@ -113,8 +114,8 @@ Caused by: ERROR XSDB6: Another instance of Derby may have already booted the da
 	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(Unknown Source)
 	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(Unknown Source)
 	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Unknown Source)
-	... 58 more
-2012-12-01 18:03:32 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
+	... 59 more
+2012-12-06 14:02:28 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
 javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
 Error Code: 40000
@@ -126,7 +127,8 @@ Error Code: 40000
 	at exceedvote.air.persistence.jpa.DaoFactoryJpa.<init>(DaoFactoryJpa.java:43)
 	at exceedvote.air.persistence.DaoFactory.getInstance(DaoFactory.java:23)
 	at exceedvote.air.model.Login.hasVoter(Login.java:30)
-	at exceedvote.air.ui.LoginUI$UpAction.actionPerformed(LoginUI.java:130)
+	at exceed.air.controller.ControllerLogin.checkLogin(ControllerLogin.java:40)
+	at exceedvote.air.ui.LoginUI$UpAction.actionPerformed(LoginUI.java:145)
 	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2028)
 	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2351)
 	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:387)
@@ -173,7 +175,7 @@ Error Code: 40000
 	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.loginAndDetectDatasource(DatabaseSessionImpl.java:685)
 	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryProvider.login(EntityManagerFactoryProvider.java:213)
 	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:542)
-	... 44 more
+	... 45 more
 Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
@@ -188,17 +190,17 @@ Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongs
 	at java.sql.DriverManager.getConnection(DriverManager.java:582)
 	at java.sql.DriverManager.getConnection(DriverManager.java:154)
 	at org.eclipse.persistence.sessions.DefaultConnector.connect(DefaultConnector.java:98)
-	... 48 more
+	... 49 more
 Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 61 more
+	... 62 more
 Caused by: java.sql.SQLException: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/DB.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	... 58 more
+	... 59 more
 Caused by: ERROR XSDB6: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/DB.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.store.raw.data.BaseDataFileFactory.privGetJBMSLockOnDB(Unknown Source)
@@ -229,4 +231,4 @@ Caused by: ERROR XSDB6: Another instance of Derby may have already booted the da
 	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(Unknown Source)
 	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(Unknown Source)
 	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Unknown Source)
-	... 58 more
+	... 59 more

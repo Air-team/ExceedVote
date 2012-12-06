@@ -54,8 +54,8 @@ public class TeamScoreUI extends JFrame {
         setBounds(100, 100, 724, 466);
         getContentPane().setLayout(null);
 
-        JLabel lblDetailResult = new JLabel("Detail Result");
-        lblDetailResult.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        JLabel lblDetailResult = new JLabel(Messages.getString("TeamScoreUI.label.result")); //$NON-NLS-1$
+        lblDetailResult.setFont(new Font("Tahoma", Font.PLAIN, 20)); //$NON-NLS-1$
         lblDetailResult.setBounds(10, 11, 131, 30);
         getContentPane().add(lblDetailResult);
 
@@ -69,7 +69,7 @@ public class TeamScoreUI extends JFrame {
         Object[][] data = new Object[1][1] ;
 		
         String[] col = {
-            "Ranking", "Topic", "Score"
+            Messages.getString("TeamScoreUI.table.ranking"), Messages.getString("TeamScoreUI.table.topic"), Messages.getString("TeamScoreUI.table.score") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         };
       
 
@@ -132,7 +132,7 @@ public class TeamScoreUI extends JFrame {
 	    
 	   for(int i=0;i<list.size();i++){
 		   List<String> info = list.get(i);
-		   String t = (i+1)+"";
+		   String t = (i+1)+""; //$NON-NLS-1$
 		   model.insertRow(i,new Object[]{t,info.get(0),info.get(1)});
 	   }
 	}

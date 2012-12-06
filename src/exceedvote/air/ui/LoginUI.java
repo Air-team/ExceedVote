@@ -7,8 +7,6 @@ import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,20 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
-import java.util.TimerTask;
-import java.util.Timer;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
-
-import exceedvote.air.model.Ballot;
-import exceedvote.air.model.Clock;
-import exceedvote.air.model.ClockTask;
-import exceedvote.air.model.Committee;
+import exceed.air.controller.ControllerLogin;
 import exceedvote.air.model.Login;
-import exceedvote.air.model.Voter;
 
 /**
  * Login user Interface waiting for test with database
@@ -46,7 +37,7 @@ public class LoginUI extends JFrame implements RunUI {
 	// password test field
 	private JPasswordField passwordType;
 
-	private JTextPane txtpnLogin = new JTextPane();
+	private JTextPane txtpnLogin;
 
 	// button submit login
 	private JButton btnLogin;
@@ -59,8 +50,6 @@ public class LoginUI extends JFrame implements RunUI {
 
 	// serviceUI for back to loginUI
 	private SeviceUI serviceUI;
-	
-	private Login login;
 
 	/**
 	 * Create the frame.
@@ -81,6 +70,7 @@ public class LoginUI extends JFrame implements RunUI {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		 txtpnLogin = new JTextPane();
 		txtpnLogin.setBackground(Color.WHITE);
 		txtpnLogin.setForeground(Color.BLACK);
 		txtpnLogin.setFont(new Font("Tahoma", Font.PLAIN, 26)); //$NON-NLS-1$
@@ -150,66 +140,26 @@ public class LoginUI extends JFrame implements RunUI {
         
 
         public void actionPerformed(ActionEvent e)
-        {  
-        	login = new Login(usernameType.getText(),passwordType.getText());
-            boolean correct = login.hasVoter();
-            if(!correct)
-            {
-            	  if(login.isAdmin()) {
-                  	AdminUI adminUI = new AdminUI();
-                  	serviceUI.addUI("AdminUI", adminUI); //$NON-NLS-1$
-                  	adminUI.addService(serviceUI);
-                  	adminUI.run(""); //$NON-NLS-1$
-                  	close();
-             
-                  }
-                  else if(login.hasCommittee()){
-                	  Committee committee = login.getCommittee();
-                  	 ControlPanel controlPanel = new ControlPanel(committee);
-                  		serviceUI.addUI("ControlPanel", controlPanel); //$NON-NLS-1$
-                  		controlPanel.addService(serviceUI);
-                  		controlPanel.run(""); //$NON-NLS-1$
-                      	close();
-                  }
-            	  
-                  else {
+        {  	
+        	ControllerLogin conLogin = ControllerLogin.getInstance();
+        	boolean correct = conLogin.checkLogin(usernameType.getText(),passwordType.getText());
+        	
+        	if(!correct){
                 	  
                 JOptionPane.showConfirmDialog((Component)
-                    null, Messages.getString("LoginUI.pop.wrong.namepass"), Messages.getString("LoginUI.pop.incorrect"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
-                  }
+                    null, "Wrong username or password", "Incorrect!!!", JOptionPane.DEFAULT_OPTION);
+                  
             }
-           
             else
             {
-            	Voter voter = login.getVoter();
-            	
-            	Clock t = new Clock();
-            	VoteUI voteUI = new VoteUI(voter,t);
-        		t.addObserver(voteUI);
-        		
-        	
-        		VoteTypeUI voteTypeUI = new VoteTypeUI(voter,t);
-        		t.addObserver(voteTypeUI);
-        		serviceUI.addUI("voteUI",voteUI); //$NON-NLS-1$
-        		serviceUI.addUI("voteTypeUI",voteTypeUI); //$NON-NLS-1$
-        		voteTypeUI.addService(serviceUI);
-        		voteUI.addService(serviceUI);
-        		TimerTask clocktask = new ClockTask( t );
-        		Timer timer = new Timer();
-        		long delay = 1000 - System.currentTimeMillis()%1000;
-        		final long INTERVAL = 1000; 
-        		timer.scheduleAtFixedRate(clocktask, delay, INTERVAL);
-        		t.start();
-        		voteTypeUI.run("voteTypeUI"); //$NON-NLS-1$
-        		close();
-        		
+            	close();
                 JOptionPane.showConfirmDialog((Component)
-                    null, Messages.getString("LoginUI.pop.logincomplete"), Messages.getString("LoginUI.pop.correct"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
+                    null, "Login Complete", "Correct", JOptionPane.DEFAULT_OPTION);            
             }
-            //System.out.print(result);
+           
+        
         }
-    }
-
+	 }
 	 
 	 
 	/*

@@ -88,7 +88,6 @@ public class InfomationUI extends JFrame implements RunUI{
 		this.serviceUI = serviceUI;
 	}
    
-    
 	public void run(String info) {
 		this.setVisible(true);
 		this.setResizable(true);

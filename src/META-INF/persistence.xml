@@ -5,7 +5,6 @@
 		<class>exceedvote.air.model.Voter</class>
 		<class>exceedvote.air.model.VoteTopic</class>
 		<class>exceedvote.air.model.Ballot</class>
-		<class>exceedvote.air.model.TeamList</class>
 		<class>exceedvote.air.model.Tracking</class>
 		<class>exceedvote.air.model.TeamDescription</class>
 		<class>exceedvote.air.model.Committee</class>

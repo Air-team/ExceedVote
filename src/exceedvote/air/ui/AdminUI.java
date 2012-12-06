@@ -18,10 +18,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import exceed.air.controller.ControllerAdmin;
 import exceedvote.air.model.Admin;
 import exceedvote.air.model.Committee;
-import exceedvote.air.model.Team;
-import exceedvote.air.model.VoteTopic;
 import exceedvote.air.model.Voter;
 
 public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
@@ -34,18 +33,19 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 	private JLabel labelVoter;
 	private JLabel labelCom;
 	private Font font;
-	private List<Voter> user;
+	private List<Voter> voterList;
 	private SeviceUI serviceUI;
-	private List<Committee> com;
+	private List<Committee> committeeList;
 	private DefaultListModel voteModel = new DefaultListModel();
 	private DefaultListModel comModel = new DefaultListModel();
 	private Admin admin = new Admin();
 
 	public AdminUI() {
-		user = admin.getVoter();
-		com = admin.getCommittee();
+		ControllerAdmin adminController = ControllerAdmin.getInstance();
+		voterList = adminController.getAllvoter();
+		committeeList = adminController.getAllcommittee();
 		inicomponent();
-
+		
 	}
 
 	private void inicomponent() {
@@ -89,23 +89,20 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 		listVoter.setSelectedIndex(0);
 		listVoter.addListSelectionListener(this);
 
-		for (int i = 0; i < user.size(); i++)
-			if (!voteModel.contains(user.get(i).getName()))
-				voteModel.addElement(user.get(i).getName());
+		for (int i = 0; i < voterList.size(); i++)
+			if (!voteModel.contains(voterList.get(i).getName()))
+				voteModel.addElement(voterList.get(i).getName());
 		listVoter.setModel(voteModel);
-//		int indexVoter= listVoter.getSelectedIndex();
-		
 
 		listCommitee = new JList();
 		listCommitee.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listCommitee.setSelectedIndex(0);
 
-		for (int i = 0; i < com.size(); i++)
-			if (!comModel.contains(com.get(i).getName()))
-				comModel.addElement(com.get(i).getName());
+		for (int i = 0; i < committeeList.size(); i++)
+			if (!comModel.contains(committeeList.get(i).getName()))
+				comModel.addElement(committeeList.get(i).getName());
 		listCommitee.setModel(comModel);
-		
-//		int indexCom = listCommitee.getSelectedIndex();
+
 		JScrollPane scrollPaneVoter = new JScrollPane(listVoter);
 		scrollPaneVoter.setBounds(330, 50, 190, 126);
 		contentPane.add(scrollPaneVoter);
@@ -132,14 +129,14 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 			int index = listVoter.getSelectedIndex();
 			
 			if(index >= 0){ 
-				String name = user.get(index).getName();
+				String name = voterList.get(index).getName();
 				
 			int size = voteModel.getSize();
 			if (size ==  0) {
 				buttonChCom.setEnabled(false);
 			}
 				voteModel.remove(index);
-				user.remove(index);
+				voterList.remove(index);
 				Voter voter = admin.getSingleVoter(name);
 				System.out.println(voter);
 				String username = admin.getSingleVoter(name).getName();
@@ -159,7 +156,7 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 					
 					int i = comModel.getSize();
 					comModel.add(i, name);
-					com.add(i, committee);
+					committeeList.add(i, committee);
 				
 				}
 			}
@@ -180,7 +177,7 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 			
 			if(index >= 0) { 
 				
-				String name = com.get(index).getName();
+				String name = committeeList.get(index).getName();
 				Committee committee = admin.getSingleCommittee(name);
 				int size = comModel.getSize();
 				if (size== 0) {
@@ -189,7 +186,7 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 				
 				
 				comModel.remove(index);
-				com.remove(index);
+				committeeList.remove(index);
 				
 				if (committee != null) {
 					
@@ -206,7 +203,7 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 					
 						int i = voteModel.getSize();
 						voteModel.add(i, name);
-						user.add(i, voter);
+						voterList.add(i, voter);
 						
 					}
 				}
@@ -230,18 +227,6 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-//	public static void main(String[] args) {
-//
-//		Committee com = new Committee();
-//		com.setName("PRisa");
-//		com.saveInfo(com);
-//		AdminUI admin = new AdminUI();
-//		SeviceUI serviceUI = new SeviceUI();
-//		serviceUI.addUI("adminUI", admin);
-//		admin.addService(serviceUI);
-//		admin.run("");
-//
-//	}
 
 	public void addService(SeviceUI serviceUI) {
 		this.serviceUI = serviceUI;

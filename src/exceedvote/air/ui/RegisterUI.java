@@ -6,7 +6,6 @@ package exceedvote.air.ui;
  * add method addService
  * add method close
  * add actionListener in cancel button
- * 
  */
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -31,6 +30,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 
+import exceed.air.controller.ControllerRegister;
 import exceedvote.air.model.Register;
 
 public class RegisterUI extends JFrame implements ActionListener, RunUI {
@@ -39,7 +39,7 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 	/**
 	 * @wbp.nonvisual location=37,-31
 	 */
-	
+
 	private JPasswordField passwordInput;
 	private JPasswordField passwordConfirm;
 	private JTextField usenameInput;
@@ -85,15 +85,18 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 		txtpnRegister.setBounds(10, 11, 188, 38);
 		contentPane.add(txtpnRegister);
 
-		JLabel lblUsername = new JLabel(Messages.getString("RegisterUI.label.username")); //$NON-NLS-1$
+		JLabel lblUsername = new JLabel(
+				Messages.getString("RegisterUI.label.username")); //$NON-NLS-1$
 		lblUsername.setBounds(21, 76, 65, 14);
 		contentPane.add(lblUsername);
 
-		JLabel lblPassword = new JLabel(Messages.getString("RegisterUI.label.password")); //$NON-NLS-1$
+		JLabel lblPassword = new JLabel(
+				Messages.getString("RegisterUI.label.password")); //$NON-NLS-1$
 		lblPassword.setBounds(21, 112, 65, 14);
 		contentPane.add(lblPassword);
 
-		JLabel lblComfermPassword = new JLabel(Messages.getString("RegisterUI.label.comfirmpass")); //$NON-NLS-1$
+		JLabel lblComfermPassword = new JLabel(
+				Messages.getString("RegisterUI.label.comfirmpass")); //$NON-NLS-1$
 		lblComfermPassword.setBounds(21, 143, 110, 14);
 		contentPane.add(lblComfermPassword);
 
@@ -117,7 +120,8 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 		lblType.setBounds(21, 202, 46, 14);
 		contentPane.add(lblType);
 
-		typeTeacher = new JRadioButton(Messages.getString("RegisterUI.radio.teacher")); //$NON-NLS-1$
+		typeTeacher = new JRadioButton(
+				Messages.getString("RegisterUI.radio.teacher")); //$NON-NLS-1$
 		typeTeacher.setBackground(Color.WHITE);
 		typeTeacher.setBounds(120, 198, 109, 23);
 		typeTeacher.setMnemonic(KeyEvent.VK_0);
@@ -125,7 +129,8 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 		typeTeacher.addActionListener(this);
 		contentPane.add(typeTeacher);
 
-		typeStudent = new JRadioButton(Messages.getString("RegisterUI.radio.student")); //$NON-NLS-1$
+		typeStudent = new JRadioButton(
+				Messages.getString("RegisterUI.radio.student")); //$NON-NLS-1$
 		typeStudent.setBackground(Color.WHITE);
 		typeStudent.setBounds(231, 198, 109, 23);
 		typeStudent.setMnemonic(KeyEvent.VK_1);
@@ -151,39 +156,54 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 
 			if (username.equals("") || pass.equals("") //$NON-NLS-1$ //$NON-NLS-2$
 					|| passConfrim.equals("")) { //$NON-NLS-1$
-				
-				JOptionPane.showConfirmDialog((Component) null,
-						Messages.getString("RegisterUI.pop.incomplete.info"), Messages.getString("RegisterUI.pop.fillinfo"), //$NON-NLS-1$ //$NON-NLS-2$
-						JOptionPane.DEFAULT_OPTION);
+
+				JOptionPane
+						.showConfirmDialog(
+								(Component) null,
+								Messages.getString("RegisterUI.pop.incomplete.info"), Messages.getString("RegisterUI.pop.fillinfo"), //$NON-NLS-1$ //$NON-NLS-2$
+								JOptionPane.DEFAULT_OPTION);
+
 			} else if (username != "" && pass != "" && passConfrim != "") { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				if (pass.equals(passConfrim)) {
-					Register regis = new Register();
-					if(type==null){
-						JOptionPane.showConfirmDialog((Component) null,
-								Messages.getString("RegisterUI.pop.selecttype"), Messages.getString("RegisterUI.pop.regist"), //$NON-NLS-1$ //$NON-NLS-2$
-								JOptionPane.DEFAULT_OPTION);
-					}else{
-					 boolean make = regis.addVoter(username,pass,type);
-					 if(make) {
-						 JOptionPane.showConfirmDialog((Component) null,
-									Messages.getString("RegisterUI.pop.complete.regis"), Messages.getString("RegisterUI.pop.regis"), //$NON-NLS-1$ //$NON-NLS-2$
-									JOptionPane.DEFAULT_OPTION);
+
+					if (type == null) {
+						JOptionPane
+								.showConfirmDialog(
+										(Component) null,
+										Messages.getString("RegisterUI.pop.selecttype"), Messages.getString("RegisterUI.pop.regist"), //$NON-NLS-1$ //$NON-NLS-2$
+										JOptionPane.DEFAULT_OPTION);
+					} else {
+						ControllerRegister controllerRegister = ControllerRegister
+								.getInstance();
+						boolean make = controllerRegister.addUser(username,
+								pass, type);
+
+						if (make) {
+							JOptionPane
+									.showConfirmDialog(
+											(Component) null,
+											Messages.getString("RegisterUI.pop.complete.regis"), Messages.getString("RegisterUI.pop.regis"), //$NON-NLS-1$ //$NON-NLS-2$
+											JOptionPane.DEFAULT_OPTION);
 							// back to loginUI and close this UI
-							
+
 							serviceUI.runByName("LoginUI", ""); //$NON-NLS-1$ //$NON-NLS-2$
 							close();
-					 }else{
-						 JOptionPane.showConfirmDialog((Component) null,
-									Messages.getString("RegisterUI.pop.warning.nameused"), Messages.getString("RegisterUI.pop.warning.regis"), //$NON-NLS-1$ //$NON-NLS-2$
-									JOptionPane.DEFAULT_OPTION);
+						} else {
+							JOptionPane
+									.showConfirmDialog(
+											(Component) null,
+											Messages.getString("RegisterUI.pop.warning.nameused"), Messages.getString("RegisterUI.pop.warning.regis"), //$NON-NLS-1$ //$NON-NLS-2$
+											JOptionPane.DEFAULT_OPTION);
 							// back to loginUI and close this UI
-					 }
-					
+						}
+
 					}
 				} else {
-					JOptionPane.showConfirmDialog((Component) null,
-							Messages.getString("RegisterUI.pop.warning.notmatch.namepass"), //$NON-NLS-1$
-							Messages.getString("RegisterUI.pop.notmatch"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$
+					JOptionPane
+							.showConfirmDialog(
+									(Component) null,
+									Messages.getString("RegisterUI.pop.warning.notmatch.namepass"), //$NON-NLS-1$
+									Messages.getString("RegisterUI.pop.notmatch"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$
 				}
 			}
 		}

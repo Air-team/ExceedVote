@@ -1,15 +1,13 @@
 package exceedvote.air.ui;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
-import java.sql.Time;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
+
 
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
@@ -28,8 +26,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.util.Timer;
-import exceedvote.air.model.Clock;
-import exceedvote.air.model.ClockTask;
+
+import exceed.air.controller.ControllerControl;
+
 import exceedvote.air.model.Committee;
 import exceedvote.air.model.Team;
 import exceedvote.air.model.VoteTopic;
@@ -77,8 +76,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 	 */
 	public ControlPanel(Committee committee) {
 		this.commitee = committee;
-		voteUI = new VoteUI();
-		voteTypeUI = new VoteTypeUI();
+
 	}
 
 	public void initComponent() {
@@ -95,6 +93,11 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 	
 
 		tab.addTab(Messages.getString("ControlPanel.tab.control"), controlPan); //$NON-NLS-1$
+		
+		btnSettime = new JButton(new setTimeAction());
+		btnSettime.setText("SetTime");
+		btnSettime.setBounds(10, 91, 242, 23);
+		controlPan.add(btnSettime);
 		
 		btnVote = new JButton(Messages.getString("ControlPanel.butt.vote.vote")); //$NON-NLS-1$
 		btnVote.addActionListener(new VoteAction() );
@@ -169,7 +172,9 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		listCriteria.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listCriteria.setSelectedIndex(0);
 		listCriteria.addListSelectionListener(this);
-		topic = commitee.getTopic();
+		
+		ControllerControl control = ControllerControl.getInstance();
+		topic = control.getTopic();
 		for (int i = 0; i < topic.size(); i++)
 			if (!topicModel.contains(topic.get(i).getTitle()))
 				topicModel.addElement(topic.get(i).getTitle());
@@ -194,32 +199,9 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
-			Clock t = new Clock();
-        	VoteUI voteUICom = new VoteUI(commitee,t);
-        	VoteTypeUI voteTypeUICom = new VoteTypeUI(commitee,t);
-    		t.addObserver(voteUICom);
-			
-    		t.addObserver(voteTypeUICom);
-    		voteUICom.setCom(commitee);
-    		serviceUI.addUI("voteUICom",voteUICom); //$NON-NLS-1$
-    		serviceUI.addUI("voteTypeUICom",voteTypeUICom); //$NON-NLS-1$
-    		voteTypeUICom.addService(serviceUI);
-    		voteUICom.addService(serviceUI);
-    		
-    		TimerTask clocktask = new ClockTask( t );
-    		Timer timer = new Timer();
-
-
-    		long delay = 1000 - System.currentTimeMillis()%1000;
-    		final long INTERVAL = 1000; 
-    		timer.scheduleAtFixedRate(clocktask, delay, INTERVAL);
-    		t.start();
-    		voteTypeUICom.run("voteTypeUICom"); //$NON-NLS-1$
-    		close();
-    		
-    		
-			
+			ControllerControl control = ControllerControl.getInstance();
+			control.voteAction();
+    		close();	
 		}
 		
 	}
@@ -234,6 +216,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 			String text = addTeamInput.getText();
 
 			if (!teamModel.contains(text)) {
+			
 				final AddTeamPanel teamDes = new AddTeamPanel(serviceUI);
 				teamDes.setTeamName(text);
 				teamDes.setModel(teamModel);
@@ -241,8 +224,6 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 				serviceUI.addUI("teamDes", teamDes); //$NON-NLS-1$
 				teamDes.addService(serviceUI);
 				serviceUI.runByName("teamDes"); //$NON-NLS-1$
-				
-				
 				close();
 
 				if (teamDes.check()) {
@@ -262,9 +243,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		}
 	}
 
-	public void close() {
-		this.setVisible(false);
-	}
+
 
 	// action for addCreteribtn
 	private class addCreteriaAction extends AbstractAction {
@@ -275,11 +254,11 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		}
 
 		public void actionPerformed(ActionEvent e) {
-
+			ControllerControl control = ControllerControl.getInstance();
+			
 			if (!topicModel.contains(criteraiInput.getText())) {
-
-				if (commitee.setTopic(criteraiInput.getText())) {
-					voteTypeUI.initComponent();
+				if (control.addTopic(criteraiInput.getText())) {
+				
 					topicModel.addElement(criteraiInput.getText());
 					JOptionPane.showConfirmDialog((Component) null,
 							Messages.getString("ControlPanel.pop.addsuccess"), Messages.getString("ControlPanel.pop.addtopic"), //$NON-NLS-1$ //$NON-NLS-2$
@@ -298,16 +277,20 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 	}
 
 	// action for setTimebtn
-	private class setTimeAction extends AbstractAction {
+		private class setTimeAction extends AbstractAction {
 
-		public setTimeAction() {
-			super();
+			public setTimeAction() {
+				super();
+			}
+
+			public void actionPerformed(ActionEvent e) {
+				SetTimeUI timeUI = new SetTimeUI(serviceUI);
+				serviceUI.addUI("timeUI", timeUI);
+				timeUI.addService(serviceUI);
+				serviceUI.runByName("timeUI");
+				dispose();
+			}
 		}
-
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	}
 
 	// action for deleteTopicbtn
 	private class deleteTopicAction extends AbstractAction {
@@ -317,12 +300,15 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			ControllerControl control = ControllerControl.getInstance();
+		
+		
 			int index = listCriteria.getSelectedIndex();
 			if (index <= 0)
 				index = 0;
-			VoteTopic top = topic.get(index);
+		
 
-			if (commitee.deleteTopic(top.getTitle())) {
+			if ( control.deleteTopic( topic.get(index)) ) {
 				topicModel.remove(index);
 				int size = topicModel.getSize();
 
@@ -330,11 +316,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 					btnDeleteTeam.setEnabled(false);
 				} else { // Select an index.
 					if (index == topicModel.getSize()) {
-						// removed item in last position
-
 						index--;
-						// voteTypeUI.initComponent();
-
 						listCriteria.setSelectedIndex(index);
 						listCriteria.ensureIndexIsVisible(index);
 					}
@@ -354,7 +336,8 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 
 	// action for deleteTeambtn
 	private class deleteTeamAction extends AbstractAction {
-
+		ControllerControl control = ControllerControl.getInstance();
+		
 		public deleteTeamAction() {
 			super();
 		}
@@ -363,11 +346,10 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 			int index = listTeam.getSelectedIndex();
 			if (index <= 0)
 				index = 0;
-			Team t = team.get(index);
-			// System.out.println(t.getName());
-
-			if (commitee.deleteTeam(t.getName())) {
-
+			
+		
+			if (control.deleteTeam(team.get(index))) {
+				
 				teamModel.remove(index);
 				int size = teamModel.getSize();
 
@@ -376,19 +358,12 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 				} else { // Select an index.
 					if (index == teamModel.getSize()) {
 						// removed item in last position
-
 						index--;
-
 						voteUI.initComponent();
-
 						listTeam.setSelectedIndex(index);
 						listTeam.ensureIndexIsVisible(index);
-
 					}
-					//
-					// voteTypeUI.initComponent();
-					// voteTypeUI.removeButton(.getName());
-
+		
 				}
 
 				JOptionPane.showConfirmDialog((Component) null,
@@ -415,19 +390,10 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 	public void addService(SeviceUI serviceUI) {
 		this.serviceUI = serviceUI;
 	}
-
-////	public static void main(String[] args) {
-//
-//		Committee com = new Committee();
-//		com.setTime("27", "11", "2012", "1", "0", "0");
-//
-//		ControlPanel controlPanel = new ControlPanel(com);
-//		SeviceUI serviceUI = new SeviceUI();
-//		serviceUI.addUI("controlPanel", controlPanel);
-//		controlPanel.addService(serviceUI);
-//		controlPanel.run("");
-//
-//	}
+	
+	public void close() {
+		this.setVisible(false);
+	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {

@@ -13,13 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.MatteBorder;
 import java.awt.Color;
-import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
@@ -27,8 +21,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBox;
-import javax.swing.JScrollBar;
+
 
 public class HistoryUI extends JFrame {
 
@@ -51,9 +44,7 @@ public class HistoryUI extends JFrame {
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-//		contentPane.setLayout(null);
-		
-		
+
 		JLabel lblHistory = new JLabel(Messages.getString("HistoryUI.label.history")); //$NON-NLS-1$
 		lblHistory.setForeground(Color.WHITE);
 		lblHistory.setFont(new Font("Tahoma", Font.PLAIN, 25)); //$NON-NLS-1$
@@ -115,10 +106,5 @@ public class HistoryUI extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
-	
-//	public static void main(String[] args)
-//	{
-//	    HistoryUI historyUI = new HistoryUI();
-//	    historyUI.run();
-//	}
+
 }

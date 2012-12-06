@@ -23,21 +23,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
-import exceedvote.air.model.Ballot;
+import exceed.air.controller.ControllerControl;
 import exceedvote.air.model.Committee;
-import exceedvote.air.model.Team;
-import exceedvote.air.model.TeamDescription;
+
 
 public class AddTeamPanel extends JFrame implements RunUI {
 
     private JPanel contentPane;
     private JTextField imageName;
-    private VoteUI voteUI;
-    // headline
-    // headline
     private JLabel teamHeadLine;
     // headline
     private JLabel teamName = new JLabel();
@@ -199,19 +194,9 @@ public class AddTeamPanel extends JFrame implements RunUI {
                     rendered = buffered;  
                 }  
                 ImageIO.write(rendered, "JPEG", new File(chooser.getSelectedFile().getName()));   //$NON-NLS-1$
-            	TeamDescription teamDes = new TeamDescription(""); //$NON-NLS-1$
-            	teamDes.setFilePic(chooser.getSelectedFile().getName());
-            	teamDes.setInfo(descriptionText.getText());
-            	teamDes.saveTeamDes(teamDes);
+                ControllerControl control = ControllerControl.getInstance();
             	String text = teamName.getText();
-            	Team team = new Team(teamName.getText(),teamDes);
-            	
-            	team.saveInfo(text, teamDes);
-            	
-            	
-            	if(commitee.setTeam(text)){
-            		voteUI = new VoteUI();
-					voteUI.initComponent();
+            	if( control.addTeam(teamName.getText(),chooser.getSelectedFile().getName(),descriptionText.getText())){
 					teamModel.addElement(text);
 					checkComplete = true;
 					 JOptionPane.showConfirmDialog((Component)

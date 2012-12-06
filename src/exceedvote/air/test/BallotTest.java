@@ -1,11 +1,8 @@
 package exceedvote.air.test;
 
-import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 
 import org.junit.Test;
-
 import exceedvote.air.model.Ballot;
 import exceedvote.air.model.Team;
 import exceedvote.air.model.TeamDescription;

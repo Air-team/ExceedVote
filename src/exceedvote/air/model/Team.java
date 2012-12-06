@@ -104,6 +104,7 @@ public class Team implements Serializable {
 	 * @return the scores of this team.
 	 */
 	public int getScore(String topicName) {
+		System.out.println(map);
 		return  map.get(topicName);
 	}
 
