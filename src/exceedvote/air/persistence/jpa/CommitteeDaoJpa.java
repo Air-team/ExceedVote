@@ -10,7 +10,10 @@ import exceedvote.air.model.Committee;
 import exceedvote.air.persistence.CommitteeDao;
 import javax.persistence.EntityManager;
 
-
+/**
+ * Committee Data Access Object is a DAO for committee objects.
+ * @author Air Team
+ */
 
 public class CommitteeDaoJpa implements CommitteeDao {
 	private EntityManager em;
@@ -20,7 +23,11 @@ public class CommitteeDaoJpa implements CommitteeDao {
 		super();
 		this.em = em;
 	}
-	
+	/**
+	 * Save committee in the database
+	 * @param committee is the person want to save in the database
+	 * @return true if can save
+	 */
 	@Override
 	public boolean saveCom(Committee committee) {
 		EntityTransaction tx = em.getTransaction();
@@ -40,7 +47,12 @@ public class CommitteeDaoJpa implements CommitteeDao {
 		return true;
 		
 	}
-
+	
+	/**
+	 * Find committee by name
+	 * @param name is identity of that committee
+	 * @return Committee that match with name
+	 */
 	@Override
 	public Committee findbyName(String username) {
 		List<Committee> allCom = findAll();
@@ -52,12 +64,12 @@ public class CommitteeDaoJpa implements CommitteeDao {
 		}
 		return null;
 	}
-	@Override
-	public void removeCom(Committee committee) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
+	/**
+	 * Find all Committee in the database
+	 * @return List all of Committee
+	 */
 	@Override
 	public List<Committee> findAll() {
 		String queryStatement = "SELECT c FROM Committee c";
@@ -65,7 +77,10 @@ public class CommitteeDaoJpa implements CommitteeDao {
 	}
 	
 	/**
-	 * Find user in database
+	 * Find committee by name and password
+	 * @param username is name or identity of this committee
+	 * @param password is security code of this committee
+	 * @return Committee that match with name and password
 	 */
 	@Override
 	public Committee findSingle(String username, String password) {
@@ -81,22 +96,25 @@ public class CommitteeDaoJpa implements CommitteeDao {
 		return null;
 	}
 	
+	/**
+	 * Remove committee out of the database
+	 * @param committee is the person out of the database
+	 */
 	@Override
-	public boolean remove(Committee committee){
+	public void remove(Committee committee){
 		EntityTransaction tx = em.getTransaction();
 		try {
 			tx.begin();
 			em.remove(committee);
 			tx.commit();
 			 System.out.printf("Delete Success");
-			return true;
 			
 		} catch (Exception ex) {
 			getLogger().error("Error Delete committee " + ex);
 			if (tx.isActive()) {
 				tx.rollback();
 			}
-			return false;
+			
 		}
 	}
 

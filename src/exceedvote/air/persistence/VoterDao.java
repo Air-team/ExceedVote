@@ -32,10 +32,26 @@ public interface VoterDao {
 	 */
 	public Voter find(Integer id);
 
+	/**
+	 * Find the Voter in the persistent storage by username and password.
+	 * @param name - The  identity  represents the Voter.
+	 * @param password - The  security  of that  Voter.
+	 * @return Voter object that represents the registered user.
+	 */
 	public Voter findSingle(String username, String password);
 
+	/**
+	 * Find the Voter in the persistent storage by username and password.
+	 * @param username - The  identity  represents the Voter.
+	 * @return Voter object that represents the registered user.
+	 */
 	public Voter findbyName(String username);
 
+	/**
+	 * Remove that voter out of the database
+	 * @param voter that want to remove
+	 * @return true if remove successfully
+	 */
 	public boolean remove(Voter voter);
 
 }

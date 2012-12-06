@@ -33,8 +33,6 @@ import exceedvote.air.model.ClockTask;
 import exceedvote.air.model.Committee;
 import exceedvote.air.model.Team;
 import exceedvote.air.model.VoteTopic;
-import exceedvote.air.persistence.DaoFactory;
-
 import java.util.TimerTask;
 
 
@@ -96,9 +94,9 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		contentPane.add(tab);
 	
 
-		tab.addTab("Control", controlPan);
+		tab.addTab(Messages.getString("ControlPanel.tab.control"), controlPan); //$NON-NLS-1$
 		
-		btnVote = new JButton("Vote");
+		btnVote = new JButton(Messages.getString("ControlPanel.butt.vote.vote")); //$NON-NLS-1$
 		btnVote.addActionListener(new VoteAction() );
 		btnVote.setForeground(Color.BLACK);
 		btnVote.setBackground(Color.LIGHT_GRAY);
@@ -122,34 +120,34 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		controlPan.add(criteraiInput);
 
 		btnAddteam = new JButton(new addTeamAction());
-		btnAddteam.setText("AddTeam");
+		btnAddteam.setText(Messages.getString("ControlPanel.butt.team.addteam")); //$NON-NLS-1$
 		btnAddteam.setBounds(163, 22, 89, 23);
 		controlPan.add(btnAddteam);
 
 		btnCriteria = new JButton(new addCreteriaAction());
-		btnCriteria.setText("Criteria");
+		btnCriteria.setText(Messages.getString("ControlPanel.butt.criteria.criteria")); //$NON-NLS-1$
 		btnCriteria.setBounds(160, 59, 89, 23);
 		controlPan.add(btnCriteria);
 
 		btnDeleteTeam = new JButton(new deleteTeamAction());
-		btnDeleteTeam.setText("DeleteTeam");
+		btnDeleteTeam.setText(Messages.getString("ControlPanel.butt.deleteteam.deleteteam")); //$NON-NLS-1$
 		btnDeleteTeam.setBounds(250, 151, 89, 23);
 		controlPan.add(btnDeleteTeam);
 
 		btnDeleteTopic = new JButton(new deleteTopicAction());
 
-		btnDeleteTopic.setText("DeleteTopic");
+		btnDeleteTopic.setText(Messages.getString("ControlPanel.butt.deletetopic.deletetopic")); //$NON-NLS-1$
 		btnDeleteTopic.setBounds(250, 340, 89, 23);
 		controlPan.add(btnDeleteTopic);
 
 		btnSettime = new JButton(new setTimeAction());
-		btnSettime.setText("SetTime");
+		btnSettime.setText(Messages.getString("ControlPanel.butt.settime.setime")); //$NON-NLS-1$
 		btnSettime.setBounds(10, 91, 242, 23);
 		controlPan.add(btnSettime);
 
 		// String [] teamList = {""};
 
-		labelTeam = new JLabel("Team:");
+		labelTeam = new JLabel(Messages.getString("ControlPanel.label.team.team")); //$NON-NLS-1$
 		labelTeam.setBounds(259, -50, 190, 126);
 		controlPan.add(labelTeam);
 
@@ -163,7 +161,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 				teamModel.addElement(team.get(i).getName());
 		listTeam.setModel(teamModel);
 
-		labelCeteria = new JLabel("Topic:");
+		labelCeteria = new JLabel(Messages.getString("ControlPanel.label.criteria.topic")); //$NON-NLS-1$
 		labelCeteria.setBounds(259, 140, 190, 126);
 		controlPan.add(labelCeteria);
 
@@ -204,8 +202,8 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 			
     		t.addObserver(voteTypeUICom);
     		voteUICom.setCom(commitee);
-    		serviceUI.addUI("voteUICom",voteUICom);
-    		serviceUI.addUI("voteTypeUICom",voteTypeUICom);
+    		serviceUI.addUI("voteUICom",voteUICom); //$NON-NLS-1$
+    		serviceUI.addUI("voteTypeUICom",voteTypeUICom); //$NON-NLS-1$
     		voteTypeUICom.addService(serviceUI);
     		voteUICom.addService(serviceUI);
     		
@@ -217,7 +215,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
     		final long INTERVAL = 1000; 
     		timer.scheduleAtFixedRate(clocktask, delay, INTERVAL);
     		t.start();
-    		voteTypeUICom.run("voteTypeUICom");
+    		voteTypeUICom.run("voteTypeUICom"); //$NON-NLS-1$
     		close();
     		
     		
@@ -239,9 +237,10 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 				final AddTeamPanel teamDes = new AddTeamPanel(serviceUI);
 				teamDes.setTeamName(text);
 				teamDes.setModel(teamModel);
-				serviceUI.addUI("teamDes", teamDes);
+				final SeviceUI serviceUI = new SeviceUI();
+				serviceUI.addUI("teamDes", teamDes); //$NON-NLS-1$
 				teamDes.addService(serviceUI);
-				serviceUI.runByName("teamDes");
+				serviceUI.runByName("teamDes"); //$NON-NLS-1$
 				
 				
 				close();
@@ -254,11 +253,11 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 			} else {
 				// System.out.println(addTeamInput.getText());
 				JOptionPane.showConfirmDialog((Component) null,
-						"This name is already used.", "Select the team",
+						Messages.getString("ControlPanel.pop.setmodel.nameused"), Messages.getString("ControlPanel.pop.setmodel.selectteam"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.DEFAULT_OPTION);
 			}
 
-			addTeamInput.setText("");
+			addTeamInput.setText(""); //$NON-NLS-1$
 
 		}
 	}
@@ -281,20 +280,18 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 
 				if (commitee.setTopic(criteraiInput.getText())) {
 					voteTypeUI.initComponent();
-					Team team = new Team();
-					team.refreshMap();
 					topicModel.addElement(criteraiInput.getText());
 					JOptionPane.showConfirmDialog((Component) null,
-							"Add successful", "add the topic",
+							Messages.getString("ControlPanel.pop.addsuccess"), Messages.getString("ControlPanel.pop.addtopic"), //$NON-NLS-1$ //$NON-NLS-2$
 							JOptionPane.DEFAULT_OPTION);
 				}
 			} else {
 				JOptionPane.showConfirmDialog((Component) null,
-						"This name is already used.", "add the topic",
+						Messages.getString("ControlPanel.pop.settopic.nameused"), Messages.getString("ControlPanel.pop.settopic.addtopic"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.DEFAULT_OPTION);
 			}
 			listCriteria.setModel(topicModel);
-			criteraiInput.setText("");
+			criteraiInput.setText(""); //$NON-NLS-1$
 
 		}
 
@@ -308,11 +305,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			SetTimeUI timeUI = new SetTimeUI(serviceUI);
-			serviceUI.addUI("timeUI", timeUI);
-			timeUI.addService(serviceUI);
-			serviceUI.runByName("timeUI");
-			dispose();
+
 		}
 	}
 
@@ -348,11 +341,11 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 
 				}
 				JOptionPane.showConfirmDialog((Component) null,
-						"Delete successful", "delete",
+						Messages.getString("ControlPanel.pop.deletesuccess"), Messages.getString("ControlPanel.pop.success.delete"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.DEFAULT_OPTION);
 			} else {
 				JOptionPane.showConfirmDialog((Component) null,
-						"Sorry,can't delete", "delete",
+						Messages.getString("ControlPanel.pop.cannotdelete"), Messages.getString("ControlPanel.pop.cannot.delete"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.DEFAULT_OPTION);
 			}
 
@@ -385,8 +378,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 						// removed item in last position
 
 						index--;
-						Team team = new Team();
-						team.refreshMap();
+
 						voteUI.initComponent();
 
 						listTeam.setSelectedIndex(index);
@@ -400,11 +392,11 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 				}
 
 				JOptionPane.showConfirmDialog((Component) null,
-						"Delete successful", "delete",
+						Messages.getString("ControlPanel.popp.deletesuccess"), Messages.getString("ControlPanel.popp.success.delete"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.DEFAULT_OPTION);
 			} else {
 				JOptionPane.showConfirmDialog((Component) null,
-						"Sorry,can't delete", "delete",
+						Messages.getString("ControlPanel.popp.cannotdelete"), Messages.getString("ControlPanel.popp.cannotdelete.delete"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.DEFAULT_OPTION);
 			}
 

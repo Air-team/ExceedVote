@@ -94,20 +94,20 @@ public class AddTeamPanel extends JFrame implements RunUI {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        teamHeadLine = new JLabel("Team :");
+        teamHeadLine = new JLabel(Messages.getString("AddTeamPanel.label.team")); //$NON-NLS-1$
         teamHeadLine.setForeground(Color.WHITE);
-        teamHeadLine.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        teamHeadLine.setFont(new Font("Tahoma", Font.PLAIN, 16)); //$NON-NLS-1$
         teamHeadLine.setBounds(10, 11, 356, 21);
         contentPane.add(teamHeadLine);
 
         
        
         teamName.setForeground(Color.WHITE);
-        teamName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        teamName.setFont(new Font("Tahoma", Font.PLAIN, 16)); //$NON-NLS-1$
         teamName.setBounds(10, 20, 356, 21);
         contentPane.add(teamName);
         
-        JLabel lblDescription = new JLabel("Description : ");
+        JLabel lblDescription = new JLabel(Messages.getString("AddTeamPanel.label.description")); //$NON-NLS-1$
         lblDescription.setForeground(Color.WHITE);
         lblDescription.setBounds(10, 43, 356, 14);
         contentPane.add(lblDescription);
@@ -118,22 +118,22 @@ public class AddTeamPanel extends JFrame implements RunUI {
         contentPane.add(imageName);
         imageName.setColumns(10);
 
-        JLabel lblNewLabel = new JLabel("Picture : ");
+        JLabel lblNewLabel = new JLabel(Messages.getString("AddTeamPanel.label.picture")); //$NON-NLS-1$
         lblNewLabel.setForeground(Color.WHITE);
         lblNewLabel.setBounds(10, 228, 249, 14);
         contentPane.add(lblNewLabel);
 
-        btnBrowse = new JButton("Browse");
+        btnBrowse = new JButton(Messages.getString("AddTeamPanel.butt.browse")); //$NON-NLS-1$
         btnBrowse.addActionListener(new OpenClass());
         btnBrowse.setBounds(269, 251, 89, 23);
         contentPane.add(btnBrowse);
 
-        btnAdd = new JButton("Add");
+        btnAdd = new JButton(Messages.getString("AddTeamPanel.butt.add")); //$NON-NLS-1$
         btnAdd.addActionListener(new addTeam());
         btnAdd.setBounds(91, 304, 89, 23);
         contentPane.add(btnAdd);
 
-        btnCancel = new JButton("Cancel");
+        btnCancel = new JButton(Messages.getString("AddTeamPanel.butt.cancel")); //$NON-NLS-1$
         btnCancel.addActionListener(new cancelAction());
         btnCancel.setBounds(190, 304, 89, 23);
         contentPane.add(btnCancel);
@@ -153,11 +153,11 @@ public class AddTeamPanel extends JFrame implements RunUI {
                 imageName.setText( 
                     ((chooser.getSelectedFile()!=null)?
                             chooser.getSelectedFile().getAbsolutePath():
-                        "nothing"));
+                        Messages.getString("AddTeamPanel.pop.nothing"))); //$NON-NLS-1$
             }
 
             if(option == JFileChooser.CANCEL_OPTION) {
-                imageName.setText("You canceled.");
+                imageName.setText(Messages.getString("AddTeamPanel.pop.canceled")); //$NON-NLS-1$
             }
         }
     }
@@ -166,9 +166,9 @@ public class AddTeamPanel extends JFrame implements RunUI {
         public void actionPerformed(ActionEvent e) {
         	checkComplete = false;
         	ControlPanel panel = new ControlPanel(commitee);
-        	serviceUI.addUI("Panel",panel);
+        	serviceUI.addUI("Panel",panel); //$NON-NLS-1$
         	panel.addService(serviceUI);
-        	panel.run("");
+        	panel.run(""); //$NON-NLS-1$
         	dispose();
         }
     }
@@ -198,8 +198,8 @@ public class AddTeamPanel extends JFrame implements RunUI {
                     g.dispose();  
                     rendered = buffered;  
                 }  
-                ImageIO.write(rendered, "JPEG", new File(chooser.getSelectedFile().getName()));  
-            	TeamDescription teamDes = new TeamDescription("");
+                ImageIO.write(rendered, "JPEG", new File(chooser.getSelectedFile().getName()));   //$NON-NLS-1$
+            	TeamDescription teamDes = new TeamDescription(""); //$NON-NLS-1$
             	teamDes.setFilePic(chooser.getSelectedFile().getName());
             	teamDes.setInfo(descriptionText.getText());
             	teamDes.saveTeamDes(teamDes);
@@ -215,22 +215,22 @@ public class AddTeamPanel extends JFrame implements RunUI {
 					teamModel.addElement(text);
 					checkComplete = true;
 					 JOptionPane.showConfirmDialog((Component)
-			                    null, "Team has been add", "Success!!", JOptionPane.DEFAULT_OPTION);
+			                    null, Messages.getString("AddTeamPanel.pop.added"), Messages.getString("AddTeamPanel.pop.success"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
 			                checkComplete = true;
 			           
 			             
             	}
             	ControlPanel panel = new ControlPanel(commitee);
-            	serviceUI.addUI("Panel",panel);
+            	serviceUI.addUI("Panel",panel); //$NON-NLS-1$
             	panel.addService(serviceUI);
-            	panel.run("");
+            	panel.run(""); //$NON-NLS-1$
             	dispose();
 	             
                
             }
             catch(Exception x){
                     JOptionPane.showConfirmDialog((Component)
-                    null, "Image must be JPG or Your file is not an image", "Error", JOptionPane.DEFAULT_OPTION);
+                    null, Messages.getString("AddTeamPanel.pop.warning"), Messages.getString("AddTeamPanel.pop.error"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
              }
         }
        

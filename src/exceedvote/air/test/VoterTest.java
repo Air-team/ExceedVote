@@ -12,8 +12,8 @@ public class VoterTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
-	Voter voter1 = new Voter("AIR","STUDENT");
-	Voter voter2 = new Voter("EE","TEACHER");
+	Voter voter1 = new Voter("AIR","12","STUDENT");
+	Voter voter2 = new Voter("EE","11","TEACHER");
 	@Test
 	public void testSetValue() {
 		

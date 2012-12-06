@@ -17,6 +17,11 @@ public class TeamDescriptionDaoJpa  implements TeamDescriptionDao{
 		this.em = em;
 	}
 
+	/**
+	 * Save description of this team in database
+	 * @param teamDes is the description of this team
+	 * @return true if can save
+	 */
 	@Override
 	public boolean save(TeamDescription teamDes) {
 		EntityTransaction tx = em.getTransaction();
@@ -37,14 +42,19 @@ public class TeamDescriptionDaoJpa  implements TeamDescriptionDao{
 	}
 	
 	
+	/**
+	 * Find description by id number
+	 * @param id is the identity number of this team
+	 * @return TeamDescription that match with this id
+	 */
 	@Override
 	public TeamDescription find(Integer id) {
 		return em.find(TeamDescription.class, id);
 	}
 	
+	
 	/**
 	 * Get the Logger of VoterDaoJpa class.
-	 * 
 	 * @return new Logger if it is null else return Logger.
 	 */
 	private static Logger getLogger() {

@@ -1,6 +1,6 @@
 package exceedvote.air.persistence.jpa;
 
-import java.sql.Time;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,9 +8,13 @@ import javax.persistence.EntityTransaction;
 
 import org.apache.log4j.Logger;
 
-import exceedvote.air.model.VoteTopic;
 import exceedvote.air.persistence.TimeDao;
 
+/**
+ *Implementation JPA, Time data access object is about time that set for close voting system
+ * @author AirTeam
+ *
+ */
 public class TimeDaoJpa implements TimeDao{
 	private EntityManager em;
 	private static Logger logger;
@@ -20,10 +24,10 @@ public class TimeDaoJpa implements TimeDao{
 		this.em = em;
 	}
 	
-		/**
-		 * Save VoteTopic to the persistent storage.
-		 * @param VoteTopic is object represents the topic for voting.
-		 */
+	/**
+	 * set new time in the database
+	 * @param time that committee want set close vote
+	 */
 		@Override
 		public void save(exceedvote.air.model.Time time) {
 			EntityTransaction tx = em.getTransaction();
@@ -42,6 +46,10 @@ public class TimeDaoJpa implements TimeDao{
 			}
 		}
 		
+		/**
+		 * Find all Time information
+		 * @return List of all time that save in database
+		 */
 		@Override
 		public List<exceedvote.air.model.Time> find() {
 			String queryStatement = "SELECT vt FROM Time vt";

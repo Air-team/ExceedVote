@@ -119,7 +119,7 @@ public class TeamDaoJpa implements TeamDao {
 	 * @return true, this team has in the persistence
 	 */
 	@Override
-	public boolean hasVoter(Team team){
+	public boolean hasTeam(Team team){
 		List<Team> listTeam = this.findAll();
 		for(int i=0;i<listTeam.size();i++){
 			if(listTeam.equals(team)) return true;
@@ -127,6 +127,9 @@ public class TeamDaoJpa implements TeamDao {
 		return false;
 	}
 	
+	/**
+	 * Find Team 
+	 */
 	@Override
 	public List<Team> findSingleTeamAlltopic(String name){
 		List<Team> listTeam = this.findAll();
@@ -137,5 +140,8 @@ public class TeamDaoJpa implements TeamDao {
 		return oneTeamAlltopic;
 	
 	}
+
+
+
 	
 }

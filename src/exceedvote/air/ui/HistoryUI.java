@@ -54,9 +54,9 @@ public class HistoryUI extends JFrame {
 //		contentPane.setLayout(null);
 		
 		
-		JLabel lblHistory = new JLabel("History");
+		JLabel lblHistory = new JLabel(Messages.getString("HistoryUI.label.history")); //$NON-NLS-1$
 		lblHistory.setForeground(Color.WHITE);
-		lblHistory.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblHistory.setFont(new Font("Tahoma", Font.PLAIN, 25)); //$NON-NLS-1$
 		lblHistory.setBounds(10, 11, 113, 31);
 		contentPane.add(lblHistory);
 		
@@ -64,7 +64,7 @@ public class HistoryUI extends JFrame {
 		
 		
 		String[] col = new String[]{
-				"Team", "Topic", "Time"
+				Messages.getString("HistoryUI.team"), Messages.getString("HistoryUI.topic"), Messages.getString("HistoryUI.time") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			};
 		
 		table = new JTable(data,col);

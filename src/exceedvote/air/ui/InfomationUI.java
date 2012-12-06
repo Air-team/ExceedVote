@@ -48,9 +48,9 @@ public class InfomationUI extends JFrame implements RunUI{
 	        setContentPane(contentPane);
 	        contentPane.setLayout(null);
 
-	        teamHeadLine = new JLabel("Team :");
+	        teamHeadLine = new JLabel(Messages.getString("InfomationUI.label.team")); //$NON-NLS-1$
 	        teamHeadLine.setForeground(Color.WHITE);
-	        teamHeadLine.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	        teamHeadLine.setFont(new Font("Tahoma", Font.PLAIN, 16)); //$NON-NLS-1$
 	        teamHeadLine.setBounds(10, 11, 356, 21);
 	        contentPane.add(teamHeadLine);
 
@@ -58,7 +58,7 @@ public class InfomationUI extends JFrame implements RunUI{
 	        teamName = new JLabel(team.getName());
 	        	        teamName.setForeground(Color.WHITE);
 
-	        teamName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	        teamName.setFont(new Font("Tahoma", Font.PLAIN, 16)); //$NON-NLS-1$
 	        teamName.setBounds(62, 11, 356, 21);
 	        contentPane.add(teamName);
 	        

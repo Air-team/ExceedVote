@@ -29,17 +29,30 @@ public interface TeamDao {
 	 */
 	public  List<Team> findAll();
 
-
+	/**
+	 * Find all the Teams and return a list of all Teams.
+	 * @return a list of all Teams that saved on the persistent storage.
+	 */
 	public List<VoteTopic> findAllTopic();
 
-
-	public boolean hasVoter(Team team);
-
-
+	
+	/**
+	 * Remove this out of the database
+	 * @param team that you want to remove
+	 * @return true if remove successfully
+	 */
 	public boolean remove(Team team);
 
 
 	public List<Team> findSingleTeamAlltopic(String name);
+
+
+	/**
+	 * Check has this team in persistence or not
+	 * @param team that want to check
+	 * @return true, this team has in the persistence
+	 */
+	public boolean hasTeam(Team team);
 	
 
 

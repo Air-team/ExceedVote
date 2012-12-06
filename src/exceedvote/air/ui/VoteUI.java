@@ -4,8 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -34,7 +32,7 @@ public class VoteUI extends JFrame implements RunUI,Observer
 {
     private JPanel contentPane;
 
-    private final JLabel label = new JLabel("New label");
+    private final JLabel label = new JLabel("New label"); //$NON-NLS-1$
     /** 
 	 * Set the all of components and add action o each components
 	 */
@@ -43,15 +41,15 @@ public class VoteUI extends JFrame implements RunUI,Observer
     private JPanel listTeam = new JPanel();
     private JTextPane status = new JTextPane();
     private JTextPane txtpnTeamlist = new JTextPane();
-    private JButton btnViewInfomation = new JButton("view Infomation");
+    private JButton btnViewInfomation = new JButton(Messages.getString("VoteUI.butt.viewinfo")); //$NON-NLS-1$
     private JButton voteBtn;
     private JTextPane teamSelect = new JTextPane();
-    private JButton revoteBtn = new JButton("-");
-    private JLabel lblClickToSelect = new JLabel("Click to select the team");
-    private JButton btnHistory = new JButton("History");
-    private JLabel lblNewLabel = new JLabel("View your history");
-    private JLabel lblVote = new JLabel("vote");
-    private JLabel lblRevote = new JLabel("revote");
+    private JButton revoteBtn = new JButton("-"); //$NON-NLS-1$
+    private JLabel lblClickToSelect = new JLabel(Messages.getString("VoteUI.label.clickteam")); //$NON-NLS-1$
+    private JButton btnHistory = new JButton(Messages.getString("VoteUI.butt.history")); //$NON-NLS-1$
+    private JLabel lblNewLabel = new JLabel(Messages.getString("VoteUI.label.viewhistory")); //$NON-NLS-1$
+    private JLabel lblVote = new JLabel(Messages.getString("VoteUI.label.vote")); //$NON-NLS-1$
+    private JLabel lblRevote = new JLabel(Messages.getString("VoteUI.label.revote")); //$NON-NLS-1$
     private JTextField fieldWatch = new JTextField();
     private DateFormat dateFormat;
     private JButton btnBack;
@@ -62,17 +60,17 @@ public class VoteUI extends JFrame implements RunUI,Observer
      * ballot test
      */
     int ballot;
-    String type = "";
-    String nameVoter = "";
+    String type = ""; //$NON-NLS-1$
+    String nameVoter = ""; //$NON-NLS-1$
     /*
      * name team test
      */
     
-    private String typeTeam = ""; 
+    private String typeTeam = "";  //$NON-NLS-1$
     
     Object[] names;
     // name select
-    String selectTeam ="";
+    String selectTeam =""; //$NON-NLS-1$
     // Voter
    
     private Clock clock;
@@ -138,7 +136,7 @@ public class VoteUI extends JFrame implements RunUI,Observer
     public void initComponent()
     {
     
-		font = new Font("Monaco",Font.BOLD,20);
+		font = new Font("Monaco",Font.BOLD,20); //$NON-NLS-1$
 
         textField_1.setColumns(10);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -157,22 +155,22 @@ public class VoteUI extends JFrame implements RunUI,Observer
         status.setBounds(242, 11, 218, 30);
         contentPane.add(status);
         status.setBackground(Color.BLACK);
-        status.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        status.setText("Status : "+type+" : "+String.valueOf(ballot)+" Ballot");
+        status.setFont(new Font("Tahoma", Font.PLAIN, 15)); //$NON-NLS-1$
+        status.setText(Messages.getString("VoteUI.label.status")+type+" : "+String.valueOf(ballot)+Messages.getString("VoteUI.label.ballot")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         status.setForeground(Color.ORANGE);
         status.setEditable(false);
 
-        txtpnTeamlist.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtpnTeamlist.setFont(new Font("Tahoma", Font.PLAIN, 15)); //$NON-NLS-1$
         txtpnTeamlist.setBackground(Color.BLACK);
         txtpnTeamlist.setEditable(false);
         txtpnTeamlist.setForeground(Color.ORANGE);
-        txtpnTeamlist.setText("TeamList");
+        txtpnTeamlist.setText(Messages.getString("VoteUI.label.teamlist")); //$NON-NLS-1$
         txtpnTeamlist.setBounds(10, 11, 218, 23);
         contentPane.add(txtpnTeamlist);
         
        
         
-        btnViewInfomation = new JButton("view Infomation");
+        btnViewInfomation = new JButton(Messages.getString("VoteUI.butt.viewinfo")); //$NON-NLS-1$
         btnViewInfomation.addActionListener(new btnInfoAction());
         btnViewInfomation.setBounds(250, 100, 130, 23);
         contentPane.add(btnViewInfomation);
@@ -180,17 +178,17 @@ public class VoteUI extends JFrame implements RunUI,Observer
        
         // add action to vote button
         voteBtn = new JButton(new UpAction());
-        voteBtn.setText("+");
+        voteBtn.setText("+"); //$NON-NLS-1$
         voteBtn.setBounds(250, 152, 89, 23);
         contentPane.add(voteBtn);
         
         revoteBtn = new JButton(new ReVoteAction());
-        revoteBtn.setText("-");
+        revoteBtn.setText("-"); //$NON-NLS-1$
         revoteBtn.setBounds(349, 152, 89, 23);
         contentPane.add(revoteBtn);
 
         btnHistory = new JButton(new historyAction());
-        btnHistory.setText("History");
+        btnHistory.setText(Messages.getString("VoteUI.butt.history")); //$NON-NLS-1$
 		btnHistory.setBounds(250, 216, 89, 23);
 		contentPane.add(btnHistory);
 		
@@ -198,15 +196,15 @@ public class VoteUI extends JFrame implements RunUI,Observer
         teamSelect.setEditable(false);
         teamSelect.setBackground(Color.BLACK);
         teamSelect.setForeground(Color.ORANGE);
-        teamSelect.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        teamSelect.setText("Team :");
+        teamSelect.setFont(new Font("Tahoma", Font.PLAIN, 15)); //$NON-NLS-1$
+        teamSelect.setText(Messages.getString("VoteUI.label.team")); //$NON-NLS-1$
         teamSelect.setBounds(242, 59, 206, 30);
         contentPane.add(teamSelect);
 
         revoteBtn.setBounds(349, 152, 89, 23);
         contentPane.add(revoteBtn);
 
-        lblVote.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        lblVote.setFont(new Font("Tahoma", Font.PLAIN, 13)); //$NON-NLS-1$
         lblVote.setForeground(Color.ORANGE);
         lblVote.setBounds(249, 138, 46, 14);
         contentPane.add(lblVote);
@@ -227,26 +225,25 @@ public class VoteUI extends JFrame implements RunUI,Observer
         contentPane.add(lblNewLabel);
         
         btnBack = new JButton(new backAction());
-        btnBack.setText("Back");
+        btnBack.setText(Messages.getString("VoteUI.butt.back")); //$NON-NLS-1$
 		btnBack.setBounds(349, 342, 89, 23);
 		contentPane.add(btnBack);
 		
 		fieldWatch = new JTextField(80);
     	fieldWatch.setBounds(250, 245, 218, 23);
-    	fieldWatch.setText("00:00:00");
+    	fieldWatch.setText("00:00:00"); //$NON-NLS-1$
     	fieldWatch.setFont(font);
         fieldWatch.setBackground(Color.BLACK);
         fieldWatch.setForeground(Color.orange);
 		contentPane.add(fieldWatch);
 		
-		if(clock ==null) clock = new Clock();
 		  if(clock.isRun()==false) closeBtn();
     }
     
     @Override
 	public void update(Observable o, Object arg) {
         
-        if(clock.isRun()==false)  { closeBtn(); fieldWatch.setText("00:00:00");}
+        if(clock.isRun()==false)  { closeBtn(); fieldWatch.setText("00:00:00");} //$NON-NLS-1$
         else if(clock.isRun()==true) { openBtn(); fieldWatch.setText(clock.time()); }
     }
     
@@ -272,7 +269,7 @@ public class VoteUI extends JFrame implements RunUI,Observer
         	
         	
            InfomationUI informationUI = new InfomationUI(teamName);
-           informationUI.run("");
+           informationUI.run(""); //$NON-NLS-1$
 
          }
     }
@@ -310,21 +307,21 @@ public class VoteUI extends JFrame implements RunUI,Observer
 
         public void actionPerformed(ActionEvent e)
         {  
-            if(selectTeam.equals(""))
+            if(selectTeam.equals("")) //$NON-NLS-1$
             {
                 JOptionPane.showConfirmDialog((Component)
-                    null, "Please Click to select the team", "Select the team", JOptionPane.DEFAULT_OPTION);
+                    null, Messages.getString("VoteUI.pop.clickteam"), Messages.getString("VoteUI.pop.selectteam"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
             }
             else if(ballot == 0)
             {
                 	JOptionPane.showConfirmDialog((Component)
-                    null, "No ballot !!", "No Ballot!!", JOptionPane.DEFAULT_OPTION);
+                    null, Messages.getString("VoteUI.pop.noballot"), Messages.getString("VoteUI.pop.nobal"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
             }
             else
             {    
-                String alert = "Do you want to vote " + selectTeam ;
+                String alert = Messages.getString("VoteUI.str.wantvote") + selectTeam ; //$NON-NLS-1$
                 int result = JOptionPane.showConfirmDialog((Component)
-                        null, alert , "Submit Vote!!!", JOptionPane.YES_NO_OPTION);
+                        null, alert , Messages.getString("VoteUI.pop.submitvote"), JOptionPane.YES_NO_OPTION); //$NON-NLS-1$
                 if(result == 0)
                 {
                 	 
@@ -335,7 +332,7 @@ public class VoteUI extends JFrame implements RunUI,Observer
 	                     if(canVote)
 	                     {
 	                     	ballot--;
-	                         status.setText("Status : "+type+" : "+String.valueOf(voter.getballotLeft())+" Ballot");
+	                         status.setText(Messages.getString("VoteUI.label.set.status")+type+" : "+String.valueOf(voter.getballotLeft())+Messages.getString("VoteUI.label.set.ballot")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	                     }
                 	 }
                 	 else  if(committee != null) {
@@ -344,7 +341,7 @@ public class VoteUI extends JFrame implements RunUI,Observer
 	                     if(canVote)
 	                     {
 	                     	ballot--;
-	                         status.setText("Status : "+type+" : "+String.valueOf(committee.getballotLeft())+" Ballot");
+	                         status.setText(Messages.getString("VoteUI.label.set.status")+type+" : "+String.valueOf(committee.getballotLeft())+Messages.getString("VoteUI.label.set.ballot")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	                     }
                 	 }
                 }
@@ -361,17 +358,17 @@ public class VoteUI extends JFrame implements RunUI,Observer
 
 		public void actionPerformed(ActionEvent arg0) {
 			
-			 if(selectTeam.equals(""))
+			 if(selectTeam.equals("")) //$NON-NLS-1$
 	         {
 	             JOptionPane.showConfirmDialog((Component)
-	                 null, "Please Click to select the team", "Select the team", JOptionPane.DEFAULT_OPTION);
+	                 null, Messages.getString("VoteUI.pop.clickteam"), Messages.getString("VoteUI.pop.selectteam"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
 	         }
 	   
 	         else
 	         {    
-	             String alert = "Do you want to disvote " + selectTeam ;
+	             String alert = Messages.getString("VoteUI.str.disvote") + selectTeam ; //$NON-NLS-1$
 	             int result = JOptionPane.showConfirmDialog((Component)
-	                     null, alert , "Submit Vote!!!", JOptionPane.YES_NO_OPTION);
+	                     null, alert , Messages.getString("VoteUI.pop.submitvote"), JOptionPane.YES_NO_OPTION); //$NON-NLS-1$
 	             if(result == 0)
 	             {
 	             	 boolean canVote  = false; ballott.returnBallot(selectTeam,typeTeam,voter);
@@ -380,11 +377,11 @@ public class VoteUI extends JFrame implements RunUI,Observer
 		                  if(canVote)
 		                  {
 		                  	ballot++;
-		                      status.setText("Status : "+type+" : "+String.valueOf(voter.getballotLeft())+" Ballot");
+		                      status.setText(Messages.getString("VoteUI.label.set.status")+type+" : "+String.valueOf(voter.getballotLeft())+Messages.getString("VoteUI.label.set.ballot")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		                  }
 		                  else {
 		                	  JOptionPane.showConfirmDialog((Component)
-		         	                 null, "You didn't vote this team", "Select the team", JOptionPane.DEFAULT_OPTION);
+		         	                 null, Messages.getString("VoteUI.pop.novote"), Messages.getString("VoteUI.pop.selectteam"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
 		                  }
 	             	 }
 	             	 else  if(committee != null) {
@@ -392,11 +389,11 @@ public class VoteUI extends JFrame implements RunUI,Observer
 			                  if(canVote)
 			                  {
 			                  	ballot++;
-			                      status.setText("Status : "+type+" : "+String.valueOf(committee.getballotLeft())+" Ballot");
+			                      status.setText(Messages.getString("VoteUI.label.set.status")+type+" : "+String.valueOf(committee.getballotLeft())+Messages.getString("VoteUI.label.set.ballot")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			                  }
 			                  else {
 			                	  JOptionPane.showConfirmDialog((Component)
-			         	                 null, "You didn't vote this team", "Select the team", JOptionPane.DEFAULT_OPTION);
+			         	                 null, Messages.getString("VoteUI.pop.novote"), Messages.getString("VoteUI.pop.selectteam"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
 			                  }
 		             	 }
 	             }
@@ -415,7 +412,7 @@ public class VoteUI extends JFrame implements RunUI,Observer
         {   
             JButton o = (JButton)e.getSource();
             selectTeam = o.getText();
-            teamSelect.setText("Team : "+selectTeam);
+            teamSelect.setText(Messages.getString("VoteUI.label.set.team")+selectTeam); //$NON-NLS-1$
         }
     }
     
@@ -437,11 +434,11 @@ public class VoteUI extends JFrame implements RunUI,Observer
            
             if(voter != null) {
         	   System.out.println(user);
-        	   serviceUI.runByName("voteTypeUI");
+        	   serviceUI.runByName("voteTypeUI"); //$NON-NLS-1$
            }
             else if(committee != null) {
-        	   System.out.println("Aa");
-        	   serviceUI.runByName("voteTypeUICom");
+        	   System.out.println("Aa"); //$NON-NLS-1$
+        	   serviceUI.runByName("voteTypeUICom"); //$NON-NLS-1$
            }
             close();
         }
@@ -478,7 +475,7 @@ public class VoteUI extends JFrame implements RunUI,Observer
     public void setType(String type)
     {
        this.typeTeam = type;
-       txtpnTeamlist.setText("TeamList: "+typeTeam);
+       txtpnTeamlist.setText(Messages.getString("VoteUI.label.set.teamlist")+typeTeam); //$NON-NLS-1$
     }
     
     public void addService(SeviceUI serviceUI)

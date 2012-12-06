@@ -51,7 +51,7 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 	private void inicomponent() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 230);
-		font = new Font("Monaco", Font.BOLD, 20);
+		font = new Font("Monaco", Font.BOLD, 20); //$NON-NLS-1$
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,26 +60,26 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 		this.add(contentPane);
 
 		labelVoter = new JLabel();
-		labelVoter.setText("Commitee:");
+		labelVoter.setText(Messages.getString("AdminUI.label.commitee")); //$NON-NLS-1$
 		labelVoter.setFont(font);
 		labelVoter.setBounds(50, 30, 100, 20);
 		contentPane.add(labelVoter);
 
 		labelCom = new JLabel();
-		labelCom.setText("Voter:");
+		labelCom.setText(Messages.getString("AdminUI.label.voter")); //$NON-NLS-1$
 		labelCom.setFont(font);
 		labelCom.setBounds(330, 30, 200, 20);
 		contentPane.add(labelCom);
 
 		buttonChCom = new JButton();
 		buttonChCom.addActionListener(new changeToComAction());
-		buttonChCom.setText("<---");
+		buttonChCom.setText("<---"); //$NON-NLS-1$
 		buttonChCom.setBounds(250, 90, 70, 30);
 		contentPane.add(buttonChCom);
 
 		buttonChVoter = new JButton();
 		buttonChVoter.addActionListener(new changeToVotAction());
-		buttonChVoter.setText("--->");
+		buttonChVoter.setText("--->"); //$NON-NLS-1$
 		buttonChVoter.setBounds(250, 120, 70, 30);
 		contentPane.add(buttonChVoter);
 

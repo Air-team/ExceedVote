@@ -40,7 +40,7 @@ public class VoterDaoJpa implements VoterDao {
 			getLogger().error("Error saving topic " + voter, ex);
 			if (tx.isActive())
 				tx.rollback();
-			// should rethrow exception so the application knows
+			// should throw exception so the application knows
 			// that save failed
 			throw ex;
 
@@ -49,7 +49,10 @@ public class VoterDaoJpa implements VoterDao {
 	}
 
 	/**
-	 * Find user in database
+	 * Find the Voter in the persistent storage by username and password.
+	 * @param name - The  identity  represents the Voter.
+	 * @param password - The  security  of that  Voter.
+	 * @return Voter object that represents the registered user.
 	 */
 	@Override
 	public Voter findSingle(String username, String password) {
@@ -64,6 +67,12 @@ public class VoterDaoJpa implements VoterDao {
 		return null;
 	}
 	
+
+	/**
+	 * Find the Voter in the persistent storage by username and password.
+	 * @param username - The  identity  represents the Voter.
+	 * @return Voter object that represents the registered user.
+	 */
 	@Override
 	public Voter findbyName(String username) {
 		List<Voter> allVoters = findAll();
@@ -77,8 +86,9 @@ public class VoterDaoJpa implements VoterDao {
 	}
 	
 	/**
-	 * Delete the voter out of persistence
-	 * @param voter that want to delete
+	 * Remove that voter out of the database
+	 * @param voter that want to remove
+	 * @return true if remove successfully
 	 */
 	@Override
 	public boolean remove(Voter voter){

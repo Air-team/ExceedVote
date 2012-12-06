@@ -96,6 +96,11 @@ public class DaoFactoryJpa extends DaoFactory {
 		return teamDao;
 	}
 
+	/**
+	 * Get an instance of the DAO for Committee.
+	 * @return a new CommitteeDao if CommitteeDao hasn't been created 
+	 * else return this CommitteeDao object.	
+	 */
 	@Override
 	public CommitteeDao getCommitteeDao() {
 		if(committeDao == null)
@@ -103,6 +108,11 @@ public class DaoFactoryJpa extends DaoFactory {
 		return committeDao;
 	}
 	
+	/**
+	 * Get an instance of the DAO for TeamDescriptionDao.
+	 * @return a new TeamDescriptionDao if TeamDescriptionDao hasn't been created 
+	 * else return this TeamDescriptionDao object.	
+	 */
 	@Override
 	public TeamDescriptionDao getTeamDescriptionDao(){
 		if(teamDescriptionDao == null) teamDescriptionDao = new TeamDescriptionDaoJpa(em);
@@ -110,6 +120,11 @@ public class DaoFactoryJpa extends DaoFactory {
 		
 	}
 
+	/**
+	 * Get an instance of the DAO for TimeDao.
+	 * @return a new TimeDao if TimeDao hasn't been created 
+	 * else return this TimeDao object.	
+	 */
 	@Override
 	public TimeDao getTimeDao() {
 		if(timeDao == null) timeDao = new TimeDaoJpa(em);

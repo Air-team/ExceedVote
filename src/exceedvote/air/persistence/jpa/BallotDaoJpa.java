@@ -11,9 +11,7 @@ import exceedvote.air.model.Voter;
 import exceedvote.air.persistence.BallotDao;
 
 /**
- * Ballot Data Access Object is a DAO for ballot objects. This class represents 
- * the interface of the database that related to ballot objects.
- * 
+ * Ballot Data Access Object is a DAO for ballot objects. 
  * @author Air Team
  */
 public class BallotDaoJpa implements BallotDao {
@@ -58,6 +56,15 @@ public class BallotDaoJpa implements BallotDao {
 		return em.createQuery(queryStatement).getResultList();
 	}
 	
+
+	/**
+	 * Find a ballot by search for teamname, topic and voter from a list of all ballots.
+	 * @param teamName - The name of the participated team.
+	 * @param topic - The vote topic that that the user vote.
+	 * @param committee - An object represents the user that relate to the ballot.
+	 * @param allBallot - A list of all ballot for searching.
+	 * @return a ballot from this user that match with the teamname and topic.
+	 */
 	@Override
 	public Ballot findSingle(String teamName, String topic,Committee committee, List<Ballot> allBallot){
 		for (int i = 0; i < allBallot.size(); i++) {
@@ -121,11 +128,11 @@ public class BallotDaoJpa implements BallotDao {
 
 
 	/**
-	 * Get the Logger of BallotDaoJpa class.
-	 * @return new Logger if it is null else return Logger.
+	 * Find History of the committee
+	 * @param committee - Person who we want to see his history
+	 * @return- List all of information Team,Topic,Date that committee vote
 	 */
 
-	
 	@Override
 	public List<ArrayList>  historyCom(Committee committee){
 		List<Ballot> allBallot = this.findAll();
@@ -146,6 +153,11 @@ public class BallotDaoJpa implements BallotDao {
 		return his;
 	}
 	
+	/**
+	 * Find History of the voter
+	 * @param voter - Person who we want to see his history
+	 * @return- List all of information Team,Topic,Date that vote vote
+	 */
 	@Override
 	public List<ArrayList>  history(Voter voter){
 		List<Ballot> allBallot = this.findAll();
@@ -166,11 +178,13 @@ public class BallotDaoJpa implements BallotDao {
 		return his;
 	}
 
-	
+	/**
+	 * Find all ballot from this voter
+	 * @param Voter is the user that want find Ballot information
+	 */
 	@Override
 	public List<Ballot>  findAllOfSingleVoter(Voter voter){
 		List<Ballot> allBallot = this.findAll();
-//		List<Ballot> ballot = new ArrayList<Ballot>();
 		
 		for (int i=0;i<allBallot.size();i++) {
 			Ballot bl = allBallot.get(i);
@@ -183,6 +197,12 @@ public class BallotDaoJpa implements BallotDao {
 		return allBallot;
 	}
 	
+
+	/**
+	 * Get the Logger of BallotDaoJpa class.
+	 * @return new Logger if it is null else return Logger.
+	 */
+
 	private static Logger getLogger() {
 		if (logger == null)
 			logger = Logger.getLogger(BallotDaoJpa.class);

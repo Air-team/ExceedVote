@@ -45,7 +45,6 @@ public class Committee implements Serializable {
 	private String topicName;
 	@Temporal(TemporalType.DATE)
 	private Date date;
-	private long time = 0;
 	public Committee() {
 		super();
 	}

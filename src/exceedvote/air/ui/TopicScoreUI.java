@@ -54,8 +54,8 @@ public class TopicScoreUI extends JFrame {
         setBounds(100, 100, 724, 466);
         getContentPane().setLayout(null);
 
-        JLabel lblDetailResult = new JLabel("Detail Result");
-        lblDetailResult.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        JLabel lblDetailResult = new JLabel(Messages.getString("TopicScoreUI.label.detailresult")); //$NON-NLS-1$
+        lblDetailResult.setFont(new Font("Tahoma", Font.PLAIN, 20)); //$NON-NLS-1$
         lblDetailResult.setBounds(10, 11, 131, 30);
         getContentPane().add(lblDetailResult);
 
@@ -73,7 +73,7 @@ public class TopicScoreUI extends JFrame {
         Object[][] data = new Object[1][1] ;
 		
         String[] col = {
-            "Ranking", "Team", "Score"
+            Messages.getString("TopicScoreUI.table.ranking"), Messages.getString("TopicScoreUI.table.team"), Messages.getString("TopicScoreUI.table.score") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         };
       
 
@@ -136,7 +136,7 @@ public class TopicScoreUI extends JFrame {
 	    
 	   for(int i=0;i<list.size();i++){
 		   List<String> info = list.get(i);
-		   String t = (i+1)+"";
+		   String t = (i+1)+""; //$NON-NLS-1$
 		   model.insertRow(i,new Object[]{t,info.get(0),info.get(1)});
 	   }
 	}

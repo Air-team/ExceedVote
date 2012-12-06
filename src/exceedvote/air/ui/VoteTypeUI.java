@@ -25,8 +25,6 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
-
 import exceedvote.air.model.Clock;
 import exceedvote.air.model.Committee;
 import exceedvote.air.model.Poll;
@@ -44,17 +42,17 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
 //	private  VoteTypeUI voteTypeUI;
     private JPanel contentPane;
     private JTextPane txtpnVotetype = new JTextPane();
-    private JButton btnHistory = new JButton("History");
-    private JButton btnPoll = new JButton("Poll");
-    private JLabel lblSelectTheType = new JLabel("Click to select the type");
+    private JButton btnHistory = new JButton(Messages.getString("VoteTypeUI.butt.history")); //$NON-NLS-1$
+    private JButton btnPoll = new JButton(Messages.getString("VoteTypeUI.butt.poll")); //$NON-NLS-1$
+    private JLabel lblSelectTheType = new JLabel(Messages.getString("VoteTypeUI.label.clicktype")); //$NON-NLS-1$
 
     // button submit 
     private JButton btnGoToVote;
-    private JLabel select = new JLabel("Select :");
+    private JLabel select = new JLabel(Messages.getString("VoteTypeUI.label.select")); //$NON-NLS-1$
 
     // label shows which user select type
     private JLabel selectType;
-    private String labelSelect = "";
+    private String labelSelect = ""; //$NON-NLS-1$
 
     // voteUi run after user select and click submit button
     //ballotleft
@@ -114,7 +112,7 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
     public void initComponent()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        font = new Font("Monaco",Font.BOLD,20);
+        font = new Font("Monaco",Font.BOLD,20); //$NON-NLS-1$
 
         setBounds(100, 100, 450, 478);
        
@@ -126,8 +124,8 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
         contentPane.setLayout(null);
 
         txtpnVotetype.setEditable(false);
-        txtpnVotetype.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        txtpnVotetype.setText("VoteType");
+        txtpnVotetype.setFont(new Font("Tahoma", Font.PLAIN, 36)); //$NON-NLS-1$
+        txtpnVotetype.setText(Messages.getString("VoteTypeUI.text.votetype")); //$NON-NLS-1$
         txtpnVotetype.setBounds(10, 11, 176, 50);
         contentPane.add(txtpnVotetype);
 
@@ -137,7 +135,7 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
         setButton();
         
         btnGoToVote = new JButton(new ActionSubmit());
-        btnGoToVote.setText("Go to vote page");
+        btnGoToVote.setText(Messages.getString("VoteTypeUI.butt.gonext")); //$NON-NLS-1$
         btnGoToVote.setBounds(232, lastPos+50, 169, 23);
         contentPane.add(btnGoToVote);
 
@@ -145,12 +143,12 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
         contentPane.add(select);
 
         selectType = new JLabel();
-        selectType.setText("none");
+        selectType.setText(Messages.getString("VoteTypeUI.text.none")); //$NON-NLS-1$
         selectType.setBounds(86, lastPos+50, 199, 14);
         contentPane.add(selectType);
         if(user.equals(voter)) ballot = voter.getballotLeft();
         else  if(user.equals(committee)) ballot = committee.getballotLeft();
-        String shows = "You Have : "+String.valueOf(ballot)+" Ballot";
+        String shows = Messages.getString("VoteTypeUI.str.uhave")+String.valueOf(ballot)+Messages.getString("VoteTypeUI.str.ballot"); //$NON-NLS-1$ //$NON-NLS-2$
         ballotLeft = new JLabel(shows);
 		ballotLeft.setBounds(267, 11, 142, 14);
 		contentPane.add(ballotLeft);
@@ -158,7 +156,7 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
 		
 
 			fieldWatch = new JTextField(80);
-			fieldWatch.setText("00:00:00");
+			fieldWatch.setText("00:00:00"); //$NON-NLS-1$
 	    	fieldWatch.setBounds(280, 30, 218, 23);
 	    	fieldWatch.setFont(font);
 	        fieldWatch.setBackground(Color.WHITE);
@@ -168,16 +166,13 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
 			
 			 
 			 btnHistory = new JButton(new historyAction());
-			 btnHistory.setText("History");
+			 btnHistory.setText(Messages.getString("VoteTypeUI.butt.history")); //$NON-NLS-1$
 			 btnHistory.setBounds(150, lastPos+50, 89, 23);
 		        contentPane.add(btnHistory);
 		        
 		        btnPoll = new JButton(new pollAction());
-		        btnPoll.setText("Poll");
+		        btnPoll.setText(Messages.getString("VoteTypeUI.bott.poll")); //$NON-NLS-1$
 		        btnPoll.setBounds(180, 60, 218, 23);
-		        
-		        if(clock == null) clock = new Clock();
-		      
 		        if(clock.isRun()==false)   btnPoll.setEnabled(true);
 		        else  btnPoll.setEnabled(false);
 			     contentPane.add(btnPoll);
@@ -273,7 +268,7 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
         {   
             JButton o = (JButton)e.getSource();
             labelSelect = o.getText();
-          
+            System.out.println(labelSelect);
             selectType.setText(labelSelect);
         }
     }
@@ -292,17 +287,17 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
 
         public void actionPerformed(ActionEvent e)
         {       
-            if(labelSelect.equals(""))
+            if(labelSelect.equals("")) //$NON-NLS-1$
             {
                 JOptionPane.showConfirmDialog((Component)
-                    null, "Please Click to select the type", "Select the type", JOptionPane.DEFAULT_OPTION);
+                    null, Messages.getString("VoteTypeUI.pop.clicktype"), Messages.getString("VoteTypeUI.pop.selecttype"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
             }
             else
             {
             	
             		
-                    if(voter != null)serviceUI.runByName("voteUI",labelSelect);
-                    else if(committee != null) serviceUI.runByName("voteUICom",labelSelect);
+                    if(voter != null)serviceUI.runByName("voteUI",labelSelect); //$NON-NLS-1$
+                    else if(committee != null) serviceUI.runByName("voteUICom",labelSelect); //$NON-NLS-1$
                     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     close();
             }
@@ -337,7 +332,7 @@ public class VoteTypeUI extends JFrame implements RunUI,Observer
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		 if(clock.isRun()==false)  {  btnPoll.setEnabled(true);  fieldWatch.setText("00:00:00");}
+		 if(clock.isRun()==false)  {  btnPoll.setEnabled(true);  fieldWatch.setText("00:00:00");} //$NON-NLS-1$
 		 else fieldWatch.setText(clock.time());
    
     

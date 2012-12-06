@@ -1,9 +1,6 @@
 package exceedvote.air.ui;
 
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,10 +13,6 @@ import javax.swing.JButton;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
-
-import exceedvote.air.model.Committee;
-import exceedvote.air.model.Time;
-
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,26 +23,24 @@ import java.awt.event.ActionListener;
  * @author Air Team
  * @version (a version number or a date)
  */
-public class SetTimeUI extends JFrame implements RunUI {
+public class SetTimeUI extends JFrame {
 
     private JPanel contentPane;
-    private JComboBox setHour;
-    private JComboBox setMin;
-    private JComboBox setSecond;
-
+    private JTextField setHour;
+    private JTextField setMin;
+   
     private JComboBox setMonth;
     private JComboBox setYear;
     private JComboBox setDay;
     private JButton btnOk;
-
+    
     // infomation when select
     private String selectYear;
     private String selectMonth;
     private String selectDay;
     private String hour;
     private String min;
-    private String second;
-    private SeviceUI serviceUI;
+    
     /**
      * Create the frame.
      */
@@ -57,103 +48,90 @@ public class SetTimeUI extends JFrame implements RunUI {
 
     }
 
-    public SetTimeUI(SeviceUI serviceUI) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public void initComponent()
+    public void initComponent()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 405, 242);
+        setBounds(100, 100, 500, 186);
         contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JComboBox setYear = new JComboBox();
+        setYear = new JComboBox();
         setYear.setBounds(10, 40, 84, 20);
         contentPane.add(setYear);
 
-        JLabel lblYear = new JLabel("Year");
-        lblYear.setBounds(104, 43, 84, 14);
+        JLabel lblYear = new JLabel(Messages.getString("SetTimeUI.label.year")); //$NON-NLS-1$
+        lblYear.setBounds(104, 43, 46, 14);
         contentPane.add(lblYear);
 
-        JComboBox setMonth = new JComboBox();
-        setMonth.setBounds(10, 85, 84, 20);
+        setMonth = new JComboBox();
+        setMonth.setBounds(145, 40, 71, 20);
         contentPane.add(setMonth);
 
-        JLabel lblMonth = new JLabel("Month");
-        lblMonth.setBounds(104, 88, 84, 14);
+        JLabel lblMonth = new JLabel(Messages.getString("SetTimeUI.label.month")); //$NON-NLS-1$
+        lblMonth.setBounds(226, 43, 46, 14);
         contentPane.add(lblMonth);
 
-        JComboBox setDay = new JComboBox();
-        setDay.setBounds(10, 126, 84, 20);
+        setDay = new JComboBox();
+        setDay.setBounds(270, 40, 59, 20);
         contentPane.add(setDay);
 
-        JLabel lblNewLabel = new JLabel("Day");
-        lblNewLabel.setBounds(104, 129, 84, 14);
+        JLabel lblNewLabel = new JLabel(Messages.getString("SetTimeUI.label.day")); //$NON-NLS-1$
+        lblNewLabel.setBounds(339, 43, 46, 14);
         contentPane.add(lblNewLabel);
 
-        JLabel lblSetdate = new JLabel("SetTime");
-        lblSetdate.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        JLabel lblSetdate = new JLabel(Messages.getString("SetTimeUI.label.settime")); //$NON-NLS-1$
+        lblSetdate.setFont(new Font("Tahoma", Font.PLAIN, 18)); //$NON-NLS-1$
         lblSetdate.setBounds(10, 12, 464, 26);
         contentPane.add(lblSetdate);
 
-        JLabel lblHour = new JLabel("Hour");
-        lblHour.setBounds(296, 43, 84, 14);
+        setHour = new JTextField();
+        setHour.setBounds(8, 85, 86, 20);
+        contentPane.add(setHour);
+        setHour.setColumns(10);
+
+        JLabel lblHour = new JLabel(Messages.getString("SetTimeUI.label.hour")); //$NON-NLS-1$
+        lblHour.setBounds(104, 88, 359, 14);
         contentPane.add(lblHour);
 
-        JLabel lblMin = new JLabel("Min\r\n");
-        lblMin.setBounds(296, 88, 96, 14);
-        contentPane.add(lblMin);
-
-        JButton btnOk = new JButton("OK");
-        btnOk.addActionListener(new OKbtn());
-        btnOk.setBounds(10, 170, 89, 23);
-        contentPane.add(btnOk);
-
-        setHour = new JComboBox();
-        setHour.addActionListener(new SelectHour());
-        setHour.setBounds(202, 40, 84, 20);
-        contentPane.add(setHour);
-
-        setMin = new JComboBox();
-        setMin.addActionListener(new SelectMin());
-        setMin.setBounds(202, 85, 84, 20);
+        setMin = new JTextField();
+        setMin.setColumns(10);
+        setMin.setBounds(10, 116, 86, 20);
         contentPane.add(setMin);
 
-        setSecond = new JComboBox();
-        setSecond.addActionListener(new SelectSecond());
-        setSecond.setBounds(202, 126, 84, 20);
-        contentPane.add(setSecond);
+        JLabel lblMin = new JLabel(Messages.getString("SetTimeUI.label.format")); //$NON-NLS-1$
+        lblMin.setBounds(104, 119, 271, 14);
+        contentPane.add(lblMin);
 
-        JLabel lblSecond = new JLabel("second");
-        lblSecond.setBounds(296, 129, 120, 14);
-        contentPane.add(lblSecond);
-
+        btnOk = new JButton(Messages.getString("SetTimeUI.butt.ok")); //$NON-NLS-1$
+        btnOk.setBounds(385, 113, 89, 23);
+        contentPane.add(btnOk);
+        btnOk.addActionListener(new OKbtn());
         
-        setMonth.addItem("Jan");
-        setMonth.addItem("Feb");
-        setMonth.addItem("Mar");
-        setMonth.addItem("Apr");
-        setMonth.addItem("May");
-        setMonth.addItem("June");
-        setMonth.addItem("July");
-        setMonth.addItem("Aug");
-        setMonth.addItem("Sept");
-        setMonth.addItem("Oct");
-        setMonth.addItem("Nov");
-        setMonth.addItem("Dec");
+        
+        setMonth.addItem("Jan"); //$NON-NLS-1$
+        setMonth.addItem("Feb"); //$NON-NLS-1$
+        setMonth.addItem("Mar"); //$NON-NLS-1$
+        setMonth.addItem("Apr"); //$NON-NLS-1$
+        setMonth.addItem("May"); //$NON-NLS-1$
+        setMonth.addItem("Jun"); //$NON-NLS-1$
+        setMonth.addItem("Jul"); //$NON-NLS-1$
+        setMonth.addItem("Aug"); //$NON-NLS-1$
+        setMonth.addItem("Sep"); //$NON-NLS-1$
+        setMonth.addItem("Oct"); //$NON-NLS-1$
+        setMonth.addItem("Nov"); //$NON-NLS-1$
+        setMonth.addItem("Dec"); //$NON-NLS-1$
 
         Date d = new Date();
-        int currentYear = d.getYear()+1900;
+        int currentYear = d.getYear();
         int currentDay =d.getDay();
         int currentMonth = d.getMonth();
-        setYear.addItem(String.valueOf(currentYear));
-        for(int i = currentYear+1 ; i <= currentYear+12  ; i++)
+
+        for(int i = 0 ; i <= 12 ; i++)
         {
-            setYear.addItem(i);
+            setYear.addItem(String.valueOf(1900+currentYear-i));
         }
 
         for(int i = 1 ; i <= 31 ; i++)
@@ -161,53 +139,37 @@ public class SetTimeUI extends JFrame implements RunUI {
             setDay.addItem(String.valueOf(i));
         }
         
-        for(int i = 1 ; i <= 24 ; i++)
-        {
-            setHour.addItem(String.valueOf(i));
-        }
-        
-        for(int i = 1 ; i <= 60 ; i++)
-        {
-            setMin.addItem(String.valueOf(i));
-        }
-        
-        for(int i = 1 ; i <= 60 ; i++)
-        {
-            setSecond.addItem(String.valueOf(i));
-        }
-
-        selectYear = String.valueOf(2012);
-        selectMonth = String.valueOf("Dec");
-        selectDay = String.valueOf(1);
+        selectYear = String.valueOf(currentYear);
+        selectMonth = String.valueOf(currentMonth);
+        selectDay = String.valueOf(currentDay);
         // add action in combobox
         setYear.addActionListener(new SelectYear());
         setDay.addActionListener(new SelectDay());
         setMonth.addActionListener(new SelectMonth());
     }
-
+    
+    
     // action when select year
     private class SelectYear implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
             JComboBox cb = (JComboBox) e.getSource();
-         
-            String newSelection = cb.getSelectedItem()+"";
-        
+            String newSelection = (String) cb.getSelectedItem();
             selectYear = newSelection;
         }
     }
-
+     
     // action when select month
     private class SelectMonth implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
-        	  JComboBox cb = (JComboBox) e.getSource();
-
-                String newSelection = (String) cb.getSelectedItem();
+            JComboBox cb = (JComboBox) e.getSource();
+            String newSelection = (String) cb.getSelectedItem();
             selectMonth = newSelection;
+           
         }
     }
-
+    
     // action when select day
     private class SelectDay implements ActionListener
     {
@@ -218,44 +180,28 @@ public class SetTimeUI extends JFrame implements RunUI {
         }
     }
     
-     private class SelectHour implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e) {
-            JComboBox cb = (JComboBox) e.getSource();
-            String newSelection = (String) cb.getSelectedItem();
-            hour = newSelection;
-        }
-    }
-    
-     private class SelectMin implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e) {
-            JComboBox cb = (JComboBox) e.getSource();
-            String newSelection = (String) cb.getSelectedItem();
-            min = newSelection;
-        }
-    }
-    
-     private class SelectSecond implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e) {
-            JComboBox cb = (JComboBox) e.getSource();
-            String newSelection = (String) cb.getSelectedItem();
-            second = newSelection;
-        }
-    }
-
     // action when click ok
     private class OKbtn implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
-        
-        		Committee com = new Committee();
-        		com.setTime(selectDay, selectMonth, selectYear, hour, min, second);
-   
+            String checkHour = setHour.getText();
+            String checkMin = setMin.getText();
+            try
+            {
+                int test = Integer.parseInt(checkHour);
+                test = Integer.parseInt(checkMin);
+                
+                //if not cash 
+                hour = setHour.getText();
+                min = setMin.getText();
+                
+                // check it!!!
                 JOptionPane.showConfirmDialog((Component)
-                    null,"You select " +selectYear +" -- "+selectMonth+" -- "+selectDay+" -- "+hour+" : " +min , "Pass!!", JOptionPane.DEFAULT_OPTION);
-                dispose();
+                    null,Messages.getString("SetTimeUI.pop.select") +selectYear +" -- "+selectMonth+" -- "+selectDay+" -- "+hour+" : " +min , Messages.getString("SetTimeUI.pop.pass"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+            }
+            catch(Exception x){ 
+                JOptionPane.showConfirmDialog((Component)
+                    null, Messages.getString("SetTimeUI.pop.incorrecttime"), Messages.getString("SetTimeUI.pop.wronginput"), JOptionPane.DEFAULT_OPTION);} //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 
@@ -264,16 +210,12 @@ public class SetTimeUI extends JFrame implements RunUI {
         this.initComponent();
         this.setVisible(true);
         this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args)
     {
         SetTimeUI setTimeUI = new SetTimeUI();
-        setTimeUI.run("");
+        setTimeUI.run(""); //$NON-NLS-1$
     }
-
-	public void addService(SeviceUI serviceUI) {
-		this.serviceUI = serviceUI;
-	}
 }

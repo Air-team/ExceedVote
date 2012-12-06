@@ -151,8 +151,6 @@ public class Team implements Serializable {
 
 	public static Team getTeam(String name) {
 		TeamDao dao = DaoFactory.getInstance().getTeamDao();
-//		System.out.println(name);
-//		System.out.println(dao.findSingle(name));
 		return dao.findSingle(name);
 	}
 

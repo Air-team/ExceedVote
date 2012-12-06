@@ -113,7 +113,6 @@ public class Voter implements Serializable {
 	public void saveInfo(Voter voter){
 		VoterDao dao = DaoFactory.getInstance().getVoterDao();
 		dao.save(voter);
-//		System.out.println(dao.save(voter));
 	}
 
 	

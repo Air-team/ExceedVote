@@ -96,6 +96,11 @@ public class VoteTopicDaoJpa implements VoteTopicDao {
 			return false;
 		}
 	}
+	/**
+	 * Get the Logger of VoterDaoJpa class.
+	 * 
+	 * @return new Logger if it is null else return Logger.
+	 */
 	private static Logger getLogger() {
 		if (logger == null)
 			logger = Logger.getLogger(VoteTopicDaoJpa.class);

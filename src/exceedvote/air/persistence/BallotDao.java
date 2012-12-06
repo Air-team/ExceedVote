@@ -46,12 +46,36 @@ public interface BallotDao {
 	 */
 	public boolean deleteBallot(Ballot ballot);
 
+
+	
+	/**
+	 * Find History of the voter
+	 * @param voter - Person who we want to see his history
+	 * @return- List all of information Team,Topic,Date that voter vote
+	 */
 	public List<ArrayList> history(Voter voter);
 
-	public List<Ballot> findAllOfSingleVoter(Voter voter);
-
+	/**
+	 * Find History of the committee
+	 * @param committee - Person who we want to see his history
+	 * @return- List all of information Team,Topic,Date that committee vote
+	 */
 	public List<ArrayList> historyCom(Committee committee);
 
+	/**
+	 * Find all ballot from this voter
+	 * @param Voter is the user that want find Ballot information
+	 */
+	public List<Ballot> findAllOfSingleVoter(Voter voter);
+
+	/**
+	 * Find a ballot by search for teamname, topic and voter from a list of all ballots.
+	 * @param teamName - The name of the participated team.
+	 * @param topic - The vote topic that that the user vote.
+	 * @param committee - An object represents the user that relate to the ballot.
+	 * @param allBallot - A list of all ballot for searching.
+	 * @return a ballot from this user that match with the teamname and topic.
+	 */
 	public Ballot findSingle(String teamName, String typeTeam,
 			Committee committee, List<Ballot> allBallot);
 
