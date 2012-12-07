@@ -1,5 +1,9 @@
 package exceedvote.air.ui;
- 
+/*
+ * ExceedVote Project
+ * @author air team
+ * @version
+ */ 
 
 
 import java.awt.Color;
@@ -30,55 +34,74 @@ import exceedvote.air.model.Committee;
 
 
 public class AddTeamPanel extends JFrame implements RunUI {
-
+     
+    // main panel in this frame
     private JPanel contentPane;
+    // JTextField for show URL file
     private JTextField imageName;
+    // head line for show what team's name that you adding
     private JLabel teamHeadLine;
     // headline
     private JLabel teamName = new JLabel();
 
-    // browse btn
+    // browse button
     private JButton btnBrowse;
 
-    //add btn
+    //add button
     private JButton btnAdd;
 
-    // btn cancel
+    //cancel button
     private JButton btnCancel;
 
     // description text
     private JTextPane descriptionText;
-    
+    // DefaultListModel for use with JTabel
     private DefaultListModel teamModel = new DefaultListModel();
     
-    //JFileChooser
+    //JFileChooser for use open dialogbox
     private JFileChooser chooser;
-	private SeviceUI serviceUI;
-	private boolean checkComplete =  false;
-	Committee commitee = new Committee();
-
-
-    /**
-     * Create the frame.
-     * @param serviceUI 
+    // SeviceUI for class other UI
+    private SeviceUI serviceUI;
+    // edite.....
+    private boolean checkComplete =  false;
+    // edite.....
+    Committee commitee = new Committee();
+     
+     /**
+     * Constructor for objects of class dcsc
      */
     public AddTeamPanel(SeviceUI serviceUI) 
     {
     	this.serviceUI = serviceUI;
     }
     
+    /*
+    *set a DefaultListModel for use with JTable
+    *@param DefaultListModel for set new teamModel
+    */
     public void setModel(DefaultListModel teamModel ){
     	this.teamModel = teamModel;
     }
     
+    /*
+    *get the DefaultListModel in current table
+    *@return current teamModel
+    */
     public DefaultListModel getModel(){
     	return teamModel;
     }
     
+     /*
+    *get the DefaultListModel in current table
+    *@return current teamModel
+    */
     public boolean getCheckComplete(){
     	return checkComplete;
     }
     
+   /*
+    *initialize all Component
+    */
     public void initComponent()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -221,7 +244,11 @@ public class AddTeamPanel extends JFrame implements RunUI {
        
     
     }
-
+     
+    /*
+    * set the team name
+    *@param String name
+    */
     public void setTeamName(String team){
     	teamName.setText(team);
     }
@@ -230,7 +257,9 @@ public class AddTeamPanel extends JFrame implements RunUI {
     	return checkComplete;
     }
     
-
+    /*
+    * run this frame
+    */
     public void run()
     {
         this.initComponent();
@@ -240,13 +269,17 @@ public class AddTeamPanel extends JFrame implements RunUI {
     }
 
 
-    /*
-   	 * close
+         /*
+   	 * close this frame
    	 */
    	public void close() {
    		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
    	}
-   	
+   
+     /*
+     * add serviceUI in this class
+     *@param SeviceUI 
+     */
     public void addService(SeviceUI serviceUI)
     {
         this.serviceUI = serviceUI;
