@@ -19,7 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
-import exceed.air.controller.ControllerLogin;
+
+import exceedvote.air.controller.ControllerLogin;
 import exceedvote.air.model.Login;
 
 /**

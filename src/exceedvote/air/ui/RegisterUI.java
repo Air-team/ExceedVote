@@ -30,7 +30,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 
-import exceed.air.controller.ControllerRegister;
+import exceedvote.air.controller.ControllerRegister;
 import exceedvote.air.model.Register;
 
 public class RegisterUI extends JFrame implements ActionListener, RunUI {

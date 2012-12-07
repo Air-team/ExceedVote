@@ -14,7 +14,8 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
-import exceed.air.controller.ControllerControl;
+import exceedvote.air.controller.ControllerControl;
+
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

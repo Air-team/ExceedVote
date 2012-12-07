@@ -25,8 +25,8 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-import exceed.air.controller.ControllerControl;
-import exceed.air.controller.ControllerVote;
+import exceedvote.air.controller.ControllerControl;
+import exceedvote.air.controller.ControllerVote;
 import exceedvote.air.model.Clock;
 import exceedvote.air.model.Committee;
 import exceedvote.air.model.Poll;

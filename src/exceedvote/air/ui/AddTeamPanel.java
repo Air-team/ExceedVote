@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
-import exceed.air.controller.ControllerControl;
+import exceedvote.air.controller.ControllerControl;
 import exceedvote.air.model.Committee;
 
 

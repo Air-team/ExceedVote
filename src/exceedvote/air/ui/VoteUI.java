@@ -12,8 +12,8 @@ import javax.swing.JLabel;
 import java.awt.GridLayout;
 import javax.swing.JTextPane;
 
-import exceed.air.controller.ControllerControl;
-import exceed.air.controller.ControllerVote;
+import exceedvote.air.controller.ControllerControl;
+import exceedvote.air.controller.ControllerVote;
 import exceedvote.air.model.Ballot;
 import exceedvote.air.model.Clock;
 import exceedvote.air.model.Committee;

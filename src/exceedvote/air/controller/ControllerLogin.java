@@ -1,4 +1,4 @@
-package exceed.air.controller;
+package exceedvote.air.controller;
 
 import exceedvote.air.model.Committee;
 import exceedvote.air.model.Login;

@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import exceed.air.controller.ControllerAdmin;
+import exceedvote.air.controller.ControllerAdmin;
 import exceedvote.air.model.Admin;
 import exceedvote.air.model.Committee;
 import exceedvote.air.model.Voter;

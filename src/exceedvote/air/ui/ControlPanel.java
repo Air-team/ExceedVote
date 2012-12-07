@@ -27,8 +27,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.util.Timer;
 
-import exceed.air.controller.ControllerControl;
 
+import exceedvote.air.controller.ControllerControl;
 import exceedvote.air.model.Committee;
 import exceedvote.air.model.Team;
 import exceedvote.air.model.VoteTopic;
