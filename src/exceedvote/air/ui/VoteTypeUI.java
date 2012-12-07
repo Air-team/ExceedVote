@@ -162,7 +162,10 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		setSize(430, lastPos + 100);
 
 	}
-
+        /*
+         *remove  button by name
+         *@param String name of button that you want to remove
+         */
 	public void removeButton(String name) {
 		JButton button = dynamicButtons.remove(name);
 		contentPane.remove(button);
@@ -170,7 +173,9 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		contentPane.repaint();
 
 	}
-
+	/*
+         *Set a button in the panel
+         */
 	private void setButton() {
 		int pos = 55;
 		for (int i = 0; i < names.length; i++) {
@@ -264,7 +269,9 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 			}
 		}
 	}
-
+        /*
+         * close this frame
+         */
 	public void close() {
 		this.setVisible(false);
 	}
