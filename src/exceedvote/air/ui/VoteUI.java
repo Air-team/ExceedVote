@@ -1,5 +1,10 @@
 package exceedvote.air.ui;
-
+/**
+ * Start Vote system 
+ * 
+ * @author AIr Team
+ * @version 2012.10.1
+ */
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -26,12 +31,6 @@ import java.text.DateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * eXceed Vote GUI
- * 
- * @author AIr Team
- * @version 2012.10.1
- */
 public class VoteUI extends JFrame implements RunUI, Observer {
 	private JPanel contentPane;
 
@@ -223,12 +222,18 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 			fieldWatch.setText(clock.time());
 		}
 	}
-
+        
+        /**
+	 * close vote button and revote vutton
+	 */
 	private void closeBtn() {
 		voteBtn.setEnabled(false);
 		revoteBtn.setEnabled(false);
 	}
-
+   
+   	/**
+	 * open vote button and revote vutton
+	 */
 	private void openBtn() {
 		voteBtn.setEnabled(true);
 		revoteBtn.setEnabled(true);
@@ -362,7 +367,10 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 					.setText(Messages.getString("VoteUI.label.set.team") + selectTeam); //$NON-NLS-1$
 		}
 	}
-
+        
+        /**
+	 * reteam in listeam 
+	 */
 	public void reTeam() {
 		listTeam.removeAll();
 	}
@@ -379,7 +387,10 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 			
 		}
 	}
-
+        
+        /**
+	 * close this frame
+	 */
 	public void close() {
 		setVisible(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -403,7 +414,11 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		contentPane.invalidate();
 		contentPane.repaint();
 	}
-
+        
+        /**
+	 * set team's type 
+	 * @param String type for set 
+	 */
 	public void setType(String type) {
 		this.typeTeam = type;
 		txtpnTeamlist
