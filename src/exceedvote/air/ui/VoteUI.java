@@ -374,15 +374,9 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			ControllerVote user = ControllerVote.getInstance();
-			
-			if (user.getStatus().equalsIgnoreCase("Voter")) {
-				serviceUI.runByName("voteTypeUI"); //$NON-NLS-$
-			} else if (user.getStatus().equalsIgnoreCase("Committee")) {
-				
-				serviceUI.runByName("voteTypeUICom"); //$NON-NLS-1$
-			}
+			serviceUI.runByName("voteTypeUI");
 			close();
+			
 		}
 	}
 

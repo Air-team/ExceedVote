@@ -247,6 +247,7 @@ public class SetTimeUI extends JFrame implements RunUI {
         public void actionPerformed(ActionEvent e) {
         		ControllerControl control = ControllerControl.getInstance();
         		control.setTime(selectDay, selectMonth, selectYear, hour, min, second);
+        		serviceUI.runByName("ControlPanel");
                 JOptionPane.showConfirmDialog((Component)
                     null,"You select " +selectYear +" -- "+selectMonth+" -- "+selectDay+" -- "+hour+" : " +min , "Pass!!", JOptionPane.DEFAULT_OPTION);
              

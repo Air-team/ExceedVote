@@ -12,9 +12,9 @@
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"></property>
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:derby:/Users/prisadumrongsiri/MyDB;create=true"></property>
+				value="jdbc:derby:/Users/prisadumrongsiri/DB;create=true"></property>
 			<property name="javax.persistence.jdbc.user" value=""></property>
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"></property>
+			<property name="eclipselink.ddl-generation" value=""></property>
 		</properties>
 	</persistence-unit>
 </persistence>

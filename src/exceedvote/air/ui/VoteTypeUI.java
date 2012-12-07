@@ -224,7 +224,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 
 	/*
 	 * action event when user select After user click any type, the type will
-	 * show in buttom of interface
+	 * show in button of interface
 	 */
 	public class ActionSelect extends AbstractAction {
 
@@ -258,11 +258,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 								(Component) null,
 								Messages.getString("VoteTypeUI.pop.clicktype"), Messages.getString("VoteTypeUI.pop.selecttype"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
-
-				if (voter != null)
-					serviceUI.runByName("voteUI", labelSelect); //$NON-NLS-1$
-				else if (committee != null)
-					serviceUI.runByName("voteUICom", labelSelect); //$NON-NLS-1$
+				serviceUI.runByName("voteUI", labelSelect); //$NON-NLS-1$
 				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				close();
 			}

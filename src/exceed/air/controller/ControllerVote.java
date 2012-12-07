@@ -51,14 +51,14 @@ public class ControllerVote {
 		this.committee = committee;
 		status = "committee";
 		Clock clock = new Clock();
-    	VoteUI voteUICom = new VoteUI(clock);
-    	VoteTypeUI voteTypeUICom = new VoteTypeUI(clock);
-    	clock.addObserver(voteUICom);
-    	clock.addObserver(voteTypeUICom);
-		serviceUI.addUI("voteUICom",voteUICom); //$NON-NLS-1$
-		serviceUI.addUI("voteTypeUICom",voteTypeUICom); //$NON-NLS-1$
-		voteTypeUICom.addService(serviceUI);
-		voteUICom.addService(serviceUI);
+    	VoteUI voteUI = new VoteUI(clock);
+    	VoteTypeUI voteTypeUI = new VoteTypeUI(clock);
+    	clock.addObserver(voteUI);
+    	clock.addObserver(voteTypeUI);
+		serviceUI.addUI("voteUI",voteUI); //$NON-NLS-1$
+		serviceUI.addUI("voteTypeUI",voteTypeUI); //$NON-NLS-1$
+		voteTypeUI.addService(serviceUI);
+		voteUI.addService(serviceUI);
 		
 		TimerTask clocktask = new ClockTask( clock );
 		Timer timer = new Timer();
@@ -68,7 +68,7 @@ public class ControllerVote {
 		final long INTERVAL = 1000; 
 		timer.scheduleAtFixedRate(clocktask, delay, INTERVAL);
 		clock.start();
-		voteTypeUICom.run("voteTypeUICom"); //$NON-NLS-1$
+		voteTypeUI.run("voteTypeUI"); //$NON-NLS-1$
 	}
 
 
