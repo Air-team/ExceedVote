@@ -50,13 +50,12 @@ public class SetTimeUI extends JFrame implements RunUI {
     public SetTimeUI(SeviceUI serviceUI) {
 		
 	}
-
-	/**
-     * Create the frame.
-     */
-
-
-	public void initComponent()
+	
+	
+   /*
+    * initialize all coponents
+    */
+    public void initComponent()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 405, 242);
@@ -212,7 +211,7 @@ public class SetTimeUI extends JFrame implements RunUI {
             selectDay = newSelection;
         }
     }
-    
+    // action when select hour
      private class SelectHour implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -221,7 +220,7 @@ public class SetTimeUI extends JFrame implements RunUI {
             hour = newSelection;
         }
     }
-    
+    // action when select min
      private class SelectMin implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -230,7 +229,7 @@ public class SetTimeUI extends JFrame implements RunUI {
             min = newSelection;
         }
     }
-    
+    // action when select second
      private class SelectSecond implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -254,7 +253,7 @@ public class SetTimeUI extends JFrame implements RunUI {
              
         }
     }
-
+    // run this frame
     public void run(String info)
     {
         this.initComponent();
@@ -263,6 +262,10 @@ public class SetTimeUI extends JFrame implements RunUI {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
+    /*
+    *add service to this class
+    *@param Service class 
+    */
     public void addService(SeviceUI serviceUI)
     {
         this.serviceUI = serviceUI;
