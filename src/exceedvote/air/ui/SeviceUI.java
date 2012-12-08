@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.*;
 /**
- * Write a description of class SeviceUI here.
+ * Service class for store all UI class
  * 
- * @author (your name) 
+ * @author Air Team
  * @version (a version number or a date)
  */
 public class SeviceUI
@@ -24,11 +24,19 @@ public class SeviceUI
        
     }
     
+    /*
+     *add UI class in map
+     *@param ui's name , class ui that implement RunUI
+     *
+     */
     public void addUI(String name,RunUI ui)
     {
         mp.put(name,ui);
     }
-    
+    /*
+     *run UI in map by name
+     *@param ui's name
+     */
     public void runByName(String name)
     {   
     	
@@ -47,7 +55,10 @@ public class SeviceUI
 
         }
     }
-    
+     /*
+     *run UI in map by name and type
+     *@param ui's name,ui's type
+     */
     public void runByName(String name,String type)
     {   
         Set s=mp.entrySet();
