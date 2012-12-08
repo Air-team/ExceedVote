@@ -39,26 +39,34 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 	/**
 	 * @wbp.nonvisual location=37,-31
 	 */
-
+        // password textField for type
 	private JPasswordField passwordInput;
+	// passwordField for comfirm above password
 	private JPasswordField passwordConfirm;
+	// username textField for type
 	private JTextField usenameInput;
-
+        //submit button
 	private JButton btnSumit;
+	// cancel button
 	private JButton btnCancel;
+	// radio button for select teacher type
 	private JRadioButton typeTeacher;
+	//radio button for select student type
 	private JRadioButton typeStudent;
-
+        // register type
 	private String type;
 
 	// serviceUI for back to loginUI
 	private SeviceUI serviceUI;
-
+         
+        /*
+         * Constructor for objects of class dqdwd
+         */
 	public RegisterUI() {
 	}
 
 	/**
-	 * Create the frame.
+	 * initialize all components
 	 */
 	public void initComponent() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -143,7 +151,9 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 		group.add(typeStudent);
 
 	}
-
+       /*
+        *  actionListener for submit button
+        */
 	private class submitAction extends AbstractAction {
 		public submitAction() {
 			super();
@@ -208,7 +218,9 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 			}
 		}
 	}
-
+        /*
+        *  actionListener for cancel button
+        */
 	private class CancelAction extends AbstractAction {
 		public CancelAction() {
 			super();
@@ -221,7 +233,7 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 	}
 
 	/*
-	 * close
+	 * close this flame
 	 */
 	public void close() {
 		this.setVisible(false);
