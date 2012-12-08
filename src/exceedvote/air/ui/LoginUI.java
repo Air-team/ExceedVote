@@ -37,7 +37,7 @@ public class LoginUI extends JFrame implements RunUI,ActionListener{
 	private JTextField usernameType;
 	// password test field
 	private JPasswordField passwordType;
-
+      
 	private JTextPane txtpnLogin;
 
 	// button submit login
@@ -51,12 +51,10 @@ public class LoginUI extends JFrame implements RunUI,ActionListener{
 
 	// serviceUI for back to loginUI
 	private SeviceUI serviceUI;
-
-	/**
-	 * Create the frame.
+        /*
+	 * Constructor for objects of class dqdwd
 	 */
 	public LoginUI() {
-
 	}
 
 	/*
