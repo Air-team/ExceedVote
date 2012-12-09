@@ -27,15 +27,22 @@ import java.awt.event.ActionListener;
  * @version (a version number or a date)
  */
 public class SetTimeUI extends JFrame implements RunUI {
-
+    
+    //main panel
     private JPanel contentPane;
+    //comboBox for select hour
     private JComboBox setHour;
+    //comboBox for select minute
     private JComboBox setMin;
+    //comboBox for select second
     private JComboBox setSecond;
-
+    //comboBox for select month
     private JComboBox setMonth;
+    //comboBox for select year
     private JComboBox setYear;
+    //comboBox for select day
     private JComboBox setDay;
+    //Ok button
     private JButton btnOk;
 
     // infomation when select
