@@ -32,7 +32,11 @@ import javax.swing.border.EmptyBorder;
 import exceedvote.air.controller.ControllerControl;
 import exceedvote.air.model.Committee;
 
-
+/**
+ * AddTeamPanel manage UI , add description and picture of that team on this page
+ * @author AirTeam
+ *
+ */
 public class AddTeamPanel extends JFrame implements RunUI {
      
     // main panel in this frame
@@ -62,9 +66,9 @@ public class AddTeamPanel extends JFrame implements RunUI {
     private JFileChooser chooser;
     // SeviceUI for class other UI
     private SeviceUI serviceUI;
-    // edite.....
+
     private boolean checkComplete =  false;
-    // edite.....
+ 
     Committee commitee = new Committee();
      
      /**
@@ -75,7 +79,7 @@ public class AddTeamPanel extends JFrame implements RunUI {
     	this.serviceUI = serviceUI;
     }
     
-    /*
+    /**
     *set a DefaultListModel for use with JTable
     *@param DefaultListModel for set new teamModel
     */
@@ -83,7 +87,7 @@ public class AddTeamPanel extends JFrame implements RunUI {
     	this.teamModel = teamModel;
     }
     
-    /*
+    /**
     *get the DefaultListModel in current table
     *@return current teamModel
     */
@@ -91,7 +95,7 @@ public class AddTeamPanel extends JFrame implements RunUI {
     	return teamModel;
     }
     
-     /*
+     /**
     *get the DefaultListModel in current table
     *@return current teamModel
     */
@@ -99,7 +103,7 @@ public class AddTeamPanel extends JFrame implements RunUI {
     	return checkComplete;
     }
     
-   /*
+   /**
     *initialize all Component
     */
     public void initComponent()
@@ -161,7 +165,9 @@ public class AddTeamPanel extends JFrame implements RunUI {
         contentPane.add(descriptionText);
 
     }
-    
+    /**
+     * Manage about file picture
+     */
     private class OpenClass implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             chooser = new JFileChooser();
@@ -180,6 +186,10 @@ public class AddTeamPanel extends JFrame implements RunUI {
         }
     }
     
+    
+   /**
+    * Action o cancel button (cancel) to add team and then it will turn on ControlPanel
+    */
     private class cancelAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
         	checkComplete = false;
@@ -191,7 +201,9 @@ public class AddTeamPanel extends JFrame implements RunUI {
         }
     }
 
-   
+   /**
+    * Action of AddTeam button 
+    */
     private class addTeam implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try
@@ -245,7 +257,7 @@ public class AddTeamPanel extends JFrame implements RunUI {
     
     }
      
-    /*
+    /**
     * set the team name
     *@param String name
     */
@@ -269,14 +281,14 @@ public class AddTeamPanel extends JFrame implements RunUI {
     }
 
 
-         /*
+     /**
    	 * close this frame
    	 */
    	public void close() {
    		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
    	}
    
-     /*
+    /**
      * add serviceUI in this class
      *@param SeviceUI 
      */

@@ -1,11 +1,12 @@
 package exceedvote.air.ui;
 
 
-import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -13,20 +14,23 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 
-import exceedvote.air.model.Committee;
-import exceedvote.air.model.Poll;
 import exceedvote.air.model.Team;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Show the all result 
+ * @author AirTeam
+ *
+ */
 public class TotalResult extends JFrame {
 
     private JPanel contentPane;
@@ -44,6 +48,7 @@ public class TotalResult extends JFrame {
     	initComponent();
     }
 
+    /** Set initial component */
     public void initComponent()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,18 +123,29 @@ public class TotalResult extends JFrame {
 
     }
     
+    /**
+     * Action for detail button
+     */
     private class DetailAction implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
+        	if(resultTable.getSelectedRow()<0){
+        		JOptionPane.showConfirmDialog((Component) null,
+						"Please selec Team that want to see", "Incorrect!!!",
+						JOptionPane.DEFAULT_OPTION);
+        	}
+        	else {
         	String teamName = (String) model.getValueAt(resultTable.getSelectedRow(), 1);
         		TeamScoreUI teamUI = new TeamScoreUI(teamName);
         		Team team = new Team();
         		teamUI.addData( team.getScoreAlltopic(teamName) );
         		teamUI.run(""); //$NON-NLS-1$
+        	}
         		
         }
     }
     
+    /** Action for topic button */
     private class TopicAction implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -138,6 +154,7 @@ public class TotalResult extends JFrame {
         }
     }
     
+    /** Add all result of voting in Table */
 	public void addData(List<ArrayList> list)
 	{
 	    
@@ -147,6 +164,9 @@ public class TotalResult extends JFrame {
 		   model.insertRow(i,new Object[]{t,info.get(0),info.get(1)});
 	   }
 	}
+	/**
+	 * Run tihs interface
+	 */
     public void run()
     {
         this.setVisible(true);

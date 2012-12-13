@@ -2,11 +2,7 @@ package exceedvote.air.ui;
 
  
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.GridLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,7 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+/**
+ * Indicate about history of that person about voting
+ * @author AirTeam
+ *
+ */
 public class HistoryUI extends JFrame {
 
 	private JPanel contentPane;
@@ -36,6 +36,7 @@ public class HistoryUI extends JFrame {
 		initComponent();
 	}
 	
+	/** Initial Component */
 	public void initComponent()
 	{
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,6 +91,7 @@ public class HistoryUI extends JFrame {
         contentPane.add(scrollPane);
 	}
 	
+	/** Add the history in table */
 	public void addData(List<ArrayList> list)
 	{
 	    
@@ -99,6 +101,9 @@ public class HistoryUI extends JFrame {
 	   }
 	}
 	
+	/**
+	 * run this frame
+	 */
 	public void run()
 	{
 	    this.initComponent();

@@ -27,7 +27,11 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
-
+/**
+ * Indicate the result of topic that you want to see
+ * @author AirTeam
+ *
+ */
 public class TopicScoreUI extends JFrame {
 
     private JPanel contentPane;
@@ -47,6 +51,7 @@ public class TopicScoreUI extends JFrame {
     	initComponent();
     }
     
+    /** Set Initial Component */
     public void  initComponent()
     {
         getContentPane().setBackground(Color.WHITE);
@@ -108,7 +113,7 @@ public class TopicScoreUI extends JFrame {
      
     }
     
-    /*
+    /**
      * addType by string
      */
     public void addType(String type)
@@ -119,7 +124,7 @@ public class TopicScoreUI extends JFrame {
     }
 
     
-    /*
+    /**
      * add the result for each team by array string {rank,team name,score in each topic}
      * ex. {1,"Air",1000} 1000 mean score in first topic
      * 
@@ -134,6 +139,9 @@ public class TopicScoreUI extends JFrame {
 	   }
 	}
     
+    /**
+	 * run this frame
+	 */
     public void run(String info)
     {
         

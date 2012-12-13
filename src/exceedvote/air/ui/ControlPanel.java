@@ -34,7 +34,10 @@ import exceedvote.air.model.Team;
 import exceedvote.air.model.VoteTopic;
 import java.util.TimerTask;
 
-
+/**
+ * ControlPanel manage about setTime ,addTeam ,add topic etc. 
+ * This UI for committee
+ */
 public class ControlPanel extends JFrame implements ListSelectionListener,
 		RunUI {
 
@@ -79,6 +82,9 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 
 	}
 
+	/**
+	 * Initial components
+	 */
 	public void initComponent() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 493, 471);
@@ -107,8 +113,11 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		controlPan.add(btnVote);
 	}
 
+	/**
+	 * set Component in the panel
+	 */
 	public void setControlPage() {
-		// create Controlpane
+		
 		controlPan.setBounds(0, 0, 475, 328);
 		controlPan.setLayout(null);
 
@@ -205,7 +214,10 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		}
 		
 	}
-	// action for addTeambtn
+	
+	/**
+	 * Action of AddTeam Button 
+	 */
 	private class addTeamAction extends AbstractAction {
 
 		public addTeamAction() {
@@ -215,7 +227,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		public void actionPerformed(ActionEvent e) {
 			String text = addTeamInput.getText();
 
-			if (!teamModel.contains(text)) {
+			if (!teamModel.contains(text) && text != "") {
 			
 				final AddTeamPanel teamDes = new AddTeamPanel(serviceUI);
 				teamDes.setTeamName(text);
@@ -231,7 +243,13 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 					listTeam.setModel(teamModel);
 				}
 
-			} else {
+			}
+			else if(text!=""){
+				JOptionPane.showConfirmDialog((Component) null,
+						"Please fill  Team", "Incorrect!!!",
+						JOptionPane.DEFAULT_OPTION);
+			}
+			else {
 				// System.out.println(addTeamInput.getText());
 				JOptionPane.showConfirmDialog((Component) null,
 						Messages.getString("ControlPanel.pop.setmodel.nameused"), Messages.getString("ControlPanel.pop.setmodel.selectteam"), //$NON-NLS-1$ //$NON-NLS-2$
@@ -245,7 +263,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 
 
 
-	// action for addCreteribtn
+	/** Action for add criteria Button*/
 	private class addCreteriaAction extends AbstractAction {
 
 		public addCreteriaAction() {
@@ -256,7 +274,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		public void actionPerformed(ActionEvent e) {
 			ControllerControl control = ControllerControl.getInstance();
 			
-			if (!topicModel.contains(criteraiInput.getText())) {
+			if (!topicModel.contains(criteraiInput.getText()) && (criteraiInput.getText()!="")) {
 				if (control.addTopic(criteraiInput.getText())) {
 				
 					topicModel.addElement(criteraiInput.getText());
@@ -264,7 +282,13 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 							Messages.getString("ControlPanel.pop.addsuccess"), Messages.getString("ControlPanel.pop.addtopic"), //$NON-NLS-1$ //$NON-NLS-2$
 							JOptionPane.DEFAULT_OPTION);
 				}
-			} else {
+			} 
+			else if(criteraiInput.getText()!=""){
+				JOptionPane.showConfirmDialog((Component) null,
+						"Please fill  Topic", "Incorrect!!!",
+						JOptionPane.DEFAULT_OPTION);
+			}
+			else {
 				JOptionPane.showConfirmDialog((Component) null,
 						Messages.getString("ControlPanel.pop.settopic.nameused"), Messages.getString("ControlPanel.pop.settopic.addtopic"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.DEFAULT_OPTION);
@@ -276,7 +300,9 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 
 	}
 
-	// action for setTimebtn
+	/**
+	 * Action set time button
+	 */
 		private class setTimeAction extends AbstractAction {
 
 			public setTimeAction() {
@@ -292,7 +318,9 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 			}
 		}
 
-	// action for deleteTopicbtn
+	/**
+	 * Action fon deleteTopic button
+	 */
 	private class deleteTopicAction extends AbstractAction {
 
 		public deleteTopicAction() {
@@ -334,7 +362,9 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		}
 	}
 
-	// action for deleteTeambtn
+	/**
+	 * Action for deleteTeam Button
+	 */
 	private class deleteTeamAction extends AbstractAction {
 		ControllerControl control = ControllerControl.getInstance();
 		
@@ -379,6 +409,10 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 
 	}
 
+
+	/**
+	 * Run this UI (Set Visible)
+	 */
 	public void run(String info) {
 		this.setControlPage();
 		this.initComponent();
@@ -387,10 +421,18 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+
+	/**
+	 * add serviceUI in this class
+	 * @param SeviceUI
+	 */
 	public void addService(SeviceUI serviceUI) {
 		this.serviceUI = serviceUI;
 	}
 	
+	/**
+	 * Invisible
+	 */
 	public void close() {
 		this.setVisible(false);
 	}

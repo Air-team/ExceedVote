@@ -1,8 +1,7 @@
 package exceedvote.air.ui;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -10,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -19,6 +17,11 @@ import javax.swing.border.EtchedBorder;
 import exceedvote.air.model.Team;
 import exceedvote.air.model.TeamDescription;
 
+/**
+ * Indicate information of team that you select
+ * @author AirTeam
+ *
+ */
 public class InfomationUI extends JFrame implements RunUI{
 	private JPanel contentPane;
 	private JTextPane infoPane;
@@ -80,14 +83,22 @@ public class InfomationUI extends JFrame implements RunUI{
 	       
 	}
 	
+	/** Invisible */
 	public void close() {
    		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
    	}
 	
+	/**
+	 * add serviceUI in this class
+	 * @param SeviceUI
+	 */
 	public void addService(SeviceUI serviceUI) {
 		this.serviceUI = serviceUI;
 	}
    
+	/**
+	 * run this frame
+	 */
 	public void run(String info) {
 		this.setVisible(true);
 		this.setResizable(true);

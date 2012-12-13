@@ -34,7 +34,7 @@ import exceedvote.air.model.VoteTopic;
 import exceedvote.air.model.Voter;
 
 /**
- * VoteType user interface
+ * VoteType user interface indicate each topic that you can select
  * 
  * @author AIr Team
  * @version 2012.11.3
@@ -80,8 +80,6 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 
 	/**
 	 * Create the frame.
-	 * 
-	 * @param t
 	 */
 
 	public VoteTypeUI(Clock clock) {
@@ -90,7 +88,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		this.clock = clock;
 	}
 
-	/*
+	/**
 	 * set all component
 	 */
 	public void initComponent() {
@@ -197,6 +195,9 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 
 	}
 
+	/**
+	 * Action fon poll button
+	 */
 	private class pollAction extends AbstractAction {
 
 		public pollAction() {
@@ -213,6 +214,9 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		}
 	}
 
+	/**
+	 * Action for history button
+	 */
 	private class historyAction extends AbstractAction {
 
 		public historyAction() {
@@ -227,7 +231,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 
 	}
 
-	/*
+	/**
 	 * action event when user select After user click any type, the type will
 	 * show in button of interface
 	 */
@@ -244,7 +248,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		}
 	}
 
-	/*
+	/**
 	 * Action event when user click submit button if type was select, run
 	 * voterUi. Show messagebox when user click submit but don't select any
 	 * type.
@@ -269,7 +273,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 			}
 		}
 	}
-        /*
+        /**
          * close this frame
          */
 	public void close() {
@@ -280,7 +284,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		this.serviceUI = serviceUI;
 	}
 
-	/*
+	/**
 	 * run this frame
 	 */
 	public void run(String info) {
@@ -293,6 +297,9 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 	}
 
 	@Override
+	/**
+	 * Update every onse second
+	 */
 	public void update(Observable o, Object arg) {
 
 		if (clock.isRun() == false) {

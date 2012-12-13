@@ -59,8 +59,8 @@ public class SetTimeUI extends JFrame implements RunUI {
 	}
 	
 	
-   /*
-    * initialize all coponents
+   /**
+    * initialize all components
     */
     public void initComponent()
     {
@@ -186,7 +186,7 @@ public class SetTimeUI extends JFrame implements RunUI {
         setMonth.addActionListener(new SelectMonth());
     }
 
-    // action when select year
+    /** action when select year */
     private class SelectYear implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -198,7 +198,7 @@ public class SetTimeUI extends JFrame implements RunUI {
         }
     }
 
-    // action when select month
+    /** action when select month */
     private class SelectMonth implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -209,7 +209,7 @@ public class SetTimeUI extends JFrame implements RunUI {
         }
     }
 
-    // action when select day
+    /** action when select day */
     private class SelectDay implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -218,7 +218,8 @@ public class SetTimeUI extends JFrame implements RunUI {
             selectDay = newSelection;
         }
     }
-    // action when select hour
+    
+     /** action when select hour */
      private class SelectHour implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -227,7 +228,8 @@ public class SetTimeUI extends JFrame implements RunUI {
             hour = newSelection;
         }
     }
-    // action when select min
+    
+     /** action when select min */
      private class SelectMin implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -236,7 +238,8 @@ public class SetTimeUI extends JFrame implements RunUI {
             min = newSelection;
         }
     }
-    // action when select second
+    
+     /** action when select second */
      private class SelectSecond implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
@@ -269,7 +272,7 @@ public class SetTimeUI extends JFrame implements RunUI {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
-    /*
+    /**
     *add service to this class
     *@param Service class 
     */

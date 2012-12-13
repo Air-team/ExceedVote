@@ -1,44 +1,36 @@
 package exceedvote.air.ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
 
-import java.awt.*;
+
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
+
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextPane;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
+
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
 import exceedvote.air.controller.ControllerControl;
 import exceedvote.air.controller.ControllerVote;
-import exceedvote.air.model.Ballot;
-import exceedvote.air.model.Clock;
-import exceedvote.air.model.Committee;
-import exceedvote.air.model.Poll;
-import exceedvote.air.model.VoteTopic;
-import exceedvote.air.model.Voter;
+import exceedvote.air.model.VoteTopic;;
+
+
 
 /**
- * VoteType user interface
- * 
+ * Detail user interface show 
  * @author AIr Team
  * @version 2012.11.3
  */
@@ -59,10 +51,6 @@ public class Detail extends JFrame implements RunUI {
 	private JLabel selectType;
 	private String labelSelect = ""; //$NON-NLS-1$
 
-	// voteUi run after user select and click submit button
-	// ballotleft
-	// private JLabel ballotLeft;
-
 	private Map<String, JButton> dynamicButtons = new HashMap<String, JButton>();
 
 	// service for call other ui
@@ -80,7 +68,7 @@ public class Detail extends JFrame implements RunUI {
 		ballot = voteControllerVote.checkAmountBallot();
 	}
 
-	/*
+	/**
 	 * set all component
 	 */
 	public void initComponent() {
@@ -122,6 +110,7 @@ public class Detail extends JFrame implements RunUI {
 
 	}
 
+	/** Remove the topic button when it out of from persistence */
 	public void removeButton(String name) {
 		JButton button = dynamicButtons.remove(name);
 		contentPane.remove(button);
@@ -130,8 +119,10 @@ public class Detail extends JFrame implements RunUI {
 
 	}
 
+	/** Set the button vcomponent */
 	private void setButton() {
 		int pos = 55;
+
 		for (int i = 0; i < names.length; i++) {
 			pos += 30;
 			JButton topicBtn = new JButton();
@@ -151,9 +142,9 @@ public class Detail extends JFrame implements RunUI {
 
 	}
 
-	/*
+	/**
 	 * action event when user select After user click any type, the type will
-	 * show in buttom of interface
+	 * show in button of interface
 	 */
 	public class ActionSelect extends AbstractAction {
 
@@ -169,9 +160,9 @@ public class Detail extends JFrame implements RunUI {
 		}
 	}
 
-	/*
+	/**
 	 * Action event when user click submit button if type was select, run
-	 * voterUi. Show messagebox when user click submit but don't select any
+	 * voterUi. Show message box when user click submit but don't select any
 	 * type.
 	 */
 	private class ActionSubmit extends AbstractAction {
@@ -190,24 +181,31 @@ public class Detail extends JFrame implements RunUI {
 			} else {
 
 				TopicScoreUI detail = new TopicScoreUI(labelSelect);
-				Ballot ballot = Ballot.getInstance();
-
-				detail.addData(ballot.getScoreEachTeam(labelSelect));
+				ControllerControl control = ControllerControl.getInstance();
+				detail.addData(control.getBallot(labelSelect));
 				detail.run(""); //$NON-NLS-1$
 
 			}
 		}
 	}
 
+
+	/**
+	 * Invisible
+	 */
 	public void close() {
 		this.setVisible(false);
 	}
 
+	/**
+	 * add serviceUI in this class
+	 * @param SeviceUI
+	 */
 	public void addService(SeviceUI serviceUI) {
 		this.serviceUI = serviceUI;
 	}
 
-	/*
+	/**
 	 * run this frame
 	 */
 	public void run(String info) {

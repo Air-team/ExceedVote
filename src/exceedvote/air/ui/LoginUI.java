@@ -1,11 +1,10 @@
 package exceedvote.air.ui;
 
-import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
-import java.awt.BorderLayout;
+
 import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,13 +14,15 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.AbstractAction;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 import exceedvote.air.controller.ControllerLogin;
-import exceedvote.air.model.Login;
+
+
 
 /**
  * Login user Interface waiting for test with database
@@ -51,13 +52,13 @@ public class LoginUI extends JFrame implements RunUI,ActionListener{
 
 	// serviceUI for back to loginUI
 	private SeviceUI serviceUI;
-        /*
+        /**
 	 * Constructor for objects of class dqdwd
 	 */
 	public LoginUI() {
 	}
 
-	/*
+	/**
 	 * set all component
 	 */
 	public void initComponent() {
@@ -127,6 +128,7 @@ public class LoginUI extends JFrame implements RunUI,ActionListener{
 		contentPane.add(lblSelectLanguage);
 
 	}
+	/** Action for select Language */
 	public class SelectLang extends AbstractAction{
 
 		@Override
@@ -142,7 +144,7 @@ public class LoginUI extends JFrame implements RunUI,ActionListener{
 		
 	}
 
-	/*
+	/**
 	 * action in login button
 	 */
 	private class UpAction extends AbstractAction {
@@ -172,7 +174,7 @@ public class LoginUI extends JFrame implements RunUI,ActionListener{
 		}
 	}
 
-	/*
+	/**
 	 * action in regist button
 	 */
 	private class Regis extends AbstractAction {
@@ -190,15 +192,20 @@ public class LoginUI extends JFrame implements RunUI,ActionListener{
 		}
 	}
 
+	/**
+	 * add serviceUI in this class
+	 * @param SeviceUI
+	 */
 	public void addService(SeviceUI serviceUI) {
 		this.serviceUI = serviceUI;
 	}
 
+	/** Close this frame */
 	public void close() {
 		this.setVisible(false);
 	}
 
-	/*
+	/**
 	 * start this frame
 	 */
 	public void run(String info) {
@@ -208,6 +215,9 @@ public class LoginUI extends JFrame implements RunUI,ActionListener{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	/**
+	 * Action for select languages
+	 */
 	  public void actionPerformed(ActionEvent actionEvent) {
     	  String select = ((String) comboBox.getSelectedItem())
 					.toString();

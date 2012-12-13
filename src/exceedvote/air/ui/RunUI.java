@@ -9,7 +9,7 @@ package exceedvote.air.ui;
  */
 public interface RunUI
 {  
-   /*
+   /**
     *run frame
     *@param infomation use for run UI
     */

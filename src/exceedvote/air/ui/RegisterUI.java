@@ -1,12 +1,6 @@
 package exceedvote.air.ui;
 
-/*
- * what changed
- * implements RunUI
- * add method addService
- * add method close
- * add actionListener in cancel button
- */
+/** Register user inferface indicate the detail that you want to input for first time that use this program*/
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -151,7 +145,7 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 		group.add(typeStudent);
 
 	}
-       /*
+       /**
         *  actionListener for submit button
         */
 	private class submitAction extends AbstractAction {
@@ -218,7 +212,7 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 			}
 		}
 	}
-        /*
+        /**
         *  actionListener for cancel button
         */
 	private class CancelAction extends AbstractAction {
@@ -232,20 +226,23 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 		}
 	}
 
-	/*
+	/**
 	 * close this flame
 	 */
 	public void close() {
 		this.setVisible(false);
 	}
 
-	/*
+	/**
 	 * add service for run the other ui
 	 */
 	public void addService(SeviceUI serviceUI) {
 		this.serviceUI = serviceUI;
 	}
 
+	/**
+	 * run this frame
+	 */
 	public void run(String info) {
 		this.initComponent();
 		this.setVisible(true);
@@ -254,6 +251,9 @@ public class RegisterUI extends JFrame implements ActionListener, RunUI {
 	}
 
 	@Override
+	/**
+	 * Actionc select tyoe between teacher and student
+	 */
 	public void actionPerformed(ActionEvent e) {
 		type = e.getActionCommand();
 

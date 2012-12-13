@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import javax.swing.*;
+
 /**
  * Service class for store all UI class
  * 
@@ -13,9 +13,7 @@ import javax.swing.*;
 public class SeviceUI
 {
     private static Map<String,RunUI> mp = new HashMap<String,RunUI>();
-    
-    //private static SeviceUI seviceUI = null;
-    
+   
     /**
      * Constructor for objects of class SeviceUI
      */
@@ -24,7 +22,7 @@ public class SeviceUI
        
     }
     
-    /*
+    /**
      *add UI class in map
      *@param ui's name , class ui that implement RunUI
      *
@@ -33,7 +31,7 @@ public class SeviceUI
     {
         mp.put(name,ui);
     }
-    /*
+    /**
      *run UI in map by name
      *@param ui's name
      */
@@ -55,7 +53,7 @@ public class SeviceUI
 
         }
     }
-     /*
+     /**
      *run UI in map by name and type
      *@param ui's name,ui's type
      */

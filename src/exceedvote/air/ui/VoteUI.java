@@ -31,6 +31,11 @@ import java.text.DateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Interface indicate Vote inteface you can select team vote,revote and see history
+ * @author AirTeam
+ */
 public class VoteUI extends JFrame implements RunUI, Observer {
 	private JPanel contentPane;
 
@@ -224,7 +229,7 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 	}
         
         /**
-	 * close vote button and revote vutton
+	 * close vote button and revote button
 	 */
 	private void closeBtn() {
 		voteBtn.setEnabled(false);
@@ -232,7 +237,7 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 	}
    
    	/**
-	 * open vote button and revote vutton
+	 * open vote button and revote button
 	 */
 	private void openBtn() {
 		voteBtn.setEnabled(true);
@@ -253,6 +258,7 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		}
 	}
 
+	/** Action  for history button */
 	 private class historyAction extends AbstractAction{
 	
 	 public historyAction()
@@ -267,7 +273,8 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 	 }
 	
 	 }
-
+	
+	 /** Action for vote button*/
 	private class UpAction extends AbstractAction {
 
 		public UpAction() {
@@ -310,6 +317,9 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		}
 	}
 
+	/**
+	 * Action for revote button
+	 */
 	private class ReVoteAction extends AbstractAction {
 		public ReVoteAction() {
 			super();
@@ -354,6 +364,7 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		}
 	}
 
+	/** Action for select button (team that want to vote) */
 	private class ActionSelect extends AbstractAction {
 
 		public ActionSelect() {
@@ -396,12 +407,10 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	/*
+	/**
 	 * set team in UI,
 	 */
 	public void updateTeam() {
-		// reTeam();
-		//
 		for (int i = 0; i < names.length; i++) {
 			JButton Btn = new JButton();
 			Btn.setText(((Team) names[i]).getName());
