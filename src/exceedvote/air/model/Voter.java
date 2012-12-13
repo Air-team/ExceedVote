@@ -24,8 +24,6 @@ public class Voter implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
-
 	private String name;
 	private String type;
 	private String password;
@@ -41,10 +39,8 @@ public class Voter implements Serializable {
 	/**
 	 * Initialize the Voter that has name and type.
 	 * 
-	 * @param name
-	 *            - the name of the user.
-	 * @param type
-	 *            - the type such as STUDENT or TEACHER.
+	 * @param name is the name of the user.
+	 * @param type is the type such as STUDENT or TEACHER.
 	 */
 	public Voter(String username,String password,String type) {
 		this();
@@ -59,8 +55,7 @@ public class Voter implements Serializable {
 	/**
 	 * Set the quota for each user depend on what kind of the user.
 	 * 
-	 * @param type
-	 *            - the type of user.
+	 * @param type is the type of user.
 	 */
 	private void setFirstQuata(String type) {
 		if(type.equalsIgnoreCase("Student")){
@@ -90,32 +85,54 @@ public class Voter implements Serializable {
 		return this.type;
 	}
 
+	/**
+	 * Return the id of this voter.
+	 * @return the Integer represents the id.
+	 */
 	public Integer getId() {
 		return this.id;
 	}
 
+	/**
+	 * Set the left ballot for this voter.
+	 * @param value the amount of ballots.
+	 */
 	public void setballotLeft(int value) {
 		this.amountOfBallot = value;
 		VoterDao dao = DaoFactory.getInstance().getVoterDao();
 		dao.save(this);
 	}
 
+	/**
+	 * Return the amount of the left ballots.
+	 * @return amount of the left ballots.
+	 */
 	public int getballotLeft() {
 		return amountOfBallot;
 	}
 
-	
+	/**
+	 * Return the list of histories.
+	 * @return list of histories.
+	 */
 	public List<ArrayList> history(){
 		BallotDao dao = DaoFactory.getInstance().getBallotDao();
 		return dao.history(this);
 	}
 	
+	/**
+	 * Save the information of this voter to the database.
+	 * @param voter is the voter object.
+	 */
 	public void saveInfo(Voter voter){
 		VoterDao dao = DaoFactory.getInstance().getVoterDao();
 		dao.save(voter);
 	}
 
-	
+	/**
+	 * Return the password of this voter.
+	 * @return password of this voter.
+	 */
 	public String getPassword(){
 		return password;
 	}

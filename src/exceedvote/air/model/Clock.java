@@ -1,22 +1,38 @@
-package exceedvote.air.model;
+ package exceedvote.air.model;
 
 import java.util.Observable;
 
+/**
+ * Clock represents the stopwatch that will countdown from the start time until the time run out.
+ * This class will be observe by the Observer.
+ * 
+ * @author Air Team
+ */
 public class Clock extends Observable {
 	private long time;
 	private long startTime = 0;
 	private long stopTime = 0;
 	private boolean running = false;
-	private Committee committee = new Committee();
+	private Committee committee;
 
+	/**
+	 * Initialize committee that will set the stop time.
+	 */
 	public Clock() {
-		
+		committee = new Committee();
 	}
 
+	/**
+	 * Check whether the time is running or not.
+	 * @return true if the time is running.
+	 */
 	public boolean isRun() {
 		return running;
 	}
 
+	/**
+	 * Start the time by get the stoptime from committee.
+	 */
 	public void start() {
 		this.startTime = System.currentTimeMillis();
 		this.stopTime = committee.getTime();
@@ -26,8 +42,11 @@ public class Clock extends Observable {
 
 	}
 
-	// elaspsed time in milliseconds
-	public long getElapsedTime() {
+	/**
+	 * Get the elapse time in milliseconds.
+	 * @return elapse time in milliseconds.
+	 */
+	private long getElapsedTime() {
 		long elapsed = 0;
 		if (running)
 			elapsed = (committee.getTime() - System.currentTimeMillis());
@@ -36,6 +55,10 @@ public class Clock extends Observable {
 		return elapsed;
 	}
 
+	/**
+	 * Return the String represents the remaining time in the time format(hour:minute:second).
+	 * @return time that is formatted.
+	 */
 	public String time() {
 
 		long time = this.getElapsedTime() / 1000;
@@ -61,12 +84,10 @@ public class Clock extends Observable {
 	}
 
 	/**
-	 * Set the time and notify something to observer
-	 * 
-	 * @param time
-	 *            is the current time from your computer
+	 * Set the time and notify to observer
+	 * @param time is the current time from computer.
 	 */
-	public void setTime(long time) {
+	private void setTime(long time) {
 		this.time = time;
 
 		setChanged();
@@ -74,7 +95,7 @@ public class Clock extends Observable {
 	}
 
 	/**
-	 * Set the current time every 1 minute
+	 * Update the time in every one second.
 	 */
 	public void updateTime() {
 		if (running == true) {

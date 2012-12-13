@@ -23,12 +23,18 @@ public class ControllerAdmin {
 		return controllerAdmin;
 	}
 
-
+	/**
+	 *Get all voter in the system
+	 * @return List Of all Voter
+	 */
 	public List<Voter> getAllvoter() {
 		return admin.getVoter();		
 	}
 
-
+	/**
+	 * Get all committee in the system
+	 * @return List Of all committee
+	 */
 	public List<Committee> getAllcommittee() {
 		return admin.getCommittee();		
 	}

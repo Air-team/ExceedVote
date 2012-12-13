@@ -26,8 +26,7 @@ public class VoteTopic implements Serializable {
 	/**
 	 * Initialize the VoteTopic with title.
 	 * 
-	 * @param title
-	 *            - the topic title.
+	 * @param title is the topic title.
 	 */
 	public VoteTopic(String title) {
 		this();
@@ -46,13 +45,10 @@ public class VoteTopic implements Serializable {
 	/**
 	 * Set the title of the topic.
 	 * 
-	 * @param title
-	 *            - the changed title.
+	 * @param title is the changed title.
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	
-	
-
 }

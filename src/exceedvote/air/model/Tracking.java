@@ -32,10 +32,8 @@ public class Tracking {
 	/**
 	 * Add Log for Vote.
 	 * 
-	 * @param teamName
-	 *            - the team's name that has an action.
-	 * @param type
-	 *            - The VoteTopic
+	 * @param teamName is the team's name that will be tracked.
+	 * @param type is The VoteTopic
 	 */
 	public void addLogVote(String teamName, String type) {
 		lg.info("vote For " + teamName + " topic: " + type);
@@ -44,10 +42,8 @@ public class Tracking {
 	/**
 	 * Add Log for ReVote.
 	 * 
-	 * @param teamName
-	 *            - the team's name that has an action.
-	 * @param type
-	 *            - The VoteTopic
+	 * @param teamName is the team's name that will be tracked.
+	 * @param type is The VoteTopic
 	 */
 	public void addLogRevote(String teamName, String type) {
 		lg.info("revote For " + teamName + " topic: " + type);

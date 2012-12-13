@@ -3,24 +3,26 @@ package exceedvote.air.model;
 import java.util.TimerTask;
 
 /**
- * Loop of time every 1 minute
+ * ClockTask will do the repeated counting of time execution by Timer
+ * 
+ * @author Air Team
  */
 public class ClockTask extends TimerTask {
 
 	private Clock clock;
 
 	/**
-	 * Initialize the ClockModel
+	 * Initialize the Clock
 	 * 
-	 * @param model
-	 *            is ClockModel that you have to update time
+	 * @param clock is Clock that you will call to update time.
 	 */
 	public ClockTask(Clock clock) {
 		this.clock = clock;
 	}
 
 	/**
-	 * Update current time to the model
+	 * Calls the Clock to update time.
+	 * This method will be call every one second(as it has already set on this program) by execution of Timer.
 	 */
 	@Override
 	public void run() {

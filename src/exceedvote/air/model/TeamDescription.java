@@ -27,6 +27,7 @@ public class TeamDescription implements Serializable {
 
 	/** the information of a team. */
 	private String info;
+	/** the String URL of file picture*/
 	private String filePic;
 	@Transient
 	private Icon icon;
@@ -40,14 +41,16 @@ public class TeamDescription implements Serializable {
 	/**
 	 * Initialize TeamDescription with information.
 	 * 
-	 * @param info
-	 *            - the information of a team.
+	 * @param info is the information of a team.
 	 */
 	public TeamDescription(String info) {
 		this();
 		this.info = info;
 	}
 
+	/**
+	 * Initialize TeamDescription.
+	 */
 	public TeamDescription() {
 		super();
 	}
@@ -55,8 +58,7 @@ public class TeamDescription implements Serializable {
 	/**
 	 * Set the information of a team.
 	 * 
-	 * @param info
-	 *            - String represents the information of a team.
+	 * @param info is the String represents the information of a team.
 	 */
 	public void setInfo(String info) {
 		this.info = info;
@@ -71,21 +73,36 @@ public class TeamDescription implements Serializable {
 		return this.info;
 	}
 
+	/**
+	 * Return the String represents the URL of file picture.
+	 * @return URL of file picture.
+	 */
 	public String getFilePic() {
 		return filePic;
 	}
 
+	/**
+	 * Set the URL of file picture.
+	 * @param filePic is Strings represent the URL of file picture.
+	 */
 	public void setFilePic(String filePic) {
 		this.filePic = filePic;
 		this.setURLPic(filePic);
 	}
 
+	/**
+	 * Save the TeamDescription to the database
+	 * @param teamDes is TeamDescription object.
+	 */
 	public void saveTeamDes(TeamDescription teamDes) {
-		TeamDescriptionDao dao = DaoFactory.getInstance()
-				.getTeamDescriptionDao();
+		TeamDescriptionDao dao = DaoFactory.getInstance().getTeamDescriptionDao();
 		dao.save(teamDes);
 	}
 
+	/**
+	 * Return the Icon of file picture.
+	 * @return Icon of file picture.
+	 */
 	public Icon getIcon() {
 		if (icon == null) {
 			try {
@@ -97,6 +114,10 @@ public class TeamDescription implements Serializable {
 		return icon;
 	}
 
+	/**
+	 * Set the URL of the file picture.
+	 * @param filePic the String represents the URL of file picture.
+	 */
 	public void setURLPic(String filePic) {
 
 		this.filePic = filePic;
@@ -111,10 +132,18 @@ public class TeamDescription implements Serializable {
 		icon = new ImageIcon(position);
 	}
 
+	/**
+	 * Return the id of this TeamDescription.
+	 * @return id of this TeamDescription.
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Set the Id of this TeamDescription
+	 * @param id the new id.
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}

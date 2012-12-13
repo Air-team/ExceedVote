@@ -12,22 +12,43 @@ import exceedvote.air.ui.ControlPanel;
 import exceedvote.air.ui.SeviceUI;
 import exceedvote.air.ui.VoteTypeUI;
 import exceedvote.air.ui.VoteUI;
-
+/**
+ * Mediator between ControlPanel and Committee which manage about setTime ,add criteria, add team etc.
+ * @author AirTeam
+ */
 public class ControllerControl {
 	
 private static ControllerControl controllerControl;
 private SeviceUI serviceUI = new SeviceUI();
 private Committee committee; 
+
+	/**
+	 * Set ConttollerControl be singleton
+	 * @return
+	 */
 	public static ControllerControl getInstance(){
 		if(controllerControl == null) controllerControl = new ControllerControl();
 		return controllerControl;
 	}
-
+	
+	/**
+	 * SetTime that close voting system
+	 * @param selectDay given date be string (such as"31")
+	 * @param selectMonth given month be string
+	 * @param selectYear given year (B.C.) be string (such as "2012")
+	 * @param hour given hour be string
+	 * @param min given minute be string
+	 * @param second given second be string
+	 */
 	public void setTime(String selectDay, String selectMonth,String selectYear, String hour, String min, String second) {
 		
 		committee.setTime(selectDay, selectMonth, selectYear, hour, min, second);
 	}
 
+	/**
+	 * Run ControlpanelUI
+	 * @param committee the person that login to use controlpanel.
+	 */
 	public void getControlPanel(Committee committee) {
 		this.committee = committee;
 		ControlPanel controlPanel = new ControlPanel(committee);
@@ -36,11 +57,19 @@ private Committee committee;
   		controlPanel.run("");
 	}
 	
+	/**
+	 * Vote the regular vote system
+	 */
 	public void voteAction(){
 		ControllerVote vote = ControllerVote.getInstance();
 		vote.voteConsole(committee);
 	}
 
+	/**
+	 * Delete topic out of the persistence
+	 * @param voteTopic : topic that want to remove.
+	 * @return true, if  it remove successfully
+	 */
 	public boolean deleteTopic(VoteTopic voteTopic) {
 		if( committee.deleteTopic(voteTopic.getTitle()) ) {
 			Clock clock = new Clock();
@@ -50,6 +79,11 @@ private Committee committee;
 		}
 		else return false;	
 	}
+/**
+ * 
+ * @param team
+ * @return
+ */
 
 	public boolean deleteTeam(Team team) {
 		if( committee.deleteTeam(team.getName())) {
@@ -61,6 +95,7 @@ private Committee committee;
 		else return false;	
 	}
 
+	
 	public boolean addTopic(String topicName) {
 		if(committee.setTopic(topicName)) {
 			Clock clock = new Clock();
