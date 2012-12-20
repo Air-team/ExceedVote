@@ -7,6 +7,9 @@ import java.awt.FlowLayout;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.*;
 
 import javax.swing.AbstractAction;
@@ -48,6 +51,10 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 			Messages.getString("VoteTypeUI.butt.history")); //$NON-NLS-1$
 	private JButton btnPoll = new JButton(
 			Messages.getString("VoteTypeUI.butt.poll")); //$NON-NLS-1$
+	
+	private JButton btnLogout;
+	private JButton btnControl;
+		
 	private JLabel lblSelectTheType = new JLabel(
 			Messages.getString("VoteTypeUI.label.clicktype")); //$NON-NLS-1$
 
@@ -69,11 +76,9 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 	// service for call other ui
 	SeviceUI serviceUI;
 	private Clock clock;
-	private Voter voter;
 	private Font font;
 	private int ballot = 0;
 	private Object[] names;
-	private Committee committee = new Committee();
 	private JTextField fieldWatch = new JTextField();
 	private int lastPos = 0;
 	Object user;
@@ -92,7 +97,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 	 * set all component
 	 */
 	public void initComponent() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		font = new Font("Monaco", Font.BOLD, 20); //$NON-NLS-1$
 
 		setBounds(100, 100, 450, 478);
@@ -114,7 +119,8 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		contentPane.add(lblSelectTheType);
 
 		setButton();
-
+		
+		
 		btnGoToVote = new JButton(new ActionSubmit());
 		btnGoToVote.setText(Messages.getString("VoteTypeUI.butt.gonext")); //$NON-NLS-1$
 		btnGoToVote.setBounds(232, lastPos + 50, 169, 23);
@@ -151,6 +157,20 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		btnPoll = new JButton(new pollAction());
 		btnPoll.setText(Messages.getString("VoteTypeUI.bott.poll")); //$NON-NLS-1$
 		btnPoll.setBounds(180, 60, 218, 23);
+		
+
+		btnLogout = new JButton(new ActionLogout());
+		btnLogout.setVisible(true);
+		btnLogout.setBounds(180, lastPos + 80 , 218, 23);
+		btnLogout.setText("Log out");
+		contentPane.add(btnLogout);
+		
+		btnControl = new JButton(new ActionControlPanel());
+		btnControl.setVisible(true);
+		btnControl.setBounds(20, lastPos + 80 , 150, 23);
+		btnControl.setText("contro Panel");
+		contentPane.add(btnControl);
+		
 		if (clock.isRun() == false)
 			btnPoll.setEnabled(true);
 		else
@@ -158,6 +178,16 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		contentPane.add(btnPoll);
 		lastPos = lastPos + 50;
 		setSize(430, lastPos + 100);
+		
+		this.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e){
+				serviceUI.runByName("LoginUI");
+				
+				
+			}
+		});
+	
+		
 
 	}
         /*
@@ -194,9 +224,24 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		contentPane.repaint();
 
 	}
+	
+	/**
+	 * Action for control panel button
+	 */
+	private class ActionControlPanel extends AbstractAction {
+
+		public ActionControlPanel() {
+			super();
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			serviceUI.runByName("ControlPanel");
+			close();
+		}
+	}
 
 	/**
-	 * Action fon poll button
+	 * Action for poll button
 	 */
 	private class pollAction extends AbstractAction {
 
@@ -206,7 +251,6 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 
 		public void actionPerformed(ActionEvent e) {
 			Poll poll = new Poll();
-
 			TotalResult result = new TotalResult();
 			result.addData(poll.totalInfo());
 			result.run();
@@ -214,8 +258,9 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		}
 	}
 
+	
 	/**
-	 * Action for history button
+	 * Action for logout button
 	 */
 	private class historyAction extends AbstractAction {
 
@@ -227,6 +272,23 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 			ControllerVote controlVote = ControllerVote.getInstance();
 			controlVote.getHistory();
 
+		}
+
+	}
+	
+	/**
+	 * Action for history button
+	 */
+	private class ActionLogout extends AbstractAction {
+
+		public ActionLogout() {
+			super();
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			serviceUI.runByName("LoginUI");
+			close();
+			
 		}
 
 	}
@@ -268,14 +330,15 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 								Messages.getString("VoteTypeUI.pop.clicktype"), Messages.getString("VoteTypeUI.pop.selecttype"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				serviceUI.runByName("voteUI", labelSelect); //$NON-NLS-1$
-				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				close();
+
 			}
 		}
 	}
         /**
          * close this frame
          */
+	
+	
 	public void close() {
 		this.setVisible(false);
 	}
@@ -292,8 +355,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		this.initComponent();
 		this.setVisible(true);
 		this.setResizable(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
 	}
 
 	@Override

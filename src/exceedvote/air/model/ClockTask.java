@@ -13,7 +13,6 @@ public class ClockTask extends TimerTask {
 
 	/**
 	 * Initialize the Clock
-	 * 
 	 * @param clock is Clock that you will call to update time.
 	 */
 	public ClockTask(Clock clock) {

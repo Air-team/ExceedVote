@@ -62,7 +62,6 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 	private JButton btnVote;
 
 	private VoteUI voteUI;
-	private VoteTypeUI voteTypeUI;
 	private Committee commitee;
 	private DefaultListModel teamModel = new DefaultListModel();
 	private DefaultListModel topicModel = new DefaultListModel();
@@ -319,7 +318,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 		}
 
 	/**
-	 * Action fon deleteTopic button
+	 * Action for deleteTopic button
 	 */
 	private class deleteTopicAction extends AbstractAction {
 
@@ -389,7 +388,6 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 					if (index == teamModel.getSize()) {
 						// removed item in last position
 						index--;
-						voteUI.initComponent();
 						listTeam.setSelectedIndex(index);
 						listTeam.ensureIndexIsVisible(index);
 					}

@@ -1,6 +1,6 @@
-2012-12-01 18:04:31 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
+2012-12-06 13:42:28 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
 javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@61e63e3d, see the next exception for details.
+Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@535ff48b, see the next exception for details.
 Error Code: 40000
 	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:602)
 	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.getDatabaseSession(EntityManagerFactoryDelegate.java:186)
@@ -10,7 +10,8 @@ Error Code: 40000
 	at exceedvote.air.persistence.jpa.DaoFactoryJpa.<init>(DaoFactoryJpa.java:43)
 	at exceedvote.air.persistence.DaoFactory.getInstance(DaoFactory.java:23)
 	at exceedvote.air.model.Login.hasVoter(Login.java:30)
-	at exceedvote.air.ui.LoginUI$UpAction.actionPerformed(LoginUI.java:130)
+	at exceed.air.controller.ControllerLogin.checkLogin(ControllerLogin.java:40)
+	at exceedvote.air.ui.LoginUI$UpAction.actionPerformed(LoginUI.java:145)
 	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2028)
 	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2351)
 	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:387)
@@ -48,7 +49,7 @@ Error Code: 40000
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:188)
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:122)
 Caused by: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@61e63e3d, see the next exception for details.
+Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@535ff48b, see the next exception for details.
 Error Code: 40000
 	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:324)
 	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:319)
@@ -57,8 +58,8 @@ Error Code: 40000
 	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.loginAndDetectDatasource(DatabaseSessionImpl.java:685)
 	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryProvider.login(EntityManagerFactoryProvider.java:213)
 	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:542)
-	... 44 more
-Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@61e63e3d, see the next exception for details.
+	... 45 more
+Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@535ff48b, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.seeNextException(Unknown Source)
@@ -72,17 +73,17 @@ Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongs
 	at java.sql.DriverManager.getConnection(DriverManager.java:582)
 	at java.sql.DriverManager.getConnection(DriverManager.java:154)
 	at org.eclipse.persistence.sessions.DefaultConnector.connect(DefaultConnector.java:98)
-	... 48 more
-Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@61e63e3d, see the next exception for details.
+	... 49 more
+Caused by: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@535ff48b, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 61 more
+	... 62 more
 Caused by: java.sql.SQLException: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/DB.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	... 58 more
+	... 59 more
 Caused by: ERROR XSDB6: Another instance of Derby may have already booted the database /Users/prisadumrongsiri/DB.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.store.raw.data.BaseDataFileFactory.privGetJBMSLockOnDB(Unknown Source)
@@ -113,52 +114,8 @@ Caused by: ERROR XSDB6: Another instance of Derby may have already booted the da
 	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(Unknown Source)
 	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(Unknown Source)
 	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Unknown Source)
-	... 58 more
-2012-12-01 18:46:47 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: WW
-2012-12-01 18:47:00 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: xx
-2012-12-01 18:47:09 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: WW
-2012-12-01 18:47:12 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: WW
-2012-12-01 18:47:15 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: WW
-2012-12-01 18:47:19 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Pan topic: WW
-2012-12-01 18:47:19 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Pan topic: WW
-2012-12-01 18:47:21 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Pan topic: WW
-2012-12-01 18:47:21 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Pan topic: WW
-2012-12-01 18:47:29 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Pan topic: WW
-2012-12-01 18:47:29 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Pan topic: WW
-2012-12-01 18:47:36 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: WW
-2012-12-01 18:47:38 INFO exceedvote.air.model.Ballot:addLogRevote - revote For Pan topic: WW
-2012-12-01 18:48:04 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: xx
-2012-12-01 18:48:10 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: xx
-2012-12-01 20:35:27 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: WW
-2012-12-01 20:35:28 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: WW
-2012-12-01 20:35:30 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: WW
-2012-12-01 20:54:19 ERROR exceedvote.air.persistence.jpa.VoteTopicDaoJpa:remove - Error Delete topic javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLIntegrityConstraintViolationException: DELETE on table 'VOTETOPIC' caused a violation of foreign key constraint 'TEAM_TOPIC_TITLE' for key (WW).  The statement has been rolled back.
-Error Code: 20000
-Call: DELETE FROM VOTETOPIC WHERE (TITLE = ?)
-	bind => [1 parameter bound]
-Query: DeleteObjectQuery(exceedvote.air.model.VoteTopic@d335207)
-2012-12-01 21:00:39 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: sdf
-2012-12-01 21:01:13 ERROR exceedvote.air.persistence.jpa.VoteTopicDaoJpa:remove - Error Delete topic javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLIntegrityConstraintViolationException: DELETE on table 'VOTETOPIC' caused a violation of foreign key constraint 'TEAM_TOPIC_TITLE' for key (sdf).  The statement has been rolled back.
-Error Code: 20000
-Call: DELETE FROM VOTETOPIC WHERE (TITLE = ?)
-	bind => [1 parameter bound]
-Query: DeleteObjectQuery(exceedvote.air.model.VoteTopic@2caee320)
-2012-12-01 21:01:15 ERROR exceedvote.air.persistence.jpa.VoteTopicDaoJpa:remove - Error Delete topic javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLIntegrityConstraintViolationException: DELETE on table 'VOTETOPIC' caused a violation of foreign key constraint 'TEAM_TOPIC_TITLE' for key (sdf).  The statement has been rolled back.
-Error Code: 20000
-Call: DELETE FROM VOTETOPIC WHERE (TITLE = ?)
-	bind => [1 parameter bound]
-Query: DeleteObjectQuery(exceedvote.air.model.VoteTopic@28c4b5f)
-2012-12-01 21:02:20 ERROR exceedvote.air.persistence.jpa.VoteTopicDaoJpa:remove - Error Delete topic javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLIntegrityConstraintViolationException: DELETE on table 'VOTETOPIC' caused a violation of foreign key constraint 'TEAM_TOPIC_TITLE' for key (sdf).  The statement has been rolled back.
-Error Code: 20000
-Call: DELETE FROM VOTETOPIC WHERE (TITLE = ?)
-	bind => [1 parameter bound]
-Query: DeleteObjectQuery(exceedvote.air.model.VoteTopic@73204425)
-2012-12-01 21:03:37 INFO exceedvote.air.model.Ballot:addLogVote - vote For Pan topic: sdf
-2012-12-06 10:43:14 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
+	... 59 more
+2012-12-06 14:02:28 FATAL exceedvote.air.persistence.DaoFactory:<init> - Error initializing JPA
 javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.4.0.v20120608-r11652): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: java.sql.SQLException: Failed to start database '/Users/prisadumrongsiri/DB' with class loader sun.misc.Launcher$AppClassLoader@40affc70, see the next exception for details.
 Error Code: 40000
@@ -170,8 +127,8 @@ Error Code: 40000
 	at exceedvote.air.persistence.jpa.DaoFactoryJpa.<init>(DaoFactoryJpa.java:43)
 	at exceedvote.air.persistence.DaoFactory.getInstance(DaoFactory.java:23)
 	at exceedvote.air.model.Login.hasVoter(Login.java:30)
-	at exceed.air.controller.ControllerLogin.checkLogin(ControllerLogin.java:44)
-	at exceedvote.air.ui.LoginUI$UpAction.actionPerformed(LoginUI.java:156)
+	at exceed.air.controller.ControllerLogin.checkLogin(ControllerLogin.java:40)
+	at exceedvote.air.ui.LoginUI$UpAction.actionPerformed(LoginUI.java:145)
 	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2028)
 	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2351)
 	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:387)

@@ -60,6 +60,7 @@ public class Time implements Serializable {
 	public long getTime(){
 		TimeDao timeDao = DaoFactory.getInstance().getTimeDao();
 		list = timeDao.find();
+		if(list.size() == 0) return 0;
 		return list.get(list.size()-1).time;
 	}
 	

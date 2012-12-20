@@ -113,11 +113,11 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 	 * Set the all of components and add action o each components
 	 */
 	public void initComponent() {
-
+		
+	
 		font = new Font("Monaco", Font.BOLD, 20); //$NON-NLS-1$
 
 		textField_1.setColumns(10);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 414);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
@@ -158,7 +158,7 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		voteBtn.setBounds(250, 152, 89, 23);
 		contentPane.add(voteBtn);
 
-		revoteBtn = new JButton(new ReVoteAction());
+		revoteBtn = new JButton(new DisVoteAction());
 		revoteBtn.setText("-"); //$NON-NLS-1$
 		revoteBtn.setBounds(349, 152, 89, 23);
 		contentPane.add(revoteBtn);
@@ -212,6 +212,7 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		fieldWatch.setForeground(Color.orange);
 		contentPane.add(fieldWatch);
 
+		
 		if (clock.isRun() == false)
 			closeBtn();
 	}
@@ -320,8 +321,8 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 	/**
 	 * Action for revote button
 	 */
-	private class ReVoteAction extends AbstractAction {
-		public ReVoteAction() {
+	private class DisVoteAction extends AbstractAction {
+		public DisVoteAction() {
 			super();
 		}
 
@@ -404,7 +405,6 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 	 */
 	public void close() {
 		setVisible(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	/**
@@ -446,6 +446,6 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		this.setType(type);
 		this.setVisible(true);
 		this.setResizable(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 }
