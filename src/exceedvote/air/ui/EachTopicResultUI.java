@@ -34,7 +34,7 @@ import exceedvote.air.model.VoteTopic;;
  * @author AIr Team
  * @version 2012.11.3
  */
-public class Detail extends JFrame implements RunUI {
+public class EachTopicResultUI extends JFrame implements RunUI {
 
 	// private VoteTypeUI voteTypeUI;
 	private JPanel contentPane;
@@ -61,7 +61,7 @@ public class Detail extends JFrame implements RunUI {
 	private JTextField fieldWatch = new JTextField();
 	private int lastPos = 0;
 
-	public Detail() {
+	public EachTopicResultUI() {
 		ControllerControl control = ControllerControl.getInstance();
 		names = control.getTopicArray();
 		ControllerVote voteControllerVote = ControllerVote.getInstance();

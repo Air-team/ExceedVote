@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
-import exceedvote.air.persistence.BallotDao;
 import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.TeamDao;
 import exceedvote.air.persistence.VoteTopicDao;

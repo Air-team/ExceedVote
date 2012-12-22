@@ -250,9 +250,9 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			Poll poll = new Poll();
+			ControllerControl control = ControllerControl.getInstance();
 			TotalResult result = new TotalResult();
-			result.addData(poll.totalInfo());
+			result.addData(control.getTotalResult());
 			result.run();
 
 		}

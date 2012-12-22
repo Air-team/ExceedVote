@@ -2,11 +2,13 @@ package exceedvote.air.controller;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import exceedvote.air.model.Ballot;
 import exceedvote.air.model.Clock;
 import exceedvote.air.model.Committee;
+import exceedvote.air.model.Poll;
 import exceedvote.air.model.Team;
 import exceedvote.air.model.TeamDescription;
 import exceedvote.air.model.VoteTopic;
@@ -166,9 +168,63 @@ private Committee committee;
 	 */
 	public List<ArrayList> getBallot(String topic){
 		Ballot ballot = Ballot.getInstance();
-		return ballot.getScoreEachTeam(topic);
-	}
-
-
+		List<ArrayList>list = ballot.getScoreEachTeam(topic);
+		List<ArrayList>listSort =  new ArrayList<ArrayList>();
+		List<Integer> score = new ArrayList<Integer>();
 	
+		for(int i=0;i<list.size();i++){
+			score.add(Integer.parseInt( list.get(i).get(1).toString() ));
+		}
+		Collections.sort(score,Collections.reverseOrder());
+		
+		for(int i=0;i<score.size();i++){
+			for(int j=0;j<list.size();j++){
+				if(score.get(i).equals(Integer.parseInt( list.get(j).get(1).toString() ))){
+					 if(!listSort.contains(list.get(j)))  { 
+						 listSort.add(list.get(j));
+							break;
+					 }
+				
+					
+				}
+			}
+		}
+	
+		return listSort;
+	}
+	
+
+	/**
+	 * Get total score of all team
+	 * @return List of score all team 
+	 */
+	public List<ArrayList> getTotalResult(){
+	
+		Poll poll = new Poll();
+		List<ArrayList>list = poll.totalInfo();
+		List<ArrayList>listSort =  new ArrayList<ArrayList>();
+		List<Integer> score = new ArrayList<Integer>();
+	
+		for(int i=0;i<list.size();i++){
+			score.add(Integer.parseInt( list.get(i).get(1).toString() ));
+		}
+		Collections.sort(score,Collections.reverseOrder());
+		
+		for(int i=0;i<score.size();i++){
+			for(int j=0;j<list.size();j++){
+				if(score.get(i).equals(Integer.parseInt( list.get(j).get(1).toString() ))){
+					 if(!listSort.contains(list.get(j)))  { 
+						 listSort.add(list.get(j));
+							break;
+					 }
+				
+					
+				}
+			}
+		}
+	
+		return listSort;
+	}
 }
+		
+	

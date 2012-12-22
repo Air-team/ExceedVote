@@ -19,15 +19,14 @@ import javax.swing.JTextPane;
 
 import exceedvote.air.controller.ControllerControl;
 import exceedvote.air.controller.ControllerVote;
-import exceedvote.air.model.Ballot;
 import exceedvote.air.model.Clock;
-import exceedvote.air.model.Committee;
+
 
 import exceedvote.air.model.Team;
-import exceedvote.air.model.Voter;
+
 import java.awt.Color;
 import java.awt.Font;
-import java.text.DateFormat;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +38,7 @@ import java.util.Map;
 public class VoteUI extends JFrame implements RunUI, Observer {
 	private JPanel contentPane;
 
-	private final JLabel label = new JLabel("New label"); //$NON-NLS-1$
+	
 	/**
 	 * Set the all of components and add action o each components
 	 */
@@ -85,7 +84,6 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 
 	private Clock clock;
 	private Map<String, JButton> dynamicButtons = new HashMap<String, JButton>();
-	private Object user;
 	private ControllerVote controllerVote = ControllerVote.getInstance();
 	private ControllerControl controllerControl = ControllerControl
 			.getInstance();

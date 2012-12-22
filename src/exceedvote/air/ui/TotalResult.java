@@ -111,6 +111,7 @@ public class TotalResult extends JFrame {
         contentPane.add(lblSeeResultIn);
 
         btnTopic = new JButton(Messages.getString("TotalResult.butt.vieweach")); //$NON-NLS-1$
+        btnTopic.setText("Topic Result");
         btnTopic.setBounds(323, 458, 100, 30);
         contentPane.add(btnTopic);  
         btnTopic.addActionListener(new TopicAction());
@@ -131,7 +132,7 @@ public class TotalResult extends JFrame {
         public void actionPerformed(ActionEvent e) {
         	if(resultTable.getSelectedRow()<0){
         		JOptionPane.showConfirmDialog((Component) null,
-						"Please selec Team that want to see", "Incorrect!!!",
+						"Please select Team that want to see", "Incorrect!!!",
 						JOptionPane.DEFAULT_OPTION);
         	}
         	else {
@@ -149,7 +150,7 @@ public class TotalResult extends JFrame {
     private class TopicAction implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
-        	Detail detail =  new Detail();
+        	EachTopicResultUI detail =  new EachTopicResultUI();
         	detail.run(""); //$NON-NLS-1$
         }
     }
@@ -163,9 +164,10 @@ public class TotalResult extends JFrame {
 		   String t = (i+1)+""; //$NON-NLS-1$
 		   model.insertRow(i,new Object[]{t,info.get(0),info.get(1)});
 	   }
+	   
 	}
 	/**
-	 * Run tihs interface
+	 * Run this interface
 	 */
     public void run()
     {

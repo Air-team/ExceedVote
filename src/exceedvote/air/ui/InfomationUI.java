@@ -28,8 +28,6 @@ public class InfomationUI extends JFrame implements RunUI{
 	private JLabel teamHeadLine;
 	private JLabel teamName;
 	private JLabel picture;
-	private JLabel infoName;
-	private SeviceUI serviceUI;
 	private TeamDescription teamDes;
 	private Team team;
 	private JScrollPane scrollPane;
@@ -93,7 +91,6 @@ public class InfomationUI extends JFrame implements RunUI{
 	 * @param SeviceUI
 	 */
 	public void addService(SeviceUI serviceUI) {
-		this.serviceUI = serviceUI;
 	}
    
 	/**
