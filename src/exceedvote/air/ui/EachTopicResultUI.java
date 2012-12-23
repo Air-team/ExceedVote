@@ -209,7 +209,6 @@ public class EachTopicResultUI extends JFrame implements RunUI {
 	 * run this frame
 	 */
 	public void run(String info) {
-
 		this.initComponent();
 		this.setVisible(true);
 		this.setResizable(true);

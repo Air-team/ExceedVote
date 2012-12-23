@@ -136,19 +136,35 @@ public class BallotDaoJpa implements BallotDao {
 	@Override
 	public List<ArrayList>  historyCom(Committee committee){
 		List<Ballot> allBallot = this.findAll();
-		
 		List<ArrayList> his = new ArrayList<ArrayList>();
+		List<String> top = new ArrayList<String>();
+		List<String> tea = new ArrayList<String>();
+		
 		for (int i=0;i<allBallot.size();i++) {
 			Ballot bl = allBallot.get(i);
 			if(bl.getCommittee() == null) continue;
-			if (  (bl.getCommittee().equals(committee) )){				
+			if (  (bl.getCommittee().equals(committee) )){	
+				int count =1;
+				String team = bl.getTeamName();
+				String topic = bl.getTopic();	
+			
+				
+				for(int j=0;j<allBallot.size();j++){
+					if( i!=j && team.equals(allBallot.get(j).getTeamName() ) &&  ( topic.equals(allBallot.get(j).getTopic() ) ) ){
+						count++;
+					}
+				}
+					
 				ArrayList<String> info = new ArrayList<String>();
 				info.add(bl.getTeamName());
 				info.add(bl.getTopic());
-				info.add(bl.getTime());
-				his.add(info);
+				info.add(count+"");
+				if(!his.contains(info)) his.add(info);
+				
 			}
 		}
+		
+	
 		
 		return his;
 	}
@@ -163,18 +179,31 @@ public class BallotDaoJpa implements BallotDao {
 		List<Ballot> allBallot = this.findAll();
 		
 		List<ArrayList> his = new ArrayList<ArrayList>();
+		
 		for (int i=0;i<allBallot.size();i++) {
 			Ballot bl = allBallot.get(i);
 			if(bl.getVoter() == null) continue;
 			 if (  (bl.getVoter().equals(voter) )){				
-				ArrayList<String> info = new ArrayList<String>();
-				info.add(bl.getTeamName());
-				info.add(bl.getTopic());
-				info.add(bl.getTime());
-				his.add(info);
+				 int count =0;
+					String team = bl.getTeamName();
+					String topic = bl.getTopic();	
+				
+					
+					for(int j=0;j<allBallot.size();j++){
+						if( team.equals(allBallot.get(j).getTeamName() ) &&  ( topic.equals(allBallot.get(j).getTopic() ) ) ){
+							count++;
+						}
+					}
+						
+					ArrayList<String> info = new ArrayList<String>();
+					info.add(bl.getTeamName());
+					info.add(bl.getTopic());
+					info.add(count+"");
+					if(!his.contains(info)) his.add(info);
+					
+				
 			}
 		}
-		
 		return his;
 	}
 

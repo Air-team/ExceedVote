@@ -77,7 +77,9 @@ public class ControllerVote {
 		final long INTERVAL = 1000; 
 		timer.scheduleAtFixedRate(clocktask, delay, INTERVAL);
 		clock.start();
-		voteTypeUI.run("voteTypeUI"); //$NON-NLS-1$
+	
+	
+		voteTypeUI.ControlPanelBtn();
 	}
 
 	/**

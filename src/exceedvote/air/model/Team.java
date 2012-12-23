@@ -43,6 +43,7 @@ public class Team implements Serializable {
 	 */
 	public Team() {
 		super();
+		
 	}
 
 	/**
@@ -56,7 +57,6 @@ public class Team implements Serializable {
 		this();
 		this.name = name;
 		this.teamdes = td;
-		
 		List<VoteTopic> topic = new ArrayList<VoteTopic>();
 		map = new HashMap<String, Integer>();
 		VoteTopicDao dao2 = DaoFactory.getInstance().getVoteTopicDao();
@@ -65,6 +65,8 @@ public class Team implements Serializable {
 		for(int i=0;i<topic.size();i++){
 			map.put(topic.get(i).getTitle(), 0);
 		}
+		
+		
 	}
 	
 
@@ -117,7 +119,6 @@ public class Team implements Serializable {
 	public void setScore(int score, String topicName) {
 		VoteTopicDao dao2 = DaoFactory.getInstance().getVoteTopicDao();
 		TeamDao daoTeam = DaoFactory.getInstance().getTeamDao();		
-		
 		map.put(topicName, score);
 		daoTeam.save(this);
 		this.topic = dao2.find(topicName);

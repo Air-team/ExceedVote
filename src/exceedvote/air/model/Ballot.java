@@ -272,6 +272,12 @@ public class Ballot implements Serializable {
 		if (bb != null) {
 			this.voter = voter;
 			int value = voter.getballotLeft();
+			list = getTeam();
+			for(int i=0;i<list.size();i++){
+				if (list.get(i).getName().equals(teamName)) {
+					team = list.get(i);
+				}
+			}
 			int score = team.getScore(typeTeam);
 			score--;
 			team.setScore(score, typeTeam);
@@ -299,6 +305,14 @@ public class Ballot implements Serializable {
 		if (bb != null) {
 			this.committee = committee;
 			int value = committee.getballotLeft();
+	
+			list = getTeam();
+			for(int i=0;i<list.size();i++){
+				if (list.get(i).getName().equals(teamName)) {
+					team = list.get(i);
+				}
+			}
+
 			int score = team.getScore(typeTeam);
 			score--;
 			team.setScore(score, typeTeam);

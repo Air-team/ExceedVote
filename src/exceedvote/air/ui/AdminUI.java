@@ -245,8 +245,7 @@ public class AdminUI extends JFrame implements RunUI, ListSelectionListener {
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
-		// TODO Auto-generated method stub
-
+	
 	}
 
 }

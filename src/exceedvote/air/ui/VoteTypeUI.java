@@ -31,10 +31,9 @@ import javax.swing.JButton;
 import exceedvote.air.controller.ControllerControl;
 import exceedvote.air.controller.ControllerVote;
 import exceedvote.air.model.Clock;
-import exceedvote.air.model.Committee;
-import exceedvote.air.model.Poll;
+
 import exceedvote.air.model.VoteTopic;
-import exceedvote.air.model.Voter;
+
 
 /**
  * VoteType user interface indicate each topic that you can select
@@ -53,7 +52,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 			Messages.getString("VoteTypeUI.butt.poll")); //$NON-NLS-1$
 	
 	private JButton btnLogout;
-	private JButton btnControl;
+
 		
 	private JLabel lblSelectTheType = new JLabel(
 			Messages.getString("VoteTypeUI.label.clicktype")); //$NON-NLS-1$
@@ -91,6 +90,18 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		ControllerControl control = ControllerControl.getInstance();
 		names = control.getTopicArray();
 		this.clock = clock;
+	}
+	
+	public void ControlPanelBtn(){
+		initComponent();
+		JButton btnControl = new JButton(new ActionControlPanel());
+		btnControl.setVisible(true);
+		btnControl.setBounds(20, lastPos + 30 , 150, 23);
+		btnControl.setText("contro Panel");
+		contentPane.add(btnControl);
+		this.setVisible(true);
+		this.setResizable(true);
+		
 	}
 
 	/**
@@ -165,11 +176,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		btnLogout.setText("Log out");
 		contentPane.add(btnLogout);
 		
-		btnControl = new JButton(new ActionControlPanel());
-		btnControl.setVisible(true);
-		btnControl.setBounds(20, lastPos + 80 , 150, 23);
-		btnControl.setText("contro Panel");
-		contentPane.add(btnControl);
+		
 		
 		if (clock.isRun() == false)
 			btnPoll.setEnabled(true);
@@ -271,7 +278,6 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 		public void actionPerformed(ActionEvent e) {
 			ControllerVote controlVote = ControllerVote.getInstance();
 			controlVote.getHistory();
-
 		}
 
 	}
@@ -351,16 +357,14 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 	 * run this frame
 	 */
 	public void run(String info) {
-
 		this.initComponent();
 		this.setVisible(true);
-		this.setResizable(true);
-		
+		this.setResizable(true);	
 	}
 
 	@Override
 	/**
-	 * Update every onse second
+	 * Update every second
 	 */
 	public void update(Observable o, Object arg) {
 
@@ -371,5 +375,9 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 			fieldWatch.setText(clock.time());
 
 	}
+	
+	
+	
+	
 
 }

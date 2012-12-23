@@ -78,6 +78,8 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 	 */
 	public ControlPanel(Committee committee) {
 		this.commitee = committee;
+		this.initComponent();
+		this.setControlPage();
 
 	}
 
@@ -142,13 +144,13 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 
 		btnDeleteTeam = new JButton(new deleteTeamAction());
 		btnDeleteTeam.setText(Messages.getString("ControlPanel.butt.deleteteam.deleteteam")); //$NON-NLS-1$
-		btnDeleteTeam.setBounds(250, 151, 89, 23);
+		btnDeleteTeam.setBounds(250, 151, 120, 23);
 		controlPan.add(btnDeleteTeam);
 
 		btnDeleteTopic = new JButton(new deleteTopicAction());
 
 		btnDeleteTopic.setText(Messages.getString("ControlPanel.butt.deletetopic.deletetopic")); //$NON-NLS-1$
-		btnDeleteTopic.setBounds(250, 340, 89, 23);
+		btnDeleteTopic.setBounds(250, 340, 120, 23);
 		controlPan.add(btnDeleteTopic);
 
 		btnSettime = new JButton(new setTimeAction());
@@ -412,8 +414,7 @@ public class ControlPanel extends JFrame implements ListSelectionListener,
 	 * Run this UI (Set Visible)
 	 */
 	public void run(String info) {
-		this.setControlPage();
-		this.initComponent();
+
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
