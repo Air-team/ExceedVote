@@ -66,7 +66,6 @@ public class Login {
 	public boolean hasCommittee() {
 		CommitteeDao dao = DaoFactory.getInstance().getCommitteeDao();
 		committee = dao.findSingle(username, password);
-		// System.out.println(committee.getName());
 		if (committee == null)
 			return false;
 		return true;
