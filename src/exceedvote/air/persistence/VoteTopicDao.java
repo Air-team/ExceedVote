@@ -31,6 +31,7 @@ public interface VoteTopicDao {
 	 */
 	public abstract VoteTopic find(String name);
 
+	
 	public boolean findTilte(String title);
 
 	public boolean remove(VoteTopic topic);

@@ -2,12 +2,16 @@ package exceedvote.air.ui;
 
 
 /**
- * Write a description of interface Runable here.
+ * Interface for all UI class
  * 
- * @author (your name) 
+ * @author Air team 
  * @version (a version number or a date)
  */
 public interface RunUI
-{
+{  
+   /**
+    *run frame
+    *@param infomation use for run UI
+    */
    public void run(String info);
 }

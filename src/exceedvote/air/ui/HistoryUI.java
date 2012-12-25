@@ -2,24 +2,14 @@ package exceedvote.air.ui;
 
  
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.GridLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.MatteBorder;
 import java.awt.Color;
-import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
@@ -27,9 +17,12 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBox;
-import javax.swing.JScrollBar;
 
+/**
+ * Indicate about history of that person about voting
+ * @author AirTeam
+ *
+ */
 public class HistoryUI extends JFrame {
 
 	private JPanel contentPane;
@@ -40,9 +33,10 @@ public class HistoryUI extends JFrame {
 	 */
 	public HistoryUI()
 	{
-		
+		initComponent();
 	}
 	
+	/** Initial Component */
 	public void initComponent()
 	{
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,12 +45,10 @@ public class HistoryUI extends JFrame {
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-//		contentPane.setLayout(null);
-		
-		
-		JLabel lblHistory = new JLabel("History");
+
+		JLabel lblHistory = new JLabel(Messages.getString("HistoryUI.label.history")); //$NON-NLS-1$
 		lblHistory.setForeground(Color.WHITE);
-		lblHistory.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblHistory.setFont(new Font("Tahoma", Font.PLAIN, 25)); //$NON-NLS-1$
 		lblHistory.setBounds(10, 11, 113, 31);
 		contentPane.add(lblHistory);
 		
@@ -64,7 +56,7 @@ public class HistoryUI extends JFrame {
 		
 		
 		String[] col = new String[]{
-				"Team", "Topic", "Time"
+				Messages.getString("HistoryUI.team"), Messages.getString("HistoryUI.topic"), Messages.getString("HistoryUI.time") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			};
 		
 		table = new JTable(data,col);
@@ -85,9 +77,6 @@ public class HistoryUI extends JFrame {
 		table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.getColumnModel().getColumn(1).setPreferredWidth(130);
 		table.getColumnModel().getColumn(2).setPreferredWidth(200);
-//		table.getColumnModel().getColumn(3).setPreferredWidth(74);
-//		table.setBounds(10, 53, 467, 320);
-//		table.setRowHeight(100);
 		table.setGridColor(Color.GRAY);
 		table.setPreferredScrollableViewportSize(new Dimension(400, 300));
         table.setFillsViewportHeight(true);
@@ -95,18 +84,14 @@ public class HistoryUI extends JFrame {
 		
 		
 		
-	
-		// How to add team
-//		model.insertRow(0,new Object[]{"Ranjan","50"});
-//		model.insertRow(1,new Object[]{"TestTeam","Test Topic","12.00","vote"});
-		//model.insertRow(table.getRowCount(),new Object[]{"TestTeam","Test Topic","12.00","vote"});
-		//Create the scroll pane and add the table to it.
+
         JScrollPane scrollPane = new JScrollPane(table);
  
         //Add the scroll pane to this panel.
         contentPane.add(scrollPane);
 	}
 	
+	/** Add the history in table */
 	public void addData(List<ArrayList> list)
 	{
 	    
@@ -116,17 +101,15 @@ public class HistoryUI extends JFrame {
 	   }
 	}
 	
+	/**
+	 * run this frame
+	 */
 	public void run()
 	{
 	    this.initComponent();
         this.setVisible(true);
         this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
-	
-//	public static void main(String[] args)
-//	{
-//	    HistoryUI historyUI = new HistoryUI();
-//	    historyUI.run();
-//	}
+
 }

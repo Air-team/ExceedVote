@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import exceedvote.air.model.Team;
 import exceedvote.air.model.TeamDescription;
-import exceedvote.air.model.TeamList;
 import exceedvote.air.model.VoteTopic;
 /**
  * The test class TestTeam.
@@ -67,11 +66,11 @@ public class TeamTest
 	 */
     @Test
 	public void testTeam() {
-		TeamList teamList1 = new TeamList();
+
 		Team team1 = new Team("air", new TeamDescription("Hi"));
-		teamList1.addTeam(team1);
+		
 		assertEquals("air", team1.getName());
-		team1.setScore(1,"Beautiful UI");
-		assertEquals(1, team1.getScore("Beautiful UI"));
+		assertEquals("Hi",team1.getTeamDescription().getInfo());
+		
 	}	
 }

@@ -1,14 +1,11 @@
-
 package exceedvote.air.ui;
-import java.awt.*;
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
-import java.awt.BorderLayout;
+
 import java.awt.Component;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,16 +13,16 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
-
 import javax.swing.AbstractAction;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
-import exceedvote.air.model.Ballot;
-import exceedvote.air.model.Login;
-import exceedvote.air.model.Voter;
+import exceedvote.air.controller.ControllerLogin;
+
+
 
 /**
  * Login user Interface waiting for test with database
@@ -33,7 +30,7 @@ import exceedvote.air.model.Voter;
  * @author AIr Team
  * @version 2012.10.25
  */
-public class LoginUI extends JFrame implements RunUI {
+public class LoginUI extends JFrame implements RunUI,ActionListener{
 
 	private JPanel contentPane;
 
@@ -41,27 +38,27 @@ public class LoginUI extends JFrame implements RunUI {
 	private JTextField usernameType;
 	// password test field
 	private JPasswordField passwordType;
-
-	private JTextPane txtpnLogin = new JTextPane();
+      
+	private JTextPane txtpnLogin;
 
 	// button submit login
 	private JButton btnLogin;
 	// button submit register
 	private JButton btnRegister;
 
+	private JComboBox comboBox;
+
+	private String[] language = { "eng", "th" }; //$NON-NLS-1$ //$NON-NLS-2$
+
 	// serviceUI for back to loginUI
 	private SeviceUI serviceUI;
-	
-	private Login login;
-
-	/**
-	 * Create the frame.
+        /**
+	 * Constructor for objects of class dqdwd
 	 */
 	public LoginUI() {
-
 	}
 
-	/*
+	/**
 	 * set all component
 	 */
 	public void initComponent() {
@@ -73,11 +70,12 @@ public class LoginUI extends JFrame implements RunUI {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		txtpnLogin = new JTextPane();
 		txtpnLogin.setBackground(Color.WHITE);
 		txtpnLogin.setForeground(Color.BLACK);
-		txtpnLogin.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		txtpnLogin.setFont(new Font("Tahoma", Font.PLAIN, 26)); //$NON-NLS-1$
 		txtpnLogin.setEditable(false);
-		txtpnLogin.setText("Login");
+		txtpnLogin.setText(Messages.getString("LoginUI.text.login")); //$NON-NLS-1$
 		txtpnLogin.setBounds(10, 11, 186, 38);
 		contentPane.add(txtpnLogin);
 
@@ -91,62 +89,92 @@ public class LoginUI extends JFrame implements RunUI {
 		contentPane.add(passwordType);
 
 		btnLogin = new JButton(new UpAction());
-		btnLogin.setText("Login");
+		btnLogin.setText(Messages.getString("LoginUI.butt.login")); //$NON-NLS-1$
 		btnLogin.setBounds(119, 164, 89, 23);
 		contentPane.add(btnLogin);
 
 		btnRegister = new JButton(new Regis());
-		btnRegister.setText("Register");
-		btnRegister.setBounds(222, 164, 89, 23);
+		btnRegister.setText(Messages.getString("LoginUI.butt.register")); //$NON-NLS-1$
+		btnRegister.setBounds(222, 164, 95, 23);
 		contentPane.add(btnRegister);
 
-		JLabel lblUsername = new JLabel("Username");
+		JLabel lblUsername = new JLabel(
+				Messages.getString("LoginUI.label.username")); //$NON-NLS-1$
 		lblUsername.setBounds(49, 95, 60, 14);
 		contentPane.add(lblUsername);
 
-		JLabel lblPassword = new JLabel("Password");
+		JLabel lblPassword = new JLabel(
+				Messages.getString("LoginUI.label.password")); //$NON-NLS-1$
 		lblPassword.setBounds(49, 126, 60, 14);
 		contentPane.add(lblPassword);
+
+		comboBox = new JComboBox();
+		
+		comboBox.setToolTipText(""); //$NON-NLS-1$
+		comboBox.setBounds(330, 231, 100, 20);
+		contentPane.add(comboBox);
+	
+
+		for (int i = 0; i < language.length; i++)
+			comboBox.addItem(language[i]);
+
+		
+		    
+			comboBox.addActionListener(this);
+		
+
+		JLabel lblSelectLanguage = new JLabel("Choose Language:"); //$NON-NLS-1$
+		lblSelectLanguage.setBounds(210, 234, 150, 14);
+		contentPane.add(lblSelectLanguage);
+
+	}
+	/** Action for select Language */
+	public class SelectLang extends AbstractAction{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			String select = ((String) comboBox.getSelectedItem())
+					.toString();
+			if (((String) comboBox.getSelectedItem()).toString().equals(
+					"eng"))select = ""; //$NON-NLS-1$ //$NON-NLS-2$
+			
+			initComponent();
+			Messages.setLocale(select);
+		}
+		
 	}
 
-	/*
+	/**
 	 * action in login button
 	 */
-	 private class UpAction extends AbstractAction{ 
-		 
-        public UpAction()
-        { 
-            super(); 
-        } 
-        
+	private class UpAction extends AbstractAction {
 
-        public void actionPerformed(ActionEvent e)
-        {  
-        	login = new Login(usernameType.getText(),passwordType.getText());
-            boolean correct = login.hasVoter();
-            if(!correct)
-            {
-                JOptionPane.showConfirmDialog((Component)
-                    null, "Wrong username or password", "Incorrect!!!", JOptionPane.DEFAULT_OPTION);
-            }
-            else
-            {
-            	Voter voter = login.getVoter();
-            	VoteUI voteUI = new VoteUI(voter);
-        		VoteTypeUI voteTypeUI = new VoteTypeUI(voter);
-        		serviceUI.addUI("voteUI",voteUI);
-        		serviceUI.addUI("voteTypeUI",voteTypeUI);
-        		voteTypeUI.addService(serviceUI);
-        		voteUI.addService(serviceUI);
-        		voteTypeUI.run("");
-                JOptionPane.showConfirmDialog((Component)
-                    null, "Login Complete", "Correct", JOptionPane.DEFAULT_OPTION);
-            }
-            //System.out.print(result);
-        }
-    }
+		public UpAction() {
+			super();
+		}
 
-	/*
+		public void actionPerformed(ActionEvent e) {
+			ControllerLogin conLogin = ControllerLogin.getInstance();
+			boolean correct = conLogin.checkLogin(usernameType.getText(),
+					passwordType.getText());
+
+			if (!correct) {
+
+				JOptionPane.showConfirmDialog((Component) null,
+						"Wrong username or password", "Incorrect!!!",
+						JOptionPane.DEFAULT_OPTION);
+
+			} else {
+				close();
+				JOptionPane
+						.showConfirmDialog((Component) null, "Login Complete",
+								"Correct", JOptionPane.DEFAULT_OPTION);
+			}
+
+		}
+	}
+
+	/**
 	 * action in regist button
 	 */
 	private class Regis extends AbstractAction {
@@ -158,17 +186,26 @@ public class LoginUI extends JFrame implements RunUI {
 		public void actionPerformed(ActionEvent e) {
 			RegisterUI re = new RegisterUI();
 			SeviceUI serviceUI = new SeviceUI();
-			serviceUI.addUI("RegisUI",re);
+			serviceUI.addUI("RegisUI", re); //$NON-NLS-1$
 			re.addService(serviceUI);
-			re.run("");
+			re.run(""); //$NON-NLS-1$
 		}
 	}
 
+	/**
+	 * add serviceUI in this class
+	 * @param SeviceUI
+	 */
 	public void addService(SeviceUI serviceUI) {
 		this.serviceUI = serviceUI;
 	}
 
-	/*
+	/** Close this frame */
+	public void close() {
+		this.setVisible(false);
+	}
+
+	/**
 	 * start this frame
 	 */
 	public void run(String info) {
@@ -177,15 +214,25 @@ public class LoginUI extends JFrame implements RunUI {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	/**
+	 * Action for select languages
+	 */
+	  public void actionPerformed(ActionEvent actionEvent) {
+    	  String select = ((String) comboBox.getSelectedItem())
+					.toString();
+    	  int index = comboBox.getSelectedIndex();
+    	  comboBox.setSelectedIndex(index);
+			if (((String) comboBox.getSelectedItem()).toString().equals(
+					"eng"))select = ""; //$NON-NLS-1$ //$NON-NLS-2$
+			
+			
+		
+			Messages.setLocale(select);
+			initComponent();
+      }
+	
 
-	// /*
-	// * main to start this frame
-	// * (test)
-	// */
-//	 public static void main(String[] args)
-//	 {
-//	 LoginUI logui = new LoginUI();
-//	 logui.run("");
-//	 }
+	
+
 }
-

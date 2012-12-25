@@ -1,357 +1,448 @@
 package exceedvote.air.ui;
+/**
+ * Start Vote system 
+ * 
+ * @author AIr Team
+ * @version 2012.10.1
+ */
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
 import javax.swing.JTextPane;
 
-import exceedvote.air.model.Ballot;
+import exceedvote.air.controller.ControllerControl;
+import exceedvote.air.controller.ControllerVote;
+import exceedvote.air.model.Clock;
+
+
 import exceedvote.air.model.Team;
-import exceedvote.air.model.Voter;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.List;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
 /**
- * eXceed Vote GUI 
- * 
- * @author AIr Team
- * @version 2012.10.1
+ * Interface indicate Vote inteface you can select team vote,revote and see history
+ * @author AirTeam
  */
-public class VoteUI extends JFrame implements RunUI
-{
-    private JPanel contentPane;
+public class VoteUI extends JFrame implements RunUI, Observer {
+	private JPanel contentPane;
 
-    private final JLabel label = new JLabel("New label");
-    /**
-     * @wbp.nonvisual location=81,-31
-     */
-    private final JTextField textField_1 = new JTextField();
+	
+	/**
+	 * Set the all of components and add action o each components
+	 */
+	private final JTextField textField_1 = new JTextField();
 
-    private JPanel listTeam = new JPanel();
-    private JTextPane status = new JTextPane();
-    private JTextPane txtpnTeamlist = new JTextPane();
-    private JButton btnViewInfomation = new JButton("view Infomation");
-    private JButton voteBtn;
-    private JTextPane teamSelect = new JTextPane();
-    private JButton revoteBtn = new JButton("-");
-    private JLabel lblClickToSelect = new JLabel("Click to select the team");
-    private JButton btnHistory = new JButton("History");
-    private JLabel lblNewLabel = new JLabel("View your history");
-    private JLabel lblVote = new JLabel("vote");
-    private JLabel lblRevote = new JLabel("revote");
-    private JButton btnBack;
-    
-    
-    /*
-     * ballot test
-     */
-    int ballot;
-    String type = "";
-    String nameVoter = "";
-    /*
-     * name team test
-     */
-    
-    private String typeTeam = ""; 
-    
-    Object[] names;
-    // name select
-    String selectTeam ="";
-    // Voter
-   
-    private Voter voter;
-    private Ballot ballott;
-    public VoteUI(Voter voter)
-    {
-        this.voter = voter;
-        ballot = voter.getballotLeft();
-        type = voter.getType();
-        nameVoter = voter.getName();
-        setBallot();
-        
-    }
-     //service for call other ui
-    SeviceUI serviceUI;
-    
-    public void setBallot(){
-    	ballott = Ballot.getInstance();
-    	
-    	names =(ballott.getTeam().toArray());
-    	 
-    }
+	private JPanel listTeam = new JPanel();
+	private JTextPane status = new JTextPane();
+	private JTextPane txtpnTeamlist = new JTextPane();
+	private JButton btnViewInfomation = new JButton(
+			Messages.getString("VoteUI.butt.viewinfo")); //$NON-NLS-1$
+	private JButton voteBtn;
+	private JTextPane teamSelect = new JTextPane();
+	private JButton revoteBtn = new JButton("-"); //$NON-NLS-1$
+	private JLabel lblClickToSelect = new JLabel(
+			Messages.getString("VoteUI.label.clickteam")); //$NON-NLS-1$
+	private JButton btnHistory = new JButton(
+			Messages.getString("VoteUI.butt.history")); //$NON-NLS-1$
+	private JLabel lblNewLabel = new JLabel(
+			Messages.getString("VoteUI.label.viewhistory")); //$NON-NLS-1$
+	private JLabel lblVote = new JLabel(Messages.getString("VoteUI.label.vote")); //$NON-NLS-1$
+	private JLabel lblRevote = new JLabel(
+			Messages.getString("VoteUI.label.revote")); //$NON-NLS-1$
+	private JTextField fieldWatch = new JTextField();
+	private JButton btnBack;
+	private Font font;
 
-    /*
-     * init all component
-     */
-    public void initComponent()
-    {
-        textField_1.setColumns(10);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 474, 414);
-        contentPane = new JPanel();
-        contentPane.setBackground(Color.BLACK);
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+	/*
+	 * ballot test
+	 */
+	int ballot;
+	String type = ""; //$NON-NLS-1$
+	String nameVoter = ""; //$NON-NLS-1$
+	/*
+	 * name team test
+	 */
 
-        listTeam.setBounds(10, 64, 218, 301);
-        contentPane.add(listTeam);
-        listTeam.setLayout(new GridLayout(20, 1, 0, 0));
+	private String typeTeam = ""; //$NON-NLS-1$
 
-        status.setBounds(242, 11, 218, 30);
-        contentPane.add(status);
-        status.setBackground(Color.BLACK);
-        status.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        status.setText("Status : "+type+" : "+String.valueOf(ballot)+" Ballot");
-        status.setForeground(Color.ORANGE);
-        status.setEditable(false);
+	Object[] names;
+	// name select
+	String selectTeam = ""; //$NON-NLS-1$
+	// Voter
 
-        txtpnTeamlist.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtpnTeamlist.setBackground(Color.BLACK);
-        txtpnTeamlist.setEditable(false);
-        txtpnTeamlist.setForeground(Color.ORANGE);
-        txtpnTeamlist.setText("TeamList");
-        txtpnTeamlist.setBounds(10, 11, 218, 23);
-        contentPane.add(txtpnTeamlist);
+	private Clock clock;
+	private Map<String, JButton> dynamicButtons = new HashMap<String, JButton>();
+	private ControllerVote controllerVote = ControllerVote.getInstance();
+	private ControllerControl controllerControl = ControllerControl
+			.getInstance();
 
-        btnViewInfomation.setBounds(250, 100, 130, 23);
-        contentPane.add(btnViewInfomation);
+	public VoteUI(Clock clock) {
+		names = controllerControl.getTeam();
+		controllerVote.checkAmountBallot();
+		ballot = controllerVote.checkAmountBallot();
+		this.clock = clock;
+		initComponent();
+	}
 
-        // add action to vote button
-        voteBtn = new JButton(new UpAction());
-        voteBtn.setText("+");
-        voteBtn.setBounds(250, 152, 89, 23);
-        contentPane.add(voteBtn);
-        
-        revoteBtn = new JButton(new ReVoteAction());
-        revoteBtn.setText("-");
-        revoteBtn.setBounds(349, 152, 89, 23);
-        contentPane.add(revoteBtn);
+	// service for call other ui
+	SeviceUI serviceUI;
 
-        btnHistory = new JButton(new historyAction());
-        btnHistory.setText("History");
+
+	public void removeTeam(String name) {
+		JButton button = dynamicButtons.remove(name);
+		contentPane.remove(button);
+		contentPane.invalidate();
+		contentPane.repaint();
+	}
+
+	/**
+	 * Set the all of components and add action o each components
+	 */
+	public void initComponent() {
+		
+	
+		font = new Font("Monaco", Font.BOLD, 20); //$NON-NLS-1$
+
+		textField_1.setColumns(10);
+		setBounds(100, 100, 500, 414);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.BLACK);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		listTeam.setBounds(10, 64, 218, 301);
+		contentPane.add(listTeam);
+		listTeam.setLayout(new GridLayout(20, 1, 0, 0));
+
+		status.setBounds(242, 11, 218, 30);
+		contentPane.add(status);
+		status.setBackground(Color.BLACK);
+		status.setFont(new Font("Tahoma", Font.PLAIN, 15)); //$NON-NLS-1$
+		status.setText(Messages.getString("VoteUI.label.status") + type + " : " + String.valueOf(ballot) + Messages.getString("VoteUI.label.ballot")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		status.setForeground(Color.ORANGE);
+		status.setEditable(false);
+
+		txtpnTeamlist.setFont(new Font("Tahoma", Font.PLAIN, 15)); //$NON-NLS-1$
+		txtpnTeamlist.setBackground(Color.BLACK);
+		txtpnTeamlist.setEditable(false);
+		txtpnTeamlist.setForeground(Color.ORANGE);
+		txtpnTeamlist.setText(Messages.getString("VoteUI.label.teamlist")); //$NON-NLS-1$
+		txtpnTeamlist.setBounds(10, 11, 218, 23);
+		contentPane.add(txtpnTeamlist);
+
+		btnViewInfomation = new JButton(
+				Messages.getString("VoteUI.butt.viewinfo")); //$NON-NLS-1$
+		btnViewInfomation.addActionListener(new btnInfoAction());
+		btnViewInfomation.setBounds(250, 100, 130, 23);
+		contentPane.add(btnViewInfomation);
+		updateTeam();
+
+		// add action to vote button
+		voteBtn = new JButton(new UpAction());
+		voteBtn.setText("+"); //$NON-NLS-1$
+		voteBtn.setBounds(250, 152, 89, 23);
+		contentPane.add(voteBtn);
+
+		revoteBtn = new JButton(new DisVoteAction());
+		revoteBtn.setText("-"); //$NON-NLS-1$
+		revoteBtn.setBounds(349, 152, 89, 23);
+		contentPane.add(revoteBtn);
+
+		 btnHistory = new JButton(new historyAction());
+		btnHistory.setText(Messages.getString("VoteUI.butt.history")); //$NON-NLS-1$
 		btnHistory.setBounds(250, 216, 89, 23);
 		contentPane.add(btnHistory);
-		
-        teamSelect.setEditable(false);
-        teamSelect.setBackground(Color.BLACK);
-        teamSelect.setForeground(Color.ORANGE);
-        teamSelect.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        teamSelect.setText("Team :");
-        teamSelect.setBounds(242, 59, 206, 30);
-        contentPane.add(teamSelect);
 
-        revoteBtn.setBounds(349, 152, 89, 23);
-        contentPane.add(revoteBtn);
+		teamSelect.setEditable(false);
+		teamSelect.setBackground(Color.BLACK);
+		teamSelect.setForeground(Color.ORANGE);
+		teamSelect.setFont(new Font("Tahoma", Font.PLAIN, 15)); //$NON-NLS-1$
+		teamSelect.setText(Messages.getString("VoteUI.label.team")); //$NON-NLS-1$
+		teamSelect.setBounds(242, 59, 206, 30);
+		contentPane.add(teamSelect);
 
-        lblVote.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        lblVote.setForeground(Color.ORANGE);
-        lblVote.setBounds(249, 138, 46, 14);
-        contentPane.add(lblVote);
+		revoteBtn.setBounds(349, 152, 89, 23);
+		contentPane.add(revoteBtn);
 
-        lblRevote.setForeground(Color.ORANGE);
-        lblRevote.setBounds(349, 139, 46, 14);
-        contentPane.add(lblRevote);
+		lblVote.setFont(new Font("Tahoma", Font.PLAIN, 13)); //$NON-NLS-1$
+		lblVote.setForeground(Color.ORANGE);
+		lblVote.setBounds(249, 138, 46, 14);
+		contentPane.add(lblVote);
 
-        lblClickToSelect.setForeground(Color.ORANGE);
-        lblClickToSelect.setBounds(10, 45, 210, 14);
-        contentPane.add(lblClickToSelect);
+		lblRevote.setForeground(Color.ORANGE);
+		lblRevote.setBounds(349, 139, 46, 14);
+		contentPane.add(lblRevote);
 
-        btnHistory.setBounds(250, 216, 89, 23);
-        contentPane.add(btnHistory);
+		lblClickToSelect.setForeground(Color.ORANGE);
+		lblClickToSelect.setBounds(10, 45, 210, 14);
+		contentPane.add(lblClickToSelect);
 
-        lblNewLabel.setForeground(Color.ORANGE);
-        lblNewLabel.setBounds(250, 200, 188, 14);
-        contentPane.add(lblNewLabel);
-        
-        btnBack = new JButton(new backAction());
-        btnBack.setText("Back");
+		btnHistory.setBounds(250, 216, 89, 23);
+		contentPane.add(btnHistory);
+
+		lblNewLabel.setForeground(Color.ORANGE);
+		lblNewLabel.setBounds(250, 200, 188, 14);
+		contentPane.add(lblNewLabel);
+
+		btnBack = new JButton(new backAction());
+		btnBack.setText(Messages.getString("VoteUI.butt.back")); //$NON-NLS-1$
 		btnBack.setBounds(349, 342, 89, 23);
 		contentPane.add(btnBack);
+
+		fieldWatch = new JTextField(80);
+		fieldWatch.setBounds(250, 245, 218, 23);
+		fieldWatch.setText("00:00:00"); //$NON-NLS-1$
+		fieldWatch.setFont(font);
+		fieldWatch.setBackground(Color.BLACK);
+		fieldWatch.setForeground(Color.orange);
+		contentPane.add(fieldWatch);
+
 		
-		
-    }
-    private class historyAction extends AbstractAction{ 
+		if (clock.isRun() == false)
+			closeBtn();
+	}
 
-        public historyAction()
-        { 
-            super(); 
-        } 
+	@Override
+	public void update(Observable o, Object arg) {
 
-        public void actionPerformed(ActionEvent e)
-        {   
-          HistoryUI historyUI = new HistoryUI();
-     	  historyUI.run();
-     	 historyUI.addData(voter.history());
-          voter.history();
-        }
-    }
+		if (clock.isRun() == false) {
+			closeBtn();
+			fieldWatch.setText("00:00:00");} //$NON-NLS-1$
+		else if (clock.isRun() == true) {
+			openBtn();
+			fieldWatch.setText(clock.time());
+		}
+	}
+        
+        /**
+	 * close vote button and revote button
+	 */
+	private void closeBtn() {
+		voteBtn.setEnabled(false);
+		revoteBtn.setEnabled(false);
+	}
+   
+   	/**
+	 * open vote button and revote button
+	 */
+	private void openBtn() {
+		voteBtn.setEnabled(true);
+		revoteBtn.setEnabled(true);
+	}
 
+	private class btnInfoAction extends AbstractAction {
+		public btnInfoAction() {
+			super();
+		}
 
-    private class UpAction extends AbstractAction{ 
+		public void actionPerformed(ActionEvent e) {
+			String teamName = selectTeam;
 
-        public UpAction()
-        { 
-            super(); 
-        } 
+			InfomationUI informationUI = new InfomationUI(teamName);
+			informationUI.run(""); //$NON-NLS-1$
 
-        public void actionPerformed(ActionEvent e)
-        {   
-            if(selectTeam.equals(""))
-            {
-                JOptionPane.showConfirmDialog((Component)
-                    null, "Please Click to select the team", "Select the team", JOptionPane.DEFAULT_OPTION);
-            }
-            else if(ballot == 0)
-            {
-                	JOptionPane.showConfirmDialog((Component)
-                    null, "No ballot !!", "No Ballot!!", JOptionPane.DEFAULT_OPTION);
-            }
-            else
-            {    
-                String alert = "Do you want to vote " + selectTeam ;
-                int result = JOptionPane.showConfirmDialog((Component)
-                        null, alert , "Submit Vote!!!", JOptionPane.YES_NO_OPTION);
-                if(result == 0)
-                {
-                	 boolean canVote = ballott.putBallot(selectTeam,typeTeam,voter);
-                     
-                     if(canVote)
-                     {
-                     	ballot--;
-                         status.setText("Status : "+type+" : "+String.valueOf(voter.getballotLeft())+" Ballot");
-                     }
-                }
-            }
-//            System.out.print(result);
-        }
-    }
+		}
+	}
 
-    private class ReVoteAction extends AbstractAction{ 
-    	  public ReVoteAction() { 
-              super(); 
-          } 
-    	
+	/** Action  for history button */
+	 private class historyAction extends AbstractAction{
+	
+	 public historyAction()
+	 {
+	 super();
+	 }
+	
+	 public void actionPerformed(ActionEvent e){
+		 ControllerVote controlVote = ControllerVote.getInstance();
+		 controlVote.getHistory();
+	
+	 }
+	
+	 }
+	
+	 /** Action for vote button*/
+	private class UpAction extends AbstractAction {
+
+		public UpAction() {
+			super();
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if (selectTeam.equals("")) //$NON-NLS-1$
+			{
+				JOptionPane
+						.showConfirmDialog(
+								(Component) null,
+								Messages.getString("VoteUI.pop.clickteam"), Messages.getString("VoteUI.pop.selectteam"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
+			} else if (ballot == 0) {
+				JOptionPane
+						.showConfirmDialog(
+								(Component) null,
+								Messages.getString("VoteUI.pop.noballot"), Messages.getString("VoteUI.pop.nobal"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
+			} else {
+				String alert = Messages.getString("VoteUI.str.wantvote") + selectTeam; //$NON-NLS-1$
+				int result = JOptionPane
+						.showConfirmDialog(
+								(Component) null,
+								alert,
+								Messages.getString("VoteUI.pop.submitvote"), JOptionPane.YES_NO_OPTION); //$NON-NLS-1$
+				if (result == 0) {
+
+					boolean canVote = false;
+					ControllerVote user = ControllerVote.getInstance();
+					canVote = user.putBallot(selectTeam, typeTeam);
+					if (canVote) {
+						ballot--;
+						status.setText(Messages
+								.getString("VoteUI.label.set.status") + type + " : " + String.valueOf(ballot) + Messages.getString("VoteUI.label.set.ballot")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					}
+
+				}
+			}
+
+		}
+	}
+
+	/**
+	 * Action for revote button
+	 */
+	private class DisVoteAction extends AbstractAction {
+		public DisVoteAction() {
+			super();
+		}
 
 		public void actionPerformed(ActionEvent arg0) {
+
+			if (selectTeam.equals("")) //$NON-NLS-1$
+			{
+				JOptionPane
+						.showConfirmDialog(
+								(Component) null,
+								Messages.getString("VoteUI.pop.clickteam"), Messages.getString("VoteUI.pop.selectteam"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+
+			else {
+				String alert = Messages.getString("VoteUI.str.disvote") + selectTeam; //$NON-NLS-1$
+				int result = JOptionPane
+						.showConfirmDialog(
+								(Component) null,
+								alert,
+								Messages.getString("VoteUI.pop.submitvote"), JOptionPane.YES_NO_OPTION); //$NON-NLS-1$
+				if (result == 0) {
+					boolean canVote = false;
+
+					ControllerVote user = ControllerVote.getInstance();
+					canVote = user.returnBallot(selectTeam, typeTeam);
+
+					if (canVote) {
+						ballot++;
+						status.setText(Messages
+								.getString("VoteUI.label.set.status") + type + " : " + String.valueOf(ballot) + Messages.getString("VoteUI.label.set.ballot")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					} else {
+						JOptionPane
+								.showConfirmDialog(
+										(Component) null,
+										Messages.getString("VoteUI.pop.novote"), Messages.getString("VoteUI.pop.selectteam"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
+					}
+
+				}
+			}
+		}
+	}
+
+	/** Action for select button (team that want to vote) */
+	private class ActionSelect extends AbstractAction {
+
+		public ActionSelect() {
+			super();
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			JButton o = (JButton) e.getSource();
+			selectTeam = o.getText();
+			teamSelect
+					.setText(Messages.getString("VoteUI.label.set.team") + selectTeam); //$NON-NLS-1$
+		}
+	}
+        
+        /**
+	 * reteam in listeam 
+	 */
+	public void reTeam() {
+		listTeam.removeAll();
+	}
+
+	private class backAction extends AbstractAction {
+
+		public backAction() {
+			super();
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			close();
 			
-			 if(selectTeam.equals(""))
-	         {
-	             JOptionPane.showConfirmDialog((Component)
-	                 null, "Please Click to select the team", "Select the team", JOptionPane.DEFAULT_OPTION);
-	         }
-	   
-	         else
-	         {    
-	             String alert = "Do you want to disvote " + selectTeam ;
-	             int result = JOptionPane.showConfirmDialog((Component)
-	                     null, alert , "Submit Vote!!!", JOptionPane.YES_NO_OPTION);
-	             if(result == 0)
-	             {
-	             	 boolean canVote = ballott.returnBallot(selectTeam,typeTeam,voter);
-	     
-	                  if(canVote)
-	                  {
-	                  	ballot++;
-	                      status.setText("Status : "+type+" : "+String.valueOf(voter.getballotLeft())+" Ballot");
-	                  }
-	                  else {
-	                	  JOptionPane.showConfirmDialog((Component)
-	         	                 null, "You didn't vote this team", "Select the team", JOptionPane.DEFAULT_OPTION);
-	                  }
-	             }
-	         }
-		}	
-    }
+		}
+	}
+        
+        /**
+	 * close this frame
+	 */
+	public void close() {
+		setVisible(false);
+	}
 
-    private class ActionSelect extends AbstractAction{ 
+	/**
+	 * set team in UI,
+	 */
+	public void updateTeam() {
+		for (int i = 0; i < names.length; i++) {
+			JButton Btn = new JButton();
+			Btn.setText(((Team) names[i]).getName());
+			Btn.addActionListener(new ActionSelect());
+			dynamicButtons.put(((Team) names[i]).getName(), Btn);
+			listTeam.add(Btn);
 
-        public ActionSelect()
-        { 
-            super(); 
-        } 
+		}
 
-        public void actionPerformed(ActionEvent e)
-        {   
-            JButton o = (JButton)e.getSource();
-            selectTeam = o.getText();
-            teamSelect.setText("Team : "+selectTeam);
-        }
-    }
-    
-    public void reTeam()
-    {
-    	listTeam.removeAll();
-    }
-    
-    private class backAction extends AbstractAction{ 
+		contentPane.invalidate();
+		contentPane.repaint();
+	}
+        
+        /**
+	 * set team's type 
+	 * @param String type for set 
+	 */
+	public void setType(String type) {
+		this.typeTeam = type;
+		txtpnTeamlist
+				.setText(Messages.getString("VoteUI.label.set.teamlist") + typeTeam); //$NON-NLS-1$
+	}
 
-        public backAction()
-        { 
-            super(); 
-        } 
+	public void addService(SeviceUI serviceUI) {
+		this.serviceUI = serviceUI;
+	}
 
-        public void actionPerformed(ActionEvent e)
-        {   
-            serviceUI.runByName("voteTypeUI");
-            close();
-        }
-    }
-    
-
-    public void close()
-    {
-        setVisible(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    
-    /*
-     * set team in UI,
-     */
-    public void updateTeam()
-    { 
-	    reTeam();
-	    for(int i = 0 ; i < names.length ; i++)
-	    { 
-		    JButton eachTeam = new JButton(new ActionSelect());
-		    eachTeam.setText(((Team)names[i]).getName());
-		    listTeam.add(eachTeam);
-	    }	
-    }
-
-    public void setType(String type)
-    {
-       this.typeTeam = type;
-       txtpnTeamlist.setText("TeamList: "+typeTeam);
-    }
-    
-    public void addService(SeviceUI serviceUI)
-    {
-        this.serviceUI = serviceUI;
-    }
-    
-    /*
-     * run Frame
-     */
-    public void run(String type)
-    {    
-        this.initComponent();
-        this.setType(type);
-        this.updateTeam();
-        this.setVisible(true);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+	/*
+	 * run Frame
+	 */
+	public void run(String type) {
+		// this.initComponent();
+		this.setType(type);
+		this.setVisible(true);
+		this.setResizable(true);
+		
+	}
 }
