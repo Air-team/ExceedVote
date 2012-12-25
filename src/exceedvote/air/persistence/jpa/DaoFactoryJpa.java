@@ -6,9 +6,13 @@ import javax.persistence.Persistence;
 
 import org.apache.log4j.Logger;
 
+import exceedvote.air.model.TeamDescription;
 import exceedvote.air.persistence.BallotDao;
+import exceedvote.air.persistence.CommitteeDao;
 import exceedvote.air.persistence.DaoFactory;
 import exceedvote.air.persistence.TeamDao;
+import exceedvote.air.persistence.TeamDescriptionDao;
+import exceedvote.air.persistence.TimeDao;
 import exceedvote.air.persistence.VoteTopicDao;
 import exceedvote.air.persistence.VoterDao;
 
@@ -26,6 +30,9 @@ public class DaoFactoryJpa extends DaoFactory {
 	private VoterDao voterDao;
 	private BallotDao ballotDao;
 	private TeamDao teamDao;
+	private CommitteeDao committeDao;
+	private TeamDescriptionDao teamDescriptionDao;
+	private TimeDao timeDao;
 
 	/**
 	 * constructor for DaoFactoryJpa.
@@ -88,5 +95,42 @@ public class DaoFactoryJpa extends DaoFactory {
 			teamDao = new TeamDaoJpa(em);
 		return teamDao;
 	}
+
+	/**
+	 * Get an instance of the DAO for Committee.
+	 * @return a new CommitteeDao if CommitteeDao hasn't been created 
+	 * else return this CommitteeDao object.	
+	 */
+	@Override
+	public CommitteeDao getCommitteeDao() {
+		if(committeDao == null)
+			committeDao = new CommitteeDaoJpa(em);
+		return committeDao;
+	}
+	
+	/**
+	 * Get an instance of the DAO for TeamDescriptionDao.
+	 * @return a new TeamDescriptionDao if TeamDescriptionDao hasn't been created 
+	 * else return this TeamDescriptionDao object.	
+	 */
+	@Override
+	public TeamDescriptionDao getTeamDescriptionDao(){
+		if(teamDescriptionDao == null) teamDescriptionDao = new TeamDescriptionDaoJpa(em);
+		return teamDescriptionDao;
+		
+	}
+
+	/**
+	 * Get an instance of the DAO for TimeDao.
+	 * @return a new TimeDao if TimeDao hasn't been created 
+	 * else return this TimeDao object.	
+	 */
+	@Override
+	public TimeDao getTimeDao() {
+		if(timeDao == null) timeDao = new TimeDaoJpa(em);
+		return timeDao;
+	}
+
+	
 
 }

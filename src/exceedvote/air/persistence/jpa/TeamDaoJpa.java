@@ -1,12 +1,14 @@
 package exceedvote.air.persistence.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.apache.log4j.Logger;
+
 import exceedvote.air.model.Team;
 import exceedvote.air.model.VoteTopic;
-import exceedvote.air.model.Voter;
+
 
 import exceedvote.air.persistence.TeamDao;
 
@@ -24,6 +26,7 @@ public class TeamDaoJpa implements TeamDao {
 		super();
 		this.em = em;
 	}
+
 
 
 	/**
@@ -116,12 +119,29 @@ public class TeamDaoJpa implements TeamDao {
 	 * @return true, this team has in the persistence
 	 */
 	@Override
-	public boolean hasVoter(Team team){
+	public boolean hasTeam(Team team){
 		List<Team> listTeam = this.findAll();
 		for(int i=0;i<listTeam.size();i++){
 			if(listTeam.equals(team)) return true;
 		}
 		return false;
 	}
+	
+	/**
+	 * Find Team 
+	 */
+	@Override
+	public List<Team> findSingleTeamAlltopic(String name){
+		List<Team> listTeam = this.findAll();
+		List<Team> oneTeamAlltopic = new ArrayList<Team> ();
+		for(int i=0;i<listTeam.size();i++){
+			if(listTeam.get(i).getName().equals(name)) oneTeamAlltopic.add(listTeam.get(i));
+		}
+		return oneTeamAlltopic;
+	
+	}
 
+
+
+	
 }
