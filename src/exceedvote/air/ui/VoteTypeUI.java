@@ -79,7 +79,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 	private int ballot = 0;
 	private Object[] names;
 	private JTextField fieldWatch = new JTextField();
-	private int lastPos = 0;
+	private int lastPos = 100;
 	Object user;
 
 	/**
