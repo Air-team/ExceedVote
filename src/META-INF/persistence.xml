@@ -16,6 +16,7 @@
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"></property>
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby:/Users/prisadumrongsiri/DB;create=true"></property>
 			<property name="javax.persistence.jdbc.user" value=""></property>
+			<property name="eclipselink.ddl-generation" value="create-tables"></property>
 		</properties>
 	</persistence-unit>
 </persistence>
