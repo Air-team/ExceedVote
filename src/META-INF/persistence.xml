@@ -11,13 +11,11 @@
 		<class>exceedvote.air.model.VoteTopic</class>
 		<class>exceedvote.air.model.Committee</class>
 		<class>exceedvote.air.model.TeamDescription</class>
+			<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"></property>
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby:/Users/prisadumrongsiri/ExceedDB;create=true"></property>
-<<<<<<< HEAD
-=======
 			<property name="javax.persistence.jdbc.user" value=""></property>
->>>>>>> fix bug
 			<property name="eclipselink.ddl-generation" value="create-tables"></property>
 		</properties>
 	</persistence-unit>
