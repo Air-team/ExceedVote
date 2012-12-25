@@ -392,6 +392,7 @@ public class VoteUI extends JFrame implements RunUI, Observer {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			serviceUI.runByName("voteTypeUI");
 			close();
 			
 		}

@@ -336,6 +336,7 @@ public class VoteTypeUI extends JFrame implements RunUI, Observer {
 								Messages.getString("VoteTypeUI.pop.clicktype"), Messages.getString("VoteTypeUI.pop.selecttype"), JOptionPane.DEFAULT_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				serviceUI.runByName("voteUI", labelSelect); //$NON-NLS-1$
+				dispose();
 
 			}
 		}
